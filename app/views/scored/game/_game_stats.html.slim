@@ -1,12 +1,10 @@
-/ div.font-bold.text-lg Skins/Birdies
 
 div.flex.flex-wrap.gap-8
   - if @game.has_skins?
-    div.border.p-1
+    div.border.p-1.w-full.lg:w-5/12
       div.font-bold.text-lg.bg-lime-300.text-center.mb-1 Birdies/Skins
  
       - skins = Skins.new(@game)
-      / - puts "SKINS #{skins.inspect}"
       - klass = "skin_hole w-8 h-7 border border-slate-500 text-center"
       div.flex.mb-1
         div.w-20.px-2.cut Cut 
@@ -46,47 +44,45 @@ div.flex.flex-wrap.gap-8
             - else
               = content_tag :td, i, class:"skin_hole"
       div.flex.gap-8.mt-2
-        div
-          strong.font-bold.text-lg Skins Stats
-          table.golfer
-
+        div.w-1/3
+          table.golfer.w-full
+            caption.font-bold.text-lg Skins Stats
             - skins.stats.each do |k,v|
               - unless k == 'winners' || v == 0
                 tr
                   td.font-bold =  k
                   td = v
-      
-        table.golfer
-          caption.font-bold.text-lg Winners
-          tr
-            th Hole
-            th Player
-            th Won
+        div.w-2/3
+          table.golfer.w-full
+            caption.font-bold.text-lg Winners
+            tr.h-10
+              th Hole
+              th Player
+              th Won
 
-          - skins.winners.each do |k,a|
-            tr
-              td = k
-              td = a[2]
-              td = a[1]
+            - skins.winners.each do |k,a|
+              tr
+                td = k
+                td = a[2]
+                td = a[1] 
   - if @game.has_par3?
-    div.border.p-1
+    div.border.p-1.w-full.lg:w-5/12
 
       - par3 = Par3.new(@game)
       div.font-bold.text-lg.text-center.bg-lime-300 Par3s
 
-
       div.flex.gap-4
-        div
+        div.w-full
           .font-bold.text-lg Par 3 Stats
           / - stats = par3.par3_stats
-          table.golfer
+          table.golfer.w-full
 
             - par3.stats.each do |k,v|
               tr
                 td.font-bold.p-2 =  k
                 td.p-2 = v
-        div
-          table.golfer
+        div.w-full
+          table.golfer.w-full
             caption.font-bold.text-lg Winners
             tr
               th Par#
