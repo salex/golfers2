@@ -1,0 +1,32 @@
+/* 
+  a super user can edit all user
+  a trustee can edit all users except super users
+  a trustee can do everything except delete groups
+  a coordinator can edit all users in their group
+  all other users can only edit their user
+
+div.w-full
+  div.flex.gap-8.bg-green-lightest.-mx-2.px-1.py-2.border-green-600.mb-2
+
+    h1.font-bold.text-2xl Users
+    - if can?('new',"user")
+      = link_to link_to icon('fas fa-plus-square', "New User"), 
+        new_user_path,class:"btn-sm-blue"
+    div.child.text-green-800.p-0.font-bold.mr-3.hover:text-2xl = link_to icon('fas fa-arrow-left'), 'javascript:history.back()'
+
+  #users
+    - @users.each do |user|
+      .flex.gap-12.flex-wrap.p-1.m-1.border-b
+        - if (Current.user.is_trustee? || Current.user.is_manager?) && user.role_rank >= Current.user.role_rank 
+
+          div.w-96 == render user
+          div
+            = link_to icon('fas fa-eye',"Show User"), user,class:"btn-sm-green mr-4"
+            = link_to icon('fas fa-edit',"Edit User"), 
+              edit_user_path(user), class:"btn-sm-orange" 
+        - elsif Current.user.id == user.id
+          div.w-96  == render user
+          div
+            = link_to icon('fas fa-eye',"Show User"), user,class:"btn-sm-green mr-4"
+            = link_to icon('fas fa-edit',"Edit User"), 
+              edit_user_path(user), class:"btn-sm-orange" 

@@ -1,0 +1,45 @@
+.w-full[style="min-height: 90%;"]
+  / - if notice.present?
+  /   p#notice.py-2.px-3.bg-green-50.mb-5.text-green-500.font-medium.rounded-lg.inline-block= notice
+  /   / .flex.justify-between.items-center
+  / / - if params[:category].present?  
+  / /   h4.font-bold.text-4xl = "Articles " + "(#{params[:category]})"
+  / / - else
+  / /   h4.font-bold.text-4xl = "Articles " 
+
+  div.flex.bg-lime-light.-mx-2.mb-1.p-1
+    h1.font-bold.text-2xl.flex-shrink Listing Articles
+    div.flex-grow.flex
+      = link_to link_to icon('fas fa-plus-square', "New Article"), 
+        new_article_path,class:"btn-sm-blue" if can?(:create,:article)
+    / div.flex-shrink.float-right.text-green-800.p-0.font-bold.mr-3.hover:text-2xl = link_to icon('fas fa-arrow-left'), 'javascript:history.back()'
+
+  
+  / - @articles.each do |article|
+  / = render article
+  div[class="w-3/4"]
+
+    table.golfer
+      thead
+        tr
+          th Date
+          th Title
+          th.w-1/2 Leadin
+          th Actions
+          
+        
+      tbody
+        - @articles.each do |article|
+          tr
+            td = article.date
+            / td = text_area_tag nil,n.slim,class:'w-full'
+            td = article.title
+            td = article.content.split[0..20].join(' ').gsub(/\.[^\s]+/,'').gsub('#','')
+            td 
+              = link_to icon('fas fa-eye'), article,class:"icon bg-blue-600"
+              - if can?(:create,:article)
+                = link_to icon('fas fa-edit'),  edit_article_path(article),class:"icon bg-green-600"
+                = button_to(icon('fas fa-trash'),article, method: :delete, form:{data: { turbo_confirm: 'Are you sure?', turbo_method:'delete' }}, form_class:"icon bg-red-600")
+
+
+   

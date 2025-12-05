@@ -1,0 +1,33 @@
+p style="color: green" = notice
+div.w-full
+  h1.font-bold.text-2xl Group Courses
+  div.flex.gap-8
+    - if current_user && current_user.is_admin?
+      = link_to icon('fas fa-edit',"Edit Courses"),edit_course_path, class:"btn-sm-green"
+
+
+p About
+p.m-3 This is a proposed change. In a previous version, there was the concept of courses. I more or less abandoned it with PtGolf. There is a course in the group, but only one. I added the capability to play on different courses. It is still in the group, but you can now set multiple course, each with different tees. Some of this comes from Avery's group play the course as a Par 3 when cart path only. Everyone plays from the same tee. I could of done that in the previous version I now going to add it back. It's a set it once and you'll probably never change it.
+
+p.m-3 I'm also updating how tees work. Most courses have multiple tees, use wierd colors etc. Twin Bridges actually has 7 tees:[Gold,Blue,White,Gray,Red] and two other tees for Junior and whatever. I'm proposing a concept of a tee level to set your default tee. Tee levels are just the order of the tee. At Twin Bridge it goes: [1 Gold,2 Blue,3 White,4 Gray, 5 Red] (lowest number is most difficult). Your quota is based on your tee. If you change your tee, you have a new quota for that tee. There is also the combined quota of all tee that is only used if you go to a new tee.
+
+p.m-3 We have numerous players who have changed tees, but not updated. We need to fix that.
+
+table.golfer
+  tr
+    th Course 
+    th Par In
+    th Par Out
+    th Tees
+    th Scorecard Letters
+
+  - @group.group_courses.each do |k,v|
+    tr
+      td = k 
+      td = v['par_in']
+      td = v['par_out']
+      td = v['tees']
+      - l = ''
+      - v['tees'].split.each{|t| l << t[0]+' '}
+      td = l
+

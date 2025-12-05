@@ -1,0 +1,40 @@
+
+div[class="  flex text-lg  bg-black font-bold text-white" data-controller="toggleSidebar"]
+
+  div.p-1.hidden.md:block.pl-4.px-3.bg-green-600.hover:bg-green-600.border-r.border-white[data-action="click->toggleSidebar#toggle"] ☰ Menu
+
+  div.p-1.px-3.hover:bg-green-600.border-r.border-white = link_to("Home",root_path)
+  
+  - unless Current.group
+    div.p-1.px-3.hover:bg-green-600.border-r.border-white = link_to "About", '/about' 
+
+  - if Current.group
+    div.p-1.px-3.hover:bg-green-600.border-r.border-white = link_to "Group", current_group, class:"" 
+    div.p-1.px-3.hover:bg-green-600.border-r.border-white= link_to "Games", games_path, class:"" 
+    div.p-1.px-3.hover:bg-green-600.border-r.border-white= link_to "Players", players_path, class:"" 
+    - if current_user.present? && current_user.is_manager?
+      div.w3-dropdown-hover
+        / .z-10.p-1.px-3.hover:bg-green-600.border-r.border-white
+        button.p-1.px-3.hover:bg-green-600.border-r.border-white
+         | Admin&nbsp;&nbsp;&nbsp;
+         i.fa.fa-caret-down
+
+        .w3-dropdown-content.w3-card-4.w-48.border-t.border-white
+          = link_to "Users", users_path, class:"block green-btn"
+          = link_to "Groups", groups_path, class:"block green-btn" if current_user.is_super?
+          = link_to "Notices", notices_path, class:"block green-btn" if current_user.is_super?
+          = link_to "Articles", articles_path, class:"block green-btn" if current_user.is_super?
+
+
+
+  div
+    .w-full
+      - flash.each do |name, msg|
+        - if msg.is_a?(String)
+          .flash-box.w3-padding.w3-animate-right[
+            data-controller="flashIt" 
+            data-flashIt-target="flashBox" 
+            class="#{name.to_s == 'notice' ? 'p-1 text-green-500 bg-green-100 px-4' : 'p-1 text-red-500 bg-red-100 px-4'}"
+          ]
+            = content_tag :span, content_tag(:strong,msg)
+

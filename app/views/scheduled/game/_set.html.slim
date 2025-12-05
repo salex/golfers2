@@ -1,0 +1,37 @@
+= turbo_frame_tag "scheduler"
+  - @expired = @game.expired_players
+  - @active = @game.active_players
+  - @inactive = @game.inactive_players
+  div#alert.p-2.bg-red-200.text-red-600.hidden
+  = render partial: '/shared/theader'
+  div[data-controller="scheduler"]
+
+    div.flex.gap-1
+      div
+
+        - if @game.state[:can_form] || @game.state[:can_reform]
+          = link_to('Form Teams',form_teams_scheduled_game_path(@game),
+            data: {scheduler_target:"formbtn", turbo_frame: "_top" }, 
+            class:"btn btn-submit inline-block text-center w-full")
+        button.btn.btn-submit.inline-block.w-full[data-scheduler-target="update" data-action="click->scheduler#submit" style="display:none;"] Update Game Players
+        hr.border-bottom
+        div.m-1= render partial:"modal"
+        
+      div
+        div.border.border-slate-500.mb-1
+          div.font-bold.bg-amber-400.p-1 New Scheduled Players
+          / div.flex.flex-grow.flex-wrap
+          div.grid.grid-cols-2.md:grid-cols-3.lg:grid-cols-4.xl:grid-cols-5#scheduled
+        div.border.border-slate-500.mb-1 
+          div.font-bold.bg-blue-100.p-1 Active Players
+          - @players = @active 
+          div.ml-1 = render partial:"grid" unless @active.blank?
+        div.border.border-slate-500.mb-1 
+          div.font-bold.bg-blue-100.p-1 Inactive Players
+          - @players = @inactive 
+          div.ml-1 = render partial:"grid" unless @inactive.blank?
+        div.border.border-slate-500.mb-1 
+          div.font-bold.bg-blue-100.p-1 Expired Players
+          - @players = @expired 
+          div.ml-1 = render partial:"grid" unless @expired.blank?
+

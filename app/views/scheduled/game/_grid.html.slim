@@ -1,0 +1,48 @@
+div[class="grid grid-cols-2 md:hidden lg:hidden xl:hidden"]
+  - mapping = get_col_mapping(@players.size,2)
+  - 2.times do |i|
+    div[class=""]
+      - mapping[i].each do |m|
+        div[class="btn-schedule w-full h-8" 
+           id="#{@players[m].id}" 
+           data-scheduler-target='player' 
+           data-action="click->scheduler#add_player" 
+           data-playerid="#{@players[m].id}"] = @players[m].name[0..11]
+           /[0..16]
+
+div[class="hidden md:grid md:grid-cols-3 lg:hidden xl:hidden"]
+  - mapping = get_col_mapping(@players.size,3)
+  - 3.times do |i|
+    div[class=""]
+      - mapping[i].each do |m|
+        div[class="btn-schedule w-full h-8" 
+          id="#{@players[m].id}" 
+          data-scheduler-target='player' 
+          data-action="click->scheduler#add_player" 
+          data-playerid="#{@players[m].id}"] = @players[m].name[0..12]
+          /[0..18]
+
+div[class="hidden lg:grid lg:grid-cols-4 xl:hidden"]
+  - mapping = get_col_mapping(@players.size,4)
+  - 4.times do |i|
+    div[class=""]
+      - mapping[i].each do |m|
+        div[class="btn-schedule w-full h-8" 
+          id="#{@players[m].id}" 
+          data-scheduler-target='player' 
+          data-action="click->scheduler#add_player" 
+          data-playerid="#{@players[m].id}"] = @players[m].name[0..15]
+          /[0..20]
+
+div[class="hidden xl:grid xl:grid-cols-5 "]
+  - mapping = get_col_mapping(@players.size,5)
+  - 5.times do |i|
+    div[class=""]
+      - mapping[i].each do |m|
+        div[class="btn-schedule w-full h-8" 
+          id="#{@players[m].id}" 
+          data-scheduler-target='player' 
+          data-action="click->scheduler#add_player" 
+          data-playerid="#{@players[m].id}"] = @players[m].name[0..18]
+          /[0..22]
+

@@ -1,0 +1,67 @@
+= form_with(model: @user) do |form|
+  - if @user.errors.any?
+    div style="color: red"
+      h2 = "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+      ul
+        - @user.errors.each do |error|
+          li = error.full_message
+
+  .flex.gap-10
+    div
+      - if current_user && current_user.is_trustee?
+        = form.label :group_id, class: "inline-block w-30 text-right font-bold m-1 mr-4"
+        = form.number_field :group_id,class:'border p-1 m-1'
+      - else
+        div
+          = form.label :group_id, class: "inline-block w-30 text-right font-bold m-1 mr-4"
+          = form.hidden_field :group_id
+          span.p-2 = @user.group_id
+
+      div
+        = form.label :fullname, class: "inline-block w-30 text-right font-bold m-1 mr-4"
+        = form.text_field :fullname,class:'border p-1 m-1'
+
+      div
+        = form.label :username, class: "inline-block w-30 text-right font-bold m-1 mr-4"
+        = form.text_field :username,class:'border p-1 m-1'
+
+      div
+        = form.label :email, class: "inline-block w-30 text-right font-bold m-1 mr-4"
+        = form.text_field :email,class:'border p-1 m-1'
+
+    div
+      div.italic
+        p Leave blank or change
+
+      div
+        = form.label :password, class: "inline-block w-48 text-right font-bold m-1 mr-4"
+        = form.password_field :password,class:'border p-1 m-1'
+
+      div
+        = form.label :password_confirmation, class: "inline-block w-48 text-right font-bold m-1 mr-4"
+        = form.password_field :password_confirmation, class:"border p-1 m-1"
+
+    div
+      - roles = {} # define roles
+      - User::Roles.each_with_index{|r,i| roles[i] = r} # set roles
+      - @user.role = User::Roles.last if @user.new_record?
+      - if Current.user.is_trustee?
+        div
+          label.font-bold Role
+          - (1..(roles.keys.last)).each do |i|
+            div
+              = form.radio_button(:role, roles[i], selected: @user.role == i)
+              span.ml-2.font-bold= roles[i].humanize
+      - elsif Current.user.is_manager? 
+          div
+            label.font-bold Role
+            - (2..(roles.keys.last)).each do |i|
+              div
+                = form.radio_button(:role, roles[i], selected: @user.role == i, class:"bg-green-200")
+                span.ml-2.font-bold= roles[i].humanize
+      - else
+        div
+          label.font-bold Role
+          div = @user.role
+  div[class= "btn-submit"]
+    = form.submit

@@ -1,0 +1,38 @@
+div[class="flex px-3 py-1  bg-green-600 font-bold "]
+  div.text-xl.text-white
+    = link_to root_path do 
+      = image_tag("links.png",class:'inline')
+      
+      span.font-bold[style="text-transform:none;" ]PtGolf
+      span.font-bold[style="text-transform:none;font-size:.5rem;"].us
+
+  div.hidden.md:block.text-center.text-white.text-xl.flex-grow
+    - if current_group
+      .small-caps = current_group.name 
+       / #.titleize
+    -else
+     .small-caps  No One Does More For Golf Sherriff's
+  div
+    - if current_user.present?
+      .flex.gap-4.float-right.mx-4
+        - if session && session[:fullname] == 'Visitor'
+          div[class=" bg-green-600 py-0"] 
+            span.text-white.text-lg = session[:fullname]
+        - else
+          div.w3-dropdown-hover.mr-2.w-48.z-10
+            div[class="bg-green-600 py-0"] 
+              span.text-white.text-lg = session[:fullname]
+              i.fa.fa-caret-down.text-white.ml-2
+            .w3-dropdown-content.w3-card-4.w-48.border-t.border-white
+              = link_to "Edit User Profile",edit_profile_path , class:"block green-btn"
+              = link_to "Change Password", edit_password_path , class:"block green-btn"
+
+        = button_to("Logout",session_path,method: :delete,class:"hover:bg-green-200 text-lg inline-block px-3 mx-3 text-green-200 hover:text-black")
+    - else
+      span.float-right = link_to "Sign In", new_session_path,
+        class:"hover:bg-green-200 text-lg inline-block px-3 mx-3 text-green-200 hover:text-black"
+      - if session[:fullname] == 'Visitor'
+        span.float-right.font-bold.text-white.text-lg
+          = linkBtn('Exit Visit',leave_group_path(current_group),meth:'patch',klass:" py-0")
+
+

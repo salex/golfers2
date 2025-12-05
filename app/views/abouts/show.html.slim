@@ -1,0 +1,47 @@
+div
+  h3[class="text-center strong"] 
+    | About 
+    strong 
+      .inline-block= image_tag('links.png')
+      |PtGolf
+      span style="font-size:.5rem;" .us
+
+  .grid.grid-cols-12.gap-4.px-4
+    .col-span-3
+      div
+        dl.about-menu
+          dd
+            div = button_to "About Home",about_path, method:'get',class:"lime-btn py-8" 
+          dd 
+            div = button_to "PTGOLF.EXE Structure",origin_about_path, method:'get',class:"lime-btn"
+            div  = button_to "PtGolf.us Structure",structure_about_path, method:'get',class:"lime-btn"
+
+            div = button_to "Terminology",terminology_about_path, method:'get',class:"lime-btn"
+            div = button_to "Notices/Changes",notices_about_path, method:'get',class:"lime-btn"
+          dt.strong Database Tables
+          dd
+            div = button_to "Clubs",club_about_path, method:'get',class:"lime-btn"
+            div = button_to "Groups",group_about_path, method:'get',class:"lime-btn"
+            div = button_to "Players",player_about_path, method:'get',class:"lime-btn"
+            div = button_to "Games",game_about_path, method:'get',class:"lime-btn"
+            div = button_to "Rounds",round_about_path, method:'get',class:"lime-btn"
+            / div = button_to "Users",user_about_path, method:'get',class:"lime-btn"
+
+          dt.strong Processes and Methods
+          dd
+            div = button_to "Group Management",gmanage_about_path, method:'get',class:"lime-btn"
+            div = button_to "The Game Process",eprocess_about_path, method:'get',class:"lime-btn"
+            div = button_to "Forming Methods",forming_about_path, method:'get',class:"lime-btn"
+            div = button_to "Scoring",scoring_about_path, method:'get',class:"lime-btn"
+            div = button_to "Limiting",limiting_about_path, method:'get',class:"lime-btn"
+            div = button_to "Features",features_about_path, method:'get',class:"lime-btn"
+
+          dt.strong Development
+          dd
+            div = button_to "Recent Changes",changes_about_path, method:'get',class:"lime-btn"
+
+
+        br
+
+    #about.col-span-9.max-height
+      .w-full = render partial: 'abouts/about'

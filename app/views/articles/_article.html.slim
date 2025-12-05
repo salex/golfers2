@@ -1,0 +1,44 @@
+div[class="w-full"]
+
+  table.golfer
+    thead
+      tr
+        th Date
+        th Leadin1
+        th Actions
+        
+      
+    tbody
+      - @articles.each do |n|
+      tr
+        td = n.date
+        / td = text_area_tag nil,n.slim,class:'w-full'
+        td = article.content.split[0..20].join(' ').gsub(/\.[^\s]+/,'').gsub('#','')
+        td 
+          = link_to icon('fas fa-eye'), n,class:"icon bg-blue-600"
+          - if can?(:create,:article)
+            = link_to icon('fas fa-edit'),  edit_article_path(n),class:"icon bg-green-600"
+            = button_to(icon('fas fa-trash'),n, method: :delete, form:{data: { turbo_confirm: 'Are you sure?', turbo_method:'delete' }}, form_class:"icon bg-red-600")
+
+
+ 
+  / div.font-medium.font-bold.flex.gap-2
+
+  /   span.font-bold Title:
+  /   span = link_to article.title, article,class:"m-1 text-xl text-green-700 hover:text-blue-700"
+  /   span = link_to icon('fas fa-eye'), article,class:"icon bg-blue-600"
+
+  /   - if can?(:update,:article)
+  /     = link_to icon('fas fa-edit'),  edit_article_path(article),class:"icon bg-green-600"
+      = button_to(icon('fas fa-trash'),article, method: :delete, form:{data: { turbo_confirm: 'Are you sure?', turbo_method:'delete' }}, form_class:"icon bg-red-600")
+
+  / div.ml-4.mb-2
+  /   .flex.flex-wrap.gap-4
+  /     div
+  /       span.font-medium.font-bold.m-1 Date:
+  /       span = article.date
+      
+  /     div
+  /       span.font-medium.font-bold.m-1 Lead In:
+  /       span = article.content .split[0..14].join(' ').gsub(/\.[^\s]+/,'').gsub('#','')
+  /       span &#8230;

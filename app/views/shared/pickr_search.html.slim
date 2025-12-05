@@ -1,0 +1,5 @@
+- @search_results.each do |result| 
+  li[class="text-green-700 font-bold hover:bg-green-100 mx-2 p-1" 
+    data-action="click->autopickr#select" 
+    data-selected-id="#{result[1]}"] = link_to(result[0],"/players/#{result[1]}")
+  

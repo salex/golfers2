@@ -1,0 +1,89 @@
+- scoring = @scoring
+- game_stats = scoring.team_scores
+/ - puts "STATS #{game_stats}"
+- teams = scoring.teams
+- win = scoring.winners
+
+
+.bg-lime-lighter.border-bottom.bg-lime.p-1.-mx-2.mb-1
+  = links = link_to( icon('fas fa-arrow-left', 'Cancel - List Games'),  games_path, class: "btn-cancel")
+
+  - if can?(:update,:game)
+    = link_to icon('fas fa-pencil-alt', 'ReScore Teams'), @game.pending_url('score_teams'),
+      class: "btn-warn"
+    = link_to icon('fas fa-pencil-alt', 'Score Skins/Birdies'), @game.scored_url('skins'),
+      class: "btn-cancel"
+    = link_to icon('fas fa-pencil-alt', 'Score Par3s'), @game.scored_url('par3s'),
+      class: "btn-cancel"
+
+= render partial:"shared/gheader"
+
+
+.flex.flex-wrap
+  - team_keys  = teams.keys
+  - map = col_map_array(team_keys,2)
+
+  - map.each do |row|
+    .w-full.md:w-1/2.px-2
+      - row.each do |tm|
+        - team = teams[tm]
+        - if team.blank?
+          strong Error, Group deleted players for team and scoreing cannot be displayed
+          - next
+
+        - team_stats = game_stats[tm]
+        / - hole = (team_stats[:quota]/18.0).round(1)
+        - if team.blank?
+          strong Error, Group deleted players for team and scoreing cannot be displayed
+          - next
+        table.golfer.w-full.mb-3 class="#{!scoring.is_winner?(tm) ? '' : 'lite-lime'}"
+          thead
+            - if !team_stats[:team_quality].zero?
+              tr
+                th.bg-lime-300 colspan="8" 
+                  = "Place won $#{to_quarters(team_stats[:team_quality],true)}, Each Team Mate $#{to_quarters(team_stats[:mate_quality],true)} "
+
+
+            tr
+              th.w-56 Name
+              th.w-12 Tm
+              th.w-20 Tee
+              th Q
+              th Side
+              th Front
+              th Back
+              th Total
+          tbody
+            - team.each do |mate|
+              tr
+                - sideq = mate[:quota] / 2.0
+                td= mate[:player_name]
+                td= mate.team
+                td= mate[:tee]
+                td= mate[:limited] ? mate[:quota].to_s + '*' : mate[:quota].to_s 
+                td= sideq
+                td= pulled(mate[:front],mate[:front_net],sideq,mate[:limited])
+                td= pulled(mate[:back],mate[:back_net],sideq,mate[:limited])
+                td= pulled(mate[:total],mate[:total_net],mate[:quota],mate[:limited]) 
+
+hr.underline
+.w3-row-padding 
+  - if @game.method == 'sides'
+    strong.annotate Team Winners
+    table.small-table.w100
+      tr
+        - sides[:winners].each do |a|
+          th = "#{a[0]} Team #{a[1]} &#177; #{a[2]} $#{to_quarters(a[3],true)}".html_safe
+  -else
+    .annotate Team Winners (Places)
+    .flex.flex-wrap.gap-4
+      - scoring.place_winners.each do |k,v|
+        div.border-2.border-black.p-1
+          strong = (k+1).ordinalize
+          span = v.html_safe
+
+div.my-4
+  = render partial:'scored/game/best_sides',locals:{scoring:scoring}
+div.mb-4
+  = render partial:'scored/game/game_stats'
+

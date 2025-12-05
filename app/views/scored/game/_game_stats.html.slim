@@ -1,0 +1,102 @@
+/ div.font-bold.text-lg Skins/Birdies
+
+div.flex.flex-wrap.gap-8
+  - if @game.has_skins?
+    div.border.p-1
+      div.font-bold.text-lg.bg-lime-300.text-center.mb-1 Birdies/Skins
+ 
+      - skins = Skins.new(@game)
+      / - puts "SKINS #{skins.inspect}"
+      - klass = "skin_hole w-8 h-7 border border-slate-500 text-center"
+      div.flex.mb-1
+        div.w-20.px-2.cut Cut 
+        div.w-20.px-2.birdie Birdie
+        div.w-20.px-2.eagle Eagle
+        div.w-20.px-2.albatros Albatros
+
+      table
+        tr.flex
+          td.border.border-slate-500.text-center.px-1.w-16 SkinsF
+          - 1.upto(9) do |i|
+            - if skins.good[i-1] == '.'
+              = content_tag :td, i, class:"#{klass} skin_hole"
+            - elsif skins.good[i-1] == '9'
+              = content_tag :td, i, class:"#{klass} skin_hole cut"
+            - elsif skins.good[i-1] == '1'
+              = content_tag :td, i, class:"#{klass} skin_hole birdie"
+            - elsif skins.good[i-1] == '2'
+              = content_tag :td, i, class:"#{klass} skin_hole eagle"
+            - elsif skins.good[i-1] == '3'
+              = content_tag :td, i, class:"#{klass} skin_hole albatros"
+            - else
+              = content_tag :td, i, class:"#{klass} skin_hole"
+        tr.flex
+          td.border.border-slate-500.text-center.px-1.w-16 SkinsB     
+          - 10.upto(18) do |i|
+            - if skins.good[i-1] == '.'
+              = content_tag :td, i, class:"#{klass} skin_hole"
+            - elsif skins.good[i-1] == '9'
+              = content_tag :td, i, class:"#{klass} skin_hole cut"
+            - elsif skins.good[i-1] == '1'
+              = content_tag :td, i, class:"#{klass} skin_hole birdie"
+            - elsif skins.good[i-1] == '2'
+              = content_tag :td, i, class:"#{klass} skin_hole eagle"
+            - elsif skins.good[i-1] == '3'
+              = content_tag :td, i, class:"#{klass} skin_hole albatros"
+            - else
+              = content_tag :td, i, class:"skin_hole"
+      div.flex.gap-8.mt-2
+        div
+          strong.font-bold.text-lg Skins Stats
+          table.golfer
+
+            - skins.stats.each do |k,v|
+              - unless k == 'winners' || v == 0
+                tr
+                  td.font-bold =  k
+                  td = v
+      
+        table.golfer
+          caption.font-bold.text-lg Winners
+          tr
+            th Hole
+            th Player
+            th Won
+
+          - skins.winners.each do |k,a|
+            tr
+              td = k
+              td = a[2]
+              td = a[1]
+  - if @game.has_par3?
+    div.border.p-1
+
+      - par3 = Par3.new(@game)
+      div.font-bold.text-lg.text-center.bg-lime-300 Par3s
+
+
+      div.flex.gap-4
+        div
+          .font-bold.text-lg Par 3 Stats
+          / - stats = par3.par3_stats
+          table.golfer
+
+            - par3.stats.each do |k,v|
+              tr
+                td.font-bold.p-2 =  k
+                td.p-2 = v
+        div
+          table.golfer
+            caption.font-bold.text-lg Winners
+            tr
+              th Par#
+              th Player
+              th Won
+
+            - par3.winners.each do |k,a|
+
+              tr
+                td = k
+                td = a[2] 
+                td = a[1]
+ 

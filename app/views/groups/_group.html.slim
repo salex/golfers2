@@ -1,0 +1,95 @@
+
+- if @group
+  - settings =  @group.settings
+  - keys = settings.keys
+  - len = settings.keys.length
+  - forth = (len / 4)
+  - third = (len / 3)
+div id="#{dom_id group}"
+  div.flex.gap-8
+    div
+      p
+        strong.w-40.inline-block.text-right Name:
+        =< "Id: #{group.id} #{group.name}"
+      p
+        strong.w-40.inline-block.text-right Tees:
+        =< group.tees
+    
+    table.golfer
+      tr
+        th Course Name
+        th Par In
+        th Par Out
+        th Tees
+        th Scorecard Letters
+
+      - @group.group_courses.each do |k,v|
+        tr
+          td = k 
+          td = v['par_in']
+          td = v['par_out']
+          td = v['tees']
+          - l = ''
+          - v['tees'].split.each{|t| l << t[0]+' '}
+          td = l
+    div
+      - if current_user && current_user.is_admin?
+        = link_to icon('fas fa-edit',"Edit Courses"),edit_course_path, class:"btn-sm bg-lime-lighter"
+
+
+
+  - if !@group
+    p
+      strong.w-40.inline-block.text-right Settings:
+      =< group.settings
+  - else
+    .font-bold Limits/Scoring Settings/Options
+
+    - if @group
+
+      div.grid.grid-cols-2.md:grid-cols-4.gap-8
+        table.golfer
+          thead
+            tr
+              th Setting
+              th  Value
+            tbody
+              - 0.upto(forth) do |i|
+                tr
+                  td.font-bold
+                    span.float-right= keys[i]
+                  td = settings[keys[i]]
+        table.golfer
+          thead
+            tr
+              th Setting
+              th  Value
+            tbody
+              - (forth + 1).upto(forth*2) do |i|
+                tr
+                  td.font-bold
+                    span.float-right= keys[i]
+                  td = settings[keys[i]]
+        table.golfer
+          thead
+            tr
+              th Setting
+              th  Value
+            tbody
+              - (forth *2 + 1).upto(forth*3) do |i|
+                tr
+                  td.font-bold
+                    span.float-right= keys[i]
+                  td = settings[keys[i]]
+        table.golfer
+          thead
+            tr
+              th Setting
+              th Value
+            tbody
+              - (forth * 3 + 1).upto(len - 1) do |i|
+                tr
+                  td.font-bold
+                    span.float-right= keys[i]
+                  td = settings[keys[i]]
+

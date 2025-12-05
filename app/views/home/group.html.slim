@@ -1,0 +1,90 @@
+/ set 5 base group colors
+div.hidden.bg-blue-500.bg-red-500.bg-orange-500.bg-purple-500.bg-green-500.bg-green-600.bg-green-700.text-green-600
+- bg = current_group.group_color
+/ - bg = "bg-orange-500"
+div[class="font-bold text-lg text-white p-1 pl-4 -mx-2 #{bg}"] 
+  span = "#{current_group.name} Home Page"
+  span.float-right.text-green-800.p-0.font-bold.mr-3.hover:text-2xl = link_to icon('fas fa-arrow-left'), 'javascript:history.back()'
+div.md:grid.md:grid-cols-12.mx-1.p-1.gap-4
+  div.md:col-span-9
+
+    - if Current.group.welcome.present?
+      .strong.text-center.text-4xl.small-caps Welcome
+      p= Current.group.welcome.html_safe
+
+    = render partial:"home/home_events"
+    - if @notice.present?
+      - @notice.each do |n|
+        p.mb-3 = callout_success(markdown_text(n.slim),n.due_date) if n.status == 'success'
+        p.mb-3 = callout_alert(markdown_text(n.slim),n.due_date) if n.status == 'alert'
+        p.mb-3 = callout_info(markdown_text(n.slim),n.due_date) if n.status == 'info'
+        p.mb-3 = callout_warning(markdown_text(n.slim),n.due_date) if n.status == 'warning'
+    - if Current.user
+        / div = Current.user.attributes
+        / div = Current.user.permit
+        / div = Current.user.role_rank
+    - if Current.group.alert.present?
+      p.mb-3 = callout_alert Current.group.alert.html_safe
+    - if Current.group.notice.present?
+      p.mb-3 = callout_info Current.group.notice.html_safe
+
+    / div.hidden
+    / .bg-avocado-100 a100
+    / .bg-avocado-200 a200
+
+    / .bg-avocado-300 a300
+    / .bg-avocado-400 a400
+    / .bg-avocado-500 a500
+    / .bg-avocado-600 a600
+    / .bg-lime-darkest lime-darkest
+    / .bg-lime-darker lime-darker
+    / .bg-lime-dark lime-dark
+    / .bg-lime lime
+    / .bg-lime-light lime-light
+    / .bg-lime-lighter lime-lighter
+    / .bg-lime-lightest lime-lightest
+
+    / .bg-green-darkest green-darkest
+    / .bg-green-darker green-darker
+    / .bg-green-dark green-dark
+    / .bg-green green
+    / .bg-green-light green-light
+    / .bg-green-lighter green-lighter
+    / .bg-green-lightest green-lightest
+    / div.text-white[style="background: #001000;"] 1ggg
+    / div.text-white[style="background: #002000;"] 2ggg
+    / div.text-white[style="background: #003000;"] 3ggg
+    / div.text-white[style="background: #004000;"] 4ggg
+    / div.text-white[style="background: #005000;"] 5ggg
+    / div.text-white[style="background: #006000;"] 6ggg
+    / div.text-white[style="background: #007000;"] 7ggg
+    / div.text-white[style="background: #008000;"] 8ggg
+    / div.text-white[style="background: #009000;"] 9ggg
+    / div.text-white[style="background: #00a000;"] aggg
+    / div.text-white[style="background: #00b000;"] bggg
+    / div.text-white[style="background: #00c000;"] cggg
+    / div.text-white[style="background: #00d000;"] dggg
+    / div.text-white[style="background: #00e000;"] dggg
+    / div.text-white[style="background: #00f000;"] fggg
+
+
+
+
+    / div
+    /   .m-1.btn-sm.bg-yellow-300 red 
+    /   .m-1.btn-sm.bg-green-300 green 
+    /   .m-1.btn-sm.bg-blue-300 blue 
+    /   .m-1.btn-sm.bg-purple-300 purple 
+    /   .m-1.btn-md.bg-red-300 red 
+    /   .m-1.btn-md.bg-green-300 green 
+    /   .m-1.btn-md.bg-blue-300 blue 
+    /   .m-1.btn-md.bg-purple-300 purple
+    /   .m-1.btn-lg.bg-red-300 red 
+    /   .m-1.btn-lg.bg-green-300 green 
+    /   .m-1.btn-lg.bg-blue-300 blue 
+    /   .m-1.btn-lg.bg-purple-300 purple
+    /   .m-1.btn-lg.bg-slate-500.text-white gray
+
+
+  div.md:col-span-3
+    = render "home/sidebar"

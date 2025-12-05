@@ -1,0 +1,31 @@
+div.w-full
+  p style="color: green" = notice
+  div.flex.gap-2.bg-lime-lighter.-m-1.p-1.-mx-2
+    div.flex-shrink
+      div.font-bold.text-xl.mx-2 Group
+      / div.btn-submit submit
+
+    div.flex-grow.flex-wrap.gap-4
+      - if current_user && current_user.is_admin?
+
+        = link_to icon('fas fa-edit', 'Edit Group'),edit_group_path(@group),
+             class: "btn-cancel"
+        = link_to icon('fas fa-cut', 'Trim Expired Players'), expired_players_group_path(@group),class: "btn-cancel"
+
+        = button_to icon('fas fa-cut','Trim Games/Rounds'), trim_rounds_group_path(@group), method: :patch, form:{data: { turbo_confirm: "Are You Sure? Will delete all rounds over #{@group.trim_months} months old?", turbo_method:'delete' },class:"inline-block p-0 m-0"}, class:"btn-warn p-1.5 rounded mr-2"
+
+        = button_to icon('fas fa-calculator', 'Recompute Quotas'), recompute_quotas_group_path(@group), method: :patch, form:{data: { turbo_confirm: "Are You Sure? Will recompute quotas for all group players? ", turbo_method:'patch' },class:"inline-block"}, class:"btn-warn p-1.5 rounded mr-2"
+        = link_to( icon('fas fa-list', 'List/Edit Groups'),  groups_path, class: "btn-cancel float-right") if is_trustee? 
+
+      
+    - if is_super?
+
+      = button_to icon('fas fa-trash',"Destroy Group"), @group, method: :delete, form:{data: { turbo_confirm: 'Are you sure?', turbo_method:'delete' }}, class:"btn-sm bg-red-700 text-white hover:bg-red-500 mt-1"
+
+    div 
+      .text-green-800.p-0.font-bold.mr-3.hover:text-2xl = link_to icon('fas fa-arrow-left'), 'javascript:history.back()'
+
+ 
+
+  hr.border-1.border-blue-500.my-1
+  == render @group

@@ -1,0 +1,21 @@
+section.dashboard
+  div.md:flex.border-bottom.bg-lime-light.p-1.-mx-2
+    div.ml-2.text-xl.strong 
+      p style="color: green" = notice
+      h1.font-bold.text-xl Showing Player
+    div.flex.flex-grow.text-center
+      =< link_to icon('fas fa-list',"List Players"), players_path, 
+        class:"btn-cancel"
+      - if can?(:update,:player)
+        => link_to icon('fas fa-edit',"Edit Player"), edit_player_path(@player), 
+          class:"btn-cancel"
+        = button_to icon('fas fa-trash',"Destroy Player"), @player, method: :delete, form:{data: { turbo_confirm: 'Are you sure?', turbo_method:'delete' }},
+          class:"btn-warn mt-1 text-white inline-block"
+
+    div.flex-shrink.text-green-800.p-0.font-bold.mr-3.hover:text-2xl.float-right = link_to icon('fas fa-arrow-left'), 'javascript:history.back()'
+
+
+  hr.border-1.border-blue-500.my-1
+
+div.w-full
+  == render @player

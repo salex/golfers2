@@ -1,0 +1,31 @@
+div.flex.bg-lime-light.-mx-2.mb-1.p-1
+  h1.font-bold.text-2xl.flex-shrink Listing Notices
+  div.flex-grow.flex
+    = link_to link_to icon('fas fa-plus-square', "New Notice"), 
+      new_notice_path,class:"btn-sm-blue" if can?(:create,:article)
+  div.flex-shrink.float-right.text-green-800.p-0.font-bold.mr-3.hover:text-2xl = link_to icon('fas fa-arrow-left'), 'javascript:history.back()'
+
+
+
+table.golfer
+  thead
+    tr
+      th Date
+      th.w-96 Slim
+      th Status
+      th Expires
+      th Actions
+      
+    
+  tbody
+    - @notices.each do |n|
+      tr
+        td = n.date
+        td = text_area_tag nil,n.slim,class:'w-full'
+        td = n.status
+        td = n.due_date
+        td 
+          = link_to icon('fas fa-eye'), n,class:"icon bg-blue-600"
+          - if can?(:update,:game)
+            = link_to icon('fas fa-edit'),  edit_notice_path(n),class:"icon bg-green-600"
+            = button_to(icon('fas fa-trash'),n, method: :delete, form:{data: { turbo_confirm: 'Are you sure?', turbo_method:'delete' }}, form_class:"icon bg-red-600")

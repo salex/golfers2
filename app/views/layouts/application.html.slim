@@ -1,0 +1,33 @@
+doctype html
+html
+  head
+    title
+      | Golfers
+    meta[name="viewport" content="width=device-width,initial-scale=1"]
+    meta[name="apple-mobile-web-app-capable" content="yes"]
+    meta[name="mobile-web-app-capable" content="yes"]
+    = csrf_meta_tags
+    = csp_meta_tag
+    = yield :head
+
+    / link rel="stylesheet" href="https://ga.jspm.io/npm:flatpickr@4.6.9/dist/flatpickr.min.css"
+
+    = stylesheet_link_tag "tailwind", "data-turbo-track": "reload"
+    = stylesheet_link_tag :app, "data-turbo-track": "reload"
+    = javascript_importmap_tags
+    script[crossorigin="anonymous" src="https://kit.fontawesome.com/69f9b59efd.js"]
+
+
+   
+  body
+    header.no-print
+      = render 'layouts/header'
+    div.no-print.sticky-menu = render 'layouts/menubar'
+
+    #mySidebar.w3-sidebar.w3-bar-block.w3-card-4.w3-animate-left[style="display:none"] 
+      = render 'home/sidebar'
+    #myMain.mx-2 = yield
+
+    
+    / main.mx-2
+    /   == yield

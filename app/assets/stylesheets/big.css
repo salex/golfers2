@@ -1,0 +1,19 @@
+.btn-sqr-blue{
+  background-color: #273862;
+  color: white;
+}
+
+.lime-btn {
+  background-color: #4CCF70 ;
+  padding: 6px 8px;
+  text-decoration: none;
+  border: none;
+  margin: 2px;
+  font-weight: bold;
+  width: 100%;
+  height: 100%;
+}
+.lime-btn:hover {
+  background-color: #b8ffb8 !important;
+  color:#4CCF70;
+}

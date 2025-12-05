@@ -1,0 +1,44 @@
+= turbo_frame_tag "toggle_pays"
+  div.flex.flex-wrap.border.border-slate-400.p-1.my-1
+    / NEED TO THINK ABOUT WHERE TO PUT TOGGLES
+    / -  if current_user && current_user.is_manager? 
+    /   / && @show.present?
+    /   - toggle = @game.method == 'sides' ? "Places" : "Sides"
+    /   div 
+    /     - ln = raw("#{icon('fas fa-exchange-alt')} Toggle Pays to #{toggle} ") 
+    /     = button_to ln,toggle_pays_scheduled_game_path(@game),method:'patch',params:{method:toggle},class:"bg-lime-400 hover:bg-lime-500 font-bold w-52 p-1 rounded"
+    div
+      strong.ml-3 Date:
+      =< @game.date
+    div
+      strong.ml-3 Status:
+      =< @game.status
+    div
+      strong.ml-3 Pay Method:
+      =< @game.method
+    div
+      strong.ml-3 Players:
+      - rounds = @game.rounds.size
+      =< rounds
+    div
+      strong.ml-3 Dues:
+      - dues = Current.group.dues
+      =< dues
+    div
+      strong.ml-3 Pot:
+      - pot = dues * rounds
+      =< pot
+    - if @game.method == "sides"
+      div
+        strong.ml-3 Pot Sides:
+        =< pot / 3.0
+    - else
+      div
+        strong.ml-3 Pot Places:
+        - winners = PgaPlaces.new(rounds,dues,nil,50).winners.reverse
+        =< " #{winners}"
+    / div 
+      
+    /   = select_tag "credit_card", options_for_select(Current.group.group_courses.keys, nil), class:"p-1  m-1"
+
+

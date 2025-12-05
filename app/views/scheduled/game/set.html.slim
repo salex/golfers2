@@ -1,0 +1,5 @@
+div.flex.gap-4.bg-lime-light.-mx-2.mb-1
+  div.font-bold.text-lg.ml-1 Add Players
+  div
+    div = link_to icon('fas fa-arrows-alt-h', 'Cancel - Return to Game'), @game.namespace_url, class: 'block btn-cancel font-bold', data:{turbo_frame: "_top"} 
+= render partial: '/scheduled/game/set'

@@ -1,0 +1,68 @@
+h6.strong.text-lg.bg-green-lighter.m-1.px-1.font-bold Active Players
+div.grid.md:grid-cols-2.lg:grid-cols-3.gap-2.px-1.m-1
+
+  - if @active.present?
+    - map = array_to_cols(@active,3)
+
+    - map.each do |col|
+      / - puts" MAP #{col}"
+
+      div
+        table.golfer.w-full
+          thead
+            tr
+              th.w-7/12 Name
+              th T
+              th Q
+              th.w-1/4 LPlay
+          tbody
+            - col.each do |player|
+                - name = player.name
+                tr
+                  td = link_to name, player_path(player),class:'text-blue-800 hover:text-green-600 font-bold'
+                  td = player.tee[0]
+                  td = player.quota_limited
+                  td = player.last_played.strftime("%m/%d/%y") if player.last_played.present?
+
+h6.strong.text-lg.bg-green-lighter.m-1.px-1.font-bold Inactive Players
+div.grid.md:grid-cols-2.lg:grid-cols-3.gap-2.px-1.m-1
+  - if @inactive.present?
+    - map = array_to_cols(@inactive,3)
+    - map.each do |col|
+      div
+        table.golfer.w-full
+          thead
+            tr
+              th.w-7/12 Name
+              th T
+              th Q
+              th.w-1/4 LPlay
+          tbody
+            - col.each do |player|
+                - name = player.name
+                tr
+                  td = link_to name, player_path(player),class:'text-blue-800 hover:text-blue-600 font-bold'
+                  td = player.tee[0]
+                  td = player.quota_limited
+                  td = player.last_played.strftime("%m/%d/%y") if player.last_played.present?
+h6.strong.bg-green-lighter.px-1.text-lg.m-2.font-bold Expired Players
+div.grid.md:grid-cols-2.lg:grid-cols-3.gap-2.px-1
+  - if @expired.present?
+    - map = array_to_cols(@expired,3)
+    - map.each do |col|
+      div
+        table.golfer.w-full
+          thead
+            tr
+              th.w-7/12 Name
+              th T
+              th Q
+              th.w-1/4 LPlay
+          tbody
+            - col.each do |player|
+                - name = player.name
+                tr
+                  td = link_to name, player_path(player),class:'text-blue-800 hover:text-blue-600 font-bold'
+                  td = player.tee[0]
+                  td = player.quota_limited
+                  td = player.last_played.strftime("%m/%d/%y") if player.last_played.present?

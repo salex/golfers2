@@ -1,0 +1,54 @@
+div[class="font-bold text-lg p-1 pl-4 -mx-2 bg-lime text-2xl flex"] 
+  div.flex-shrink
+    span.font-bold.flex-shrink[style="text-transform:none;" ]PtGolf
+    span.font-bold[style="text-transform:none;font-size:.5rem;"].us 
+  span.flex-grow.font-bold.text-center Home Page
+
+
+  span.float-right.text-green-800.p-0.font-bold.mr-3.hover:text-2xl = link_to icon('fas fa-arrow-left'), 'javascript:history.back()'
+
+
+div.grid.grid-cols-1.md:grid-cols-2.gap-8.p-4
+
+  .card-4.bg-lime-lightest
+    span.float-right = link_to "Login", new_session_path,
+      class:"bg-green-200 hover:bg-green-400 font-bold text-lg inline-block px-3 mx-3 "
+
+    table.golfer.w-11/12.m-6.bg-white
+      caption.font-lg.font-bold Current Groups
+      thead
+        tr
+         
+          th.p-2 Group Name
+          th.p-2 Players
+          th.p-2 Games
+          th.p-2 Last Game
+          th.p-2 Visit/Leave
+      tbody
+        tr
+        - groups = Group.all.order(:name)
+        - groups.each do |group|
+          tr
+            td.p-2 = group.name
+            td.p-2.text-center = group.players.size
+            td.p-2.text-center = group.games.size
+            td.p-2.text-center = group.games.last.date
+            td.p-2
+              - if Current.group && Current.group.id == group.id
+                = linkBtn('Exit and Leave',leave_group_path(group),meth:'patch',klass:"btn-md bg-lime-darker w-full py-0")
+              - else
+                = linkBtn('Visit',visit_group_path(group),meth:'patch',klass:"btn-md bg-lime-darker w-full text-center py-0")
+  div
+    strong.fs2 Welcome to PointGolf (PtGolf.us)
+    p.mb-2 A Web tool for managing quotas for your golf groups Low Ball or Dog Fight games.
+    p.mb-2 If your are a Member of a Group - Login using one of the Login links/button.
+    p.mb-2 If just visiting, select a Group by clicking one the 'Visit' link in the Current Groups list on the left. Once you visit a group you will go directly to that group's home page. If you leave the group, you can visit another group.
+    .button-bar
+      .annotate Learn more about PtGolf by clicking on the About link.
+      button.text-green-700.hover:text-blue-700.text-lg.font-bold = link_to 'About PtGolf.us', '/about'
+
+    p.mb-2 PtGolf.us is currently in limited production with only Clubs/Groups personally known by the author. If you like to inquire about adding you Club/Group, please click the <b>Contact Us</b> button below and provide contact information.
+    .button-bar
+        / button.lime-link-btn = link_to 'Contact Us', '/inquiries/new'
+
+

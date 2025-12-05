@@ -1,0 +1,70 @@
+= form_with(model: @player) do |form|
+  - if @player.errors.any?
+    div style="color: red"
+      h2 = "#{pluralize(@player.errors.count, "error")} prohibited this player from being saved:"
+      ul
+        - @player.errors.each do |error|
+          li = error.full_message
+  div
+    span.btn-submit = form.submit
+
+  div.flex.flex-wrap.gap-8.mt-4
+    div
+      div
+        = form.label :"group_id:", class:"w-40 font-bold text-right m-2 inline-block"
+        = form.text_field :group_id, class:"border border-zinc-300"
+
+      div
+        = form.label :"first_name:", class:"w-40 font-bold text-right m-2 inline-block"
+        = form.text_field :first_name, class:"border border-zinc-300"
+
+      div
+        = form.label "last_name:" , class:"w-40 font-bold text-right m-2 inline-block"
+        = form.text_field :last_name, class:"border border-zinc-300"
+
+      div
+        = form.label "nickname:", class:"w-40 font-bold text-right m-2 inline-block"
+        = form.text_field :nickname, class:"border border-zinc-300"
+
+      div
+        = form.label :"use_nickname:",class:"w-40 font-bold text-right m-2 inline-block"
+        = form.check_box :use_nickname, class:""
+
+      div
+        = form.label :"name:",class:"w-40 font-bold text-right m-2 inline-block"
+        = form.text_field :name, class:"border border-zinc-300"
+
+      div
+        = form.label :"tee:",class:"w-40 font-bold text-right m-2 inline-block"
+        / = form.text_field :tee
+        = form.select :tee,tee_select_options(Current.group.tees.split,@player.tee),{}, class:"border border-zinc-300"
+
+    div
+      div
+        = form.label :"quota:",class:"w-40 font-bold text-right m-2 inline-block"
+        = form.number_field :quota, class:"border border-zinc-300"
+
+      div
+        = form.label :"rquota:",class:"w-40 font-bold text-right m-2 inline-block"
+        = form.text_field :rquota, class:"border border-zinc-300"
+
+      div
+        = form.label :"phone:",class:"w-40 font-bold text-right m-2 inline-block"
+        = form.text_field :phone, class:"border border-zinc-300"
+
+      div
+        = form.label :"is_frozen:",class:"w-40 font-bold text-right m-2 inline-block"
+        = form.check_box :is_frozen, class:""
+
+      div
+        = form.label :"last_played:",class:"w-40 font-bold text-right m-2 inline-block"
+        = form.date_field :last_played, class:"border border-zinc-300"
+
+      div
+        = form.label :"pin:",class:"w-40 font-bold text-right m-2 inline-block"
+        = form.number_field :pin, class:"border border-zinc-300"
+
+      div
+        = form.label :"limited:",class:"w-40 font-bold text-right m-2 inline-block"
+        = form.text_field :limited, class:"border border-zinc-300"
+

@@ -1,0 +1,15 @@
+div.w-full
+  p style="color: green" = notice
+
+  h1.font-bold.text-2xl Rounds
+  = link_to link_to icon('fas fa-plus-square', "New Round"), new_round_path,class:"btn-primary"
+  hr.border-1.border-blue-500.my-1
+
+  #rounds
+    - @rounds.each do |round|
+      == render round
+      = link_to icon('fas fa-eye',"Show Round"), round,class:"btn-sm-green"
+      = link_to icon('fas fa-edit',"Edit Round"),  edit_round_path(round),class:"btn-sm-green"
+
+      hr.border-1.border-blue-500.my-1
+

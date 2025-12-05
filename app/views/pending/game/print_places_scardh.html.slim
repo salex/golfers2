@@ -1,0 +1,161 @@
+/ each score card has a fixed height. We'll fit 2 in a landscape page and 3 in
+/  a portriat page
+/ We'll adjust top margin(slightly) and hr/cutline margin depending on rows 2
+/  or rows 3
+/ Each page will have either 2 or 3 scorecards
+/ - params[:rows].present? ? rows = 4 : rows = 2 
+  / its either 2 or 3  based on presence of rows parameter
+- rows = 3
+- tms = @teams.keys
+- map = number_to_col_array(tms.size,rows) # returns cards in each col
+
+/ - par_in = current_group.par_in
+/ - par_out = current_group.par_out
+/ - par_in = @game.game_course["par_in"]
+/ - par_out = @game.game_course["par_out"]
+- course = @game.group.group_courses['Home']
+- par_in = course["par_in"]
+- par_out = course["par_out"]
+
+
+
+= link_to icon('fas fa-print',"Print"), '#', title: 'Print it', class: 'btn-cancel py-0 bg-blue-800 text-white no-print', onclick: "window.print();"
+= link_to( icon('fas fa-arrow-left', 'Cancel'),  @game.pending_url, class: "btn-cancel py-0 no-print")
+
+- map.each do |pg|
+  
+  div.page-break.px-4
+    - pg.each do |team|
+      - players = @teams[team]['players']
+      / slight adjustment on top margin
+      - if rows == 2
+        div.mt-12.font-bold = @teams[team]['header']
+      - else 
+        div.mt-10.font-bold = @teams[team]['header']
+
+      table.classic
+        / thead tries to set constant widths at least for holes 1..18
+        thead 
+          tr
+          th Name
+          th[style="width: 3.25%;"] TQ
+          th[style="width: 3.25%;"] 1 
+          th[style="width: 3.25%;"] 2 
+          th[style="width: 3.25%;"] 3 
+          th[style="width: 3.25%;"] 4 
+          th[style="width: 3.25%;"] 5 
+          th[style="width: 3.25%;"] 6 
+          th[style="width: 3.25%;"] 7 
+          th[style="width: 3.25%;"] 8 
+          th[style="width: 3.25%;"] 9 
+          th[style="width: 3.25%;"] In
+          th[style="width: 3.25%;"] i&nbsp;
+          th[style="width: 3.25%;"] 10
+          th[style="width: 3.25%;"] 11  
+          th[style="width: 3.25%;"] 12 
+          th[style="width: 3.25%;"] 13 
+          th[style="width: 3.25%;"] 14 
+          th[style="width: 3.25%;"] 15 
+          th[style="width: 3.25%;"] 16 
+          th[style="width: 3.25%;"] 17 
+          th[style="width: 3.25%;"] 18 
+          th[style="width: 3.25%;"] Out
+          th[style="width: 3.25%;"] Tot
+          th[style="width: 3.25%;"] +- 
+        tbody
+          / - 4.times do |i|
+          - i = 0
+          - n = q =  w = "." # need something other than space
+          - if players[i].present?
+            
+            - n = players[i][:name]
+            - q = players[i][:quota]
+            - w = players[i][:initial]
+
+          tr
+            - if rows == 2
+              td = n
+            - else 
+              td.elem7p  = n[0..18]
+            td = q
+            td  
+            td  
+            td  
+            td  
+            td  
+            td  
+            td  
+            td  
+            td
+            td  
+            td.elem7p  = w
+            td 
+            td   
+            td  
+            td  
+            td  
+            td  
+            td  
+            td  
+            td  
+            td 
+            td 
+            td
+          tr
+            th.text-left Par
+            th
+            - 0.upto(8) do |i|
+              th = par_in[i]
+
+            th  
+            th
+            - 0.upto(8) do |i|
+              th = par_out[i]
+            th 
+            th 
+            th
+          - 2.times do |i| 
+            tr
+              - if i == 0
+                td.italic.text-zinc-300 Hole Score
+              - else
+                td.italic.text-zinc-300 Side Score
+              td 
+              td  
+              td  
+              td  
+              td  
+              td  
+              td  
+              td  
+              td  
+              td  
+              td
+              td 
+              td   
+              td  
+              td
+              td 
+              td  
+              td  
+              td  
+              td  
+              td  
+              td 
+              td 
+              td
+      - if ((team) % rows).zero?  # default to 2 columns 
+        div.font-bold = @teams[team]['header']
+      - else
+        div.font-bold = @teams[team]['header']
+        / set margin on hr baseed on col. 
+        / bigger spaceing for 2 col
+        / smaller spacing for 3 rows
+        - if rows == 2
+          hr.my-20.border.border-black
+        - else 
+          hr.my-8.border.border-black
+
+
+
+  

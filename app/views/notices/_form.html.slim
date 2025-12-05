@@ -1,0 +1,32 @@
+= form_for @notice, format: :html do |f|
+  - if @notice.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@notice.errors.count, "error")} prohibited this notice from being saved:"
+      ul
+        - @notice.errors.full_messages.each do |message|
+          li = message
+  .form-fields.m-1
+    .flex.gap-8
+      button.btn-submit.p-2.actions = f.submit "Submit"
+      = link_to icon('fas fa-list',"Cancel - List Notices"), notices_path, class:"btn-cancel"
+
+    = f.hidden_field :stashable_type
+    = f.hidden_field :stashable_id
+    div.flex.gap-8
+      .field
+        = f.label "Date", style: "display: block",class:'font-bold'
+        = f.date_field :date,class:"border"
+      .field
+        = f.label :NoticeType, style: "display: block",class:'font-bold'
+        = f.select :status, %w{alert warning success info},include_blank:true,selected:"#{@notice.status.present? ? @notice.status : 'info'}"
+      .field
+        = f.label 'Expires', style: "display: block",class:'font-bold'
+        = f.date_field :due_date,class:"border"
+    .field
+      = f.label :Slim, style: "display: block",class:'font-bold'
+      = f.text_area :slim, rows:20, cols:60,class:"border"
+
+
+
+
+ 

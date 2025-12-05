@@ -1,0 +1,41 @@
+div.flex.flex-wrap.border.border-slate-400.p-1.my-1
+
+  div
+    strong.ml-3 Date:
+    =< @game.date
+  div
+    strong.ml-3 Status:
+    =< @game.status
+  div
+    strong.ml-3 Pay Method:
+    =< @game.method
+  div
+    strong.ml-3 Players:
+    - rounds = @game.state[:players]
+    =< rounds
+  div
+    strong.ml-3 Teams:
+    - teams = @game.state[:teams].size
+    / compensate for teams set to 1 in set player teams
+    - if teams == 1
+      - teams = rounds
+    =< teams
+
+  div
+    strong.ml-3 Dues:
+    - dues = current_group.dues
+    =< dues
+  div
+    strong.ml-3 Pot:
+    - pot = dues * rounds
+    =< pot
+  - if @game.method == "sides"
+    div
+      strong.ml-3 Pot Sides:
+      =< pot / 3.0
+  - else
+    div
+      strong.ml-3 Pot Places:
+      - winners = PgaPlaces.new(teams,pot/teams,nil,current_group.score_place_perc ||= 50).winners.reverse
+      =< " #{winners}"
+

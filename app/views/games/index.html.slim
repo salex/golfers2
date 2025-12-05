@@ -1,0 +1,55 @@
+div.w-full
+  p style="color: green" = notice
+  / h1.font-bold.text-2xl Group Games
+
+  div.flex.-mx-2.mb-1.px-2
+  = render partial:"home/home_events"
+ 
+  #games.flex.gap-2
+    table.golfer.w-full
+      caption
+        .grid.grid-cols-5.mb-1
+          h1.font-bold.text-2xl Group Games
+          div == pagy_nav(@pagy)
+
+      thead
+        tr
+          th.w-16 Status
+          th Date
+          th Pay
+          th Players
+          th Teams
+          th Makeup
+          th Seed
+          th Course
+
+          th Actions
+      tbody
+            
+        - @games.each do |game|
+          tr
+            - if game.status == 'Scheduled'
+              td = link_to game.status.capitalize,
+              game.namespace_url,class:"btn-xsm bg-amber-400 w-full"
+            - elsif game.status == 'Pending'
+              td = link_to game.status.capitalize,
+              game.namespace_url,class:"btn-xsm bg-blue-400 w-full"
+            - else
+              td = link_to game.status.capitalize,
+              game.namespace_url,class:"btn-xsm bg-green-400 w-full"
+
+            td = game.date
+            td = game.method
+            td = game.formed["players"] if game.formed.present?
+            td = game.formed["teams"] if game.formed.present?
+            td = game.formed['makeup'] if game.formed.present?
+            td = game.formed["seed_method"] if game.formed.present?
+            td = game.course if game.formed.present?
+            td 
+
+              = link_to icon('fas fa-eye'), game,class:"icon bg-blue-600"
+              - if can?(:update,:game)
+                = link_to icon('fas fa-edit'),  edit_game_path(game),class:"icon bg-green-600"
+                = button_to(icon('fas fa-trash'),game, method: :delete, form:{data: { turbo_confirm: 'Are you sure?', turbo_method:'delete' }}, form_class:"icon bg-red-600")
+    
+    

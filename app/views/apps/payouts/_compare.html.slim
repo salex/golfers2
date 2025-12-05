@@ -1,0 +1,70 @@
+table.golfer.w75
+  thead
+    tr
+      th Meth
+      th Pot
+      - 1.upto(5)do |i|
+        th = i.ordinalize
+  tbody
+    tr
+      td = "Deal High" 
+      td = "$#{ 10*6}"
+      - places = Things::DealTokens.new(10,6,'high').winners.reverse
+      - places.each do |i|
+        td.text-right = number_to_currency i
+    tr
+      td = "Deal Mid" 
+      td = "$#{ 10*6}"
+      - places = Things::DealTokens.new(10,6,'mid').winners.reverse
+      - places.each do |i|
+        td.text-right = number_to_currency i
+    tr
+      td = "Deal Low" 
+      td = "$#{ 10*6}"
+      - places = Things::DealTokens.new(10,6,'low').winners.reverse
+      - places.each do |i|
+        td.text-right = number_to_currency i
+    tr
+      td = "PGA High" 
+      td = "$#{ 10*6}"
+      - places = Things::PgaPlaces.new(10,6,'high').winners.reverse
+      - places.each do |i|
+        td.text-right = number_to_currency i
+    tr
+      td = "PGA Mid" 
+      td = "$#{ 10*6}"
+      - places = Things::PgaPlaces.new(10,6,'mid').winners.reverse
+      - places.each do |i|
+        td.text-right = number_to_currency i
+    tr
+      td = "PGA Low" 
+      td = "$#{ 10*6}"
+      - places = Things::PgaPlaces.new(10,6,'low').winners.reverse
+      - places.each do |i|
+        td.text-right = number_to_currency i
+    tr
+      td = "PGA Even" 
+      td = "$#{ 10*6}"
+      - places = Things::PgaPlaces.new(10,6,'even').winners.reverse
+      - places.each do |i|
+        td.text-right = number_to_currency i
+
+
+    tr
+      td = "Rate" 
+      td = "$#{ 10*6}"
+      - places = Things::RatePlaces.new(10,6).winners.reverse
+      - places.each do |i|
+        td.text-right = number_to_currency i
+    tr
+      td = "Even" 
+      td = "$#{ 10*6}"
+      - places = Things::EvenPlaces.new(10,6).winners.reverse
+      - places.each do |i|
+        td.text-right = number_to_currency i
+    tr
+      td = "Base 60/40" 
+      td = "$#{ 10*6}"
+      - places = Things::Base6040.new(10,6).winners
+      - places.each do |i|
+        td.text-right = number_to_currency i

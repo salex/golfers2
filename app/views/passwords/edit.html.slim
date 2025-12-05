@@ -1,0 +1,39 @@
+p style="color: green" = notice
+h1.font-bold.text-2xl Change Password
+
+div.flex.gap-8
+  => link_to icon('fa fa-window-close',"Cancel"), root_path, class:"btn-cancel"
+
+hr.border-1.border-blue-500.my-1
+= form_with(model: current_user, url: password_path) do |form|
+
+  - if current_user.errors.any?
+    div style="color: red"
+      h2 = "#{pluralize(current_user.errors.count, "error")} prohibited this user from being saved:"
+      ul
+        - current_user.errors.each do |error|
+          li = error.full_message
+
+  .grid.grid-cols-3
+    div
+      .flex.flex-wrap.gap-4
+     
+        div
+          div
+            / = form.label :password_challenge, style: "display: block"
+
+            = form.label :current_password, style: "display: block"
+            = form.password_field :password_challenge, class:"border"
+
+          div
+            = form.label :new_password, style: "display: block"
+            = form.password_field :password, class:"border"
+
+          div
+            = form.label :password_confirmation, style: "display: block"
+            = form.password_field :password_confirmation, class:"border"
+
+  div.mt-4 
+    div[class="btn-submit"]
+      = form.submit("Update Password")
+

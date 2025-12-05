@@ -1,0 +1,23 @@
+
+div.no-print
+  div.flex.bg-lime-light.-mx-2.mb-1.p-1
+    h1.font-bold.text-2xl.flex-shrink Showing Articles
+    div.flex-grow.flex
+      = link_to icon('fas fa-print',"Print"), '#', title: 'Print it', class: 'btn-cancel py-0 bg-blue-800 text-white no-print', onclick: "window.print();"
+
+      = link_to icon('fas fa-list',"List Articles"), articles_path, 
+        class:"btn-cancel"
+      - if can?(:create,:article)
+        = link_to icon('fas fa-edit',"Edit Article"), edit_article_path(@article),
+          class:"btn-cancel" if can?(:update,:article)
+        = link_to link_to icon('fas fa-plus-square', "New Article"), 
+          new_article_path,class:"btn-sm-blue"
+        = button_to icon('fas fa-trash',"Destroy Article"), @article, method: :delete,form:{data: { turbo_confirm: 'Are you sure?'}}, 
+          class:"btn-warn mt-1 text-white inline-block"
+    div.flex-shrink.float-right
+      .text-green-800.p-0.font-bold.mr-3.hover:text-2xl = link_to icon('fas fa-arrow-left'), 'javascript:history.back()'
+
+.mx-auto.w-full.z-0
+  h3.text-xl.font-bold = @article.title
+  i = @article.created_at.to_fs(:long)
+  div.marked = markdown_text(@article.content)

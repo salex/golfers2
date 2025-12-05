@@ -1,0 +1,36 @@
+p style="color: green" = notice
+div.flex.gap-2.bg-lime-lighter.-m-1.p-1.-mx-2
+  div.flex-shrink
+    div.font-bold.text-xl.mx-2 Users
+
+  div.flex-grow.flex-wrap.gap-4
+    = link_to link_to icon('fas fa-plus-square', "New User"), new_user_path,class:"btn-sm-blue"
+  div.flex-shrink.text-green-800.p-0.font-bold.mr-3.hover:text-2xl = link_to icon('fas fa-arrow-left'), 'javascript:history.back()'
+hr.border-1.border-blue-500.my-1
+
+div.w-full
+  #users
+    table.golfer
+      thead
+        tr
+          th User Name
+          th Id
+          th Group
+          th uName
+          th Role
+          th eMail
+          th Actions
+      tbody
+        - @users.each do |user|
+          tr
+            td =< user.fullname
+            td =< user.id
+            td =< user.group.name
+            td =< user.username
+            td =< user.role
+            td =< user.email
+            td 
+              = link_to icon('fas fa-eye',"Show User"), user,class:"btn-sm-green"
+              = link_to icon('fas fa-edit',"Edit User"),  edit_user_path(user),class:"btn-sm-green"
+
+

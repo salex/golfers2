@@ -1,0 +1,61 @@
+= form_with(model: @user) do |form|
+  - if @user.errors.any?
+    div style="color: red"
+      h2 = "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+      ul
+        - @user.errors.each do |error|
+          li = error.full_message
+  .flex.flex-wrap.gap-8
+    div
+      div
+        = form.label :group_id, class: "font-bold text-lg"
+        = form.number_field :group_id, class: "p-1 border block"
+
+      div
+        = form.label :email_address, class: "font-bold text-lg"
+        = form.text_field :email_address, class: "p-1 border block"
+      div
+        = form.label :full_name, class: "font-bold text-lg"
+        = form.text_field :full_name, class: "p-1 border block"
+    - roles = {}
+    - Can.roles.each_with_index{|r,i| roles[i] = r}
+
+    - if Current.user.is_manager?
+
+
+      / only top 2 can set role for all user
+      div
+        label.font-bold Role
+        - roles.each do |key,role|
+
+          div
+            = form.radio_button(:role, role, checked: @user.role == role)
+            span.ml-2.font-bold= role.humanize
+    - elsif @user.is_coordinator 
+        div
+          label.font-bold Role
+          - (2..(roles.keys.last)).each do |i|
+
+            div
+              = form.radio_button(:role, roles[i], checked: @user.role== roles[i])
+              span.ml-2.font-bold= roles[i].humanize
+
+    - else
+      div
+        label.font-bold Role
+        div = @user.role
+
+    div
+      div.italic
+        p Leave blank or change
+
+      div
+        = form.label :password, class: "font-bold text-lg"
+        = form.password_field :password, class: "p-1 border block"
+
+      div
+        = form.label :password_confirmation, class: "font-bold text-lg"
+        = form.password_field :password_confirmation, class: "p-1 border block"
+
+  div[class="btn-submit mt-2"]
+    = form.submit

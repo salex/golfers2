@@ -1,0 +1,19 @@
+.flex.justify-center
+
+  .card-4.my-3.p-2.rounded.bg-lime-lighter.w-11/12.text-center
+    / div[class="my-3 bg-lime-lighter text-center p-2 rounded w-11/12 shadow-xl"]
+    div.font-bold.small-caps 
+      |Scheduled, Pending or New Games &nbsp;
+    div.annotate 
+      div Scheduled games may have players but no teams. 
+      div Pending games have teams/players, but has not been scored. 
+      dib Old games that were entered in error or incomplete should be deleted/destroyed!
+    .flex.flex-wrap.justify-center
+      - current_group.home_events.each do |e|
+        = link_to "#{e.status} #{e.date} Players: #{e.formed['players']} Teams: #{e.formed['teams']}", e.namespace_url, class:"btn-sqr-blue p-1 border-zinc-100 border-2 rounded"
+    - if current_user && current_user.is_admin? && !current_group.games.find_by(date:Date.today).present?
+      hr.underline
+      div.flex-none= button_to("Create New Game for Today", new_today_games_path, method:'post', class:"btn-sm-green w-full text-white bg-green-600")
+/   / - if Current.user
+/ div = Current.user
+/ div = "IS MANAGER #{is_manager?}"

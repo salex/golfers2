@@ -1,0 +1,33 @@
+div.w-full
+  h1.font-bold.text-2xl Editing Courses
+  div.m-2.flex.gap-8
+    = link_to icon('fas fa-list',"Cancel List Courses"), course_path, class:"btn-sm-green"
+  p.m-3 You can add a new course by filling in the blank row with valid stuff.
+  p.m-3 You can delete a course by setting the course name to blank.
+
+
+= form_with url: course_path, method: :patch do
+  / div
+  /   .font-bold= "Group Id"
+  /   .ml-4= text_field_tag "group_id",@group.id
+
+  table.golfer
+    tr
+      th Course Name 
+      th Par In
+      th Par Out
+      th Tees
+    - @group.group_courses.each do |k,v|
+      tr
+        td = text_field_tag "course[name][]", k
+        td = text_field_tag "course[par_in][]", v['par_in']
+        td = text_field_tag "course[par_out][]", v['par_out']
+        td = text_field_tag "course[tees][]", v['tees']
+    tr
+      td = text_field_tag "course[name][]",""
+      td = text_field_tag "course[par_in][]",""
+      td = text_field_tag "course[par_out][]",""
+      td = text_field_tag "course[tees][]",""
+
+  button[class="btn-submit bg-blue-400 rounded border-2"]= submit_tag( "Update Courses",class:'button small')
+end

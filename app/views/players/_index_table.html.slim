@@ -1,0 +1,43 @@
+div.m-1
+  table.golfer.sortable.overflow-scroll.w-full
+    - bal = 0.0
+    thead[data-controller="sortTable"]
+      tr
+        th[data-action="click->sortTable#sortBy"] 
+          i.fas.fa-sort.noprint
+          | Name
+        th.hidden.md:table-cell First
+        th.hidden.md:table-cell Last
+        th.hidden.md:table-cell Nick
+        th Tee
+        th.numeric[data-action="click->sortTable#sortBy"] 
+          i.fas.fa-sort.noprint.nopointer
+          | Quota
+        th.numeric[data-action="click->sortTable#sortBy"] 
+          i.fas.fa-sort.noprint.nopointer
+          | Rquota
+        th.numeric[data-action="click->sortTable#sortBy"] 
+          i.fas.fa-sort.noprint.nopointer 
+          | LPlayed
+        th frozen
+        - if current_user && current_user.is_trustee?
+          th Actions
+
+    tbody
+      - @players.each do |player|
+        tr
+          td = player.name
+          td.hidden.md:table-cell = player.first_name
+          td.hidden.md:table-cell = player.last_name
+          td.hidden.md:table-cell = player.use_nickname
+          td = player.tee
+          td = player.quota
+          td = player.rquota
+          td = player.last_played
+          td = player.is_frozen
+          td
+            = link_to icon('fas fa-eye'), player,class:"icon bg-blue-600"
+            - if can?(:update,:player)
+              = link_to icon('fas fa-edit'),  edit_player_path(player),class:"icon bg-green-600"
+              = button_to(icon('fas fa-trash'),player, method: :delete, form:{data: { turbo_confirm: 'Are you sure?', turbo_method:'delete' }}, form_class:"icon bg-red-600")
+          

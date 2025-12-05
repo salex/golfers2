@@ -1,0 +1,51 @@
+= form_with(model: @game) do |form|
+  - if @game.errors.any?
+    div style="color: red"
+      h2 = "#{pluralize(@game.errors.count, "error")} prohibited this game from being saved:"
+      ul
+        - @game.errors.each do |error|
+          li = error.full_message
+
+  / div.m-1
+  /   .font-bold= form.label :group_id, style: "display: block"
+  /   .ml-4= form.text_field :group_id
+
+  div.m-1
+    = form.label "Group:", class: "strong w-30 mr-4 inline-block text-right"
+    = form.text_field :group_id,  disabled: true, class: "border p-0.5"
+
+
+  div.m-1
+    = form.label "Date:", class: "strong w-30 mr-4 inline-block text-right"
+    = form.date_field :date, class: "border p-0.5"
+
+  div.m-1
+    = form.label "Status:", class: "strong w-30 mr-4 inline-block text-right"
+    = form.text_field :status, class: "border p-0.5"
+
+  div.m-1
+    = form.label "Method:", class: "strong w-30 mr-4 inline-block text-right"
+    = form.select(:method, [["Sides","sides"],["Places","places"]])
+
+  div.m-1
+    = form.label "Course:", class: "strong w-30 mr-4 inline-block text-right"
+    = form.select(:course,Current.group.group_courses.keys)
+
+  / div
+  /   = form.label :course, style: "display: block"
+  /   = form.select(:course, Current.group.group_courses.keys)
+
+  / div
+  /   = form.label :scoring, style: "display: block"
+  /   = form.text_area :scoring
+
+  / div
+  /   = form.label :par3, style: "display: block"
+  /   = form.text_area :par3
+
+  / div
+  /   = form.label :skins, style: "display: block"
+  /   = form.text_area :skins
+
+  div[class="btn-submit"]
+    = form.submit

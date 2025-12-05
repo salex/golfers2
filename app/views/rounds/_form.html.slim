@@ -1,0 +1,71 @@
+= form_with(model: @round) do |form|
+  - if @round.errors.any?
+    div style="color: red"
+      h2 = "#{pluralize(@round.errors.count, "error")} prohibited this round from being saved:"
+      ul
+        - @round.errors.each do |error|
+          li = error.full_message
+  .grid.grid-cols-3
+    div
+      div
+        = form.label :game_id, style: "display: block"
+        = form.text_field :game_id
+
+      div
+        = form.label :player_id, style: "display: block"
+        = form.text_field :player_id
+
+      div
+        = form.label :type, style: "display: block"
+        = form.text_field :type
+
+      div
+        = form.label :date, style: "display: block"
+        = form.date_field :date
+
+      div
+        = form.label :team, style: "display: block"
+        = form.number_field :team
+    div
+      div
+        = form.label :tee, style: "display: block"
+        = form.text_field :tee
+
+      div
+        = form.label :quota, style: "display: block"
+        = form.number_field :quota
+
+      div
+        = form.label :front, style: "display: block"
+        = form.number_field :front
+
+      div
+        = form.label :back, style: "display: block"
+        = form.number_field :back
+
+      div
+        = form.label :total, style: "display: block"
+        = form.number_field :total
+    div
+      div
+        = form.label :quality, style: "display: block"
+        = form.text_field :quality
+
+      div
+        = form.label :skins, style: "display: block"
+        = form.text_field :skins
+
+      div
+        = form.label :par3, style: "display: block"
+        = form.text_field :par3
+
+      div
+        = form.label :other, style: "display: block"
+        = form.text_field :other
+
+      div
+        = form.label :limited, style: "display: block"
+        = form.text_field :limited
+
+  div[class="btn-submit m-3"]
+    = form.submit

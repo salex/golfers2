@@ -1,0 +1,35 @@
+div.flex
+  p
+    strong.w-20.inline-block.text-right Group:
+    =< game.group_id
+  p
+    strong.w-20.inline-block.text-right Date:
+    =< game.date
+  p
+    strong.w-20.inline-block.text-right Status:
+    =< game.status
+  p
+    strong.w-20.inline-block.text-right Method:
+    =< game.method
+  p
+    strong.w-20.inline-block.text-right Formed:
+    =< game.formed
+  p
+    strong.w-20.inline-block.text-right Par3:
+    =< game.par3
+  p
+    strong.w-20.inline-block.text-right Skins:
+    =< game.skins
+
+table.golfers
+  - @game.rounds.each do |round|
+    tr
+      td =< round.name
+      td =< round.team
+      td =< round.tee
+      td =< round.quota
+      td =< round.front
+      td =< round.back
+      td =< round.total
+      td =< round.quality
+      td =< round.limited

@@ -1,0 +1,90 @@
+- scoring = @scoring
+- game_scores = scoring.team_scores
+- teams = scoring.teams
+- win = scoring.winners
+
+.bg-lime-lighter.border-bottom.bg-lime.p-1.-mx-2.mb-1
+  = links = link_to( icon('fas fa-arrow-left', 'Cancel - List Games'),  games_path, class: "btn-cancel")
+
+  - if can?(:update,:game)
+    = link_to icon('fas fa-pencil-alt', 'Score Skins/Birdies'), @game.scored_url('skins'),
+      class: "btn-cancel"
+    = link_to icon('fas fa-pencil-alt', 'Score Par3s'), @game.scored_url('par3s'),
+      class: "btn-cancel"
+    = link_to icon('fas fa-pencil-alt', 'ReScore Teams'), @game.pending_url('score_teams'),
+      class: "btn-warn"
+
+  div.flex-shrink.text-green-800.p-0.font-bold.mr-3.hover:text-2xl.float-right = link_to icon('fas fa-arrow-left'), 'javascript:history.back()'
+
+= render partial:"shared/gheader"
+
+
+.flex.flex-wrap
+  - team_keys  = teams.keys
+  - map = col_map_array(team_keys,2)
+  - map.each do |col|
+    .w-full.md:w-1/2.px-2
+      - col.each do |tm|
+        - team = teams[tm]
+        - if team.blank?
+          strong Error, Group deleted players for team and scoreing cannot be displayed
+          - next
+
+
+        - team_stats = game_scores[tm]
+        - hole = (team_stats[:quota]/18.0).round(1)
+        table.golfer.mt-1.mb-2.w-full 
+          / class="#{team_stats[:team_quality].zero? ? '' :'bg-lime-lighter'}"
+          thead
+            - if !team_stats[:team_quality].zero?
+              tr
+                th.bg-lime-300 colspan="7" 
+
+                  = "Team won $#{to_nickels(team_stats[:team_quality],true)}, Each Team Mate $#{to_quarters(team_stats[:mate_quality],true)} "
+
+            tr
+              th[colspan="4" ] = "Team - #{tm} Q(T/S/H): #{team_stats[:quota]}/#{team_stats[:side_quota]}/#{hole}"
+              th class="#{win[:front].include?(tm) ? 'bg-lime-300' : ''}" = "#{team_stats[:front_net]} (#{team_stats[:front_pm]})"
+              th class="#{win[:back].include?(tm) ? 'bg-lime-300' : ''}" = "#{team_stats[:back_net]} (#{team_stats[:back_pm]})"
+              th class="#{win[:total].include?(tm) ? 'bg-lime-300' : ''}" = "#{team_stats[:total_net]} (#{team_stats[:total_pm]})"
+          tbody
+            tr
+              th.w-44 Name
+              th.w-16 Tee
+              th Q
+              th Side
+              th Front
+              th Back
+              th Total
+            - team.each do |mate|
+              tr
+                - sideq = mate[:quota] / 2.0
+                td= mate[:player_name]
+                td= mate[:tee]
+                td= mate[:limited] ? mate[:quota].to_s + '*' : mate[:quota].to_s 
+                td= sideq
+                td= pulled(mate[:front],mate[:front_net],sideq,mate[:limited])
+                td= pulled(mate[:back],mate[:back_net],sideq,mate[:limited])
+                td= pulled(mate[:total],mate[:total_net],mate[:quota],mate[:limited]) 
+
+hr.underline
+.w3-row-padding 
+  strong.annotate.font-bold.text-xl Team Winners
+  / table.golfer
+  div.flex.flex-wrap.gap-4
+
+    div.border-2.border-black.p-1
+      span.font-bold = "Front Teams #{scoring.winners[:front].to_s}"
+      span = "&#177; #{game_scores[scoring.winners[:front].first][:front_pm]} Pot $#{scoring.game.state[:side]} Share $#{to_quarters(scoring.game.state[:side]/scoring.winners[:front_size])}".html_safe
+    div.border-2.border-black.p-1 
+      span.font-bold = "Back Teams #{scoring.winners[:back].to_s}"  
+      span = "&#177; #{game_scores[scoring.winners[:back].first][:back_pm]} Pot $#{scoring.game.state[:side]} Share $#{to_quarters(scoring.game.state[:side]/scoring.winners[:back_size])}".html_safe
+    div.border-2.border-black.p-1
+      span.font-bold = "Total Teams #{scoring.winners[:total].to_s}"
+      span = "&#177; #{game_scores[scoring.winners[:total].first][:total_pm]} Pot $#{scoring.game.state[:side]} Share $#{to_quarters(scoring.game.state[:side]/scoring.winners[:total_size])}".html_safe
+
+div.my-4
+  = render partial:'scored/game/best_sides',locals:{scoring:scoring}
+div.mb-4
+  = render partial:'scored/game/game_stats'
+

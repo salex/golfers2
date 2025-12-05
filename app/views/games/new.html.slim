@@ -1,0 +1,7 @@
+div.w-full
+  div.flex.bg-lime-light.-mx-2.mb-1.p-1
+    h1.font-bold.text-2xl New Game
+
+    div = link_to icon('fas fa-list',"Cancel - List Games"), games_path, class:"btn-sm-green"
+  == render "form", game: @game
+

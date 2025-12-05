@@ -1,0 +1,50 @@
+= form_with(model: @article, data:{controller:"marked",marked_target:'form'}) do |form|
+  - if @article.errors.any?
+    div style="color: red"
+      h2 = "#{pluralize(@article.errors.count, 'error')} prohibited this post from being saved:"
+      ul
+        - @article.errors.each do |error|
+          li = error.full_message
+  .flex.gap-8.flex-wrap
+    div.marked
+      = submit_tag("Update Article",disabled:false)
+
+    div
+      = form.label 'Title: ', style: "display: inlineblock;font-weight:bold;"
+      = form.text_field :title, style:'width:30vw;',class:'border border-zinc-500'
+    div = link_to 'Back to articles', articles_path, class: "ml-2 btn-sm-green rounded-lg py-2 px-4 inline-block font-medium"
+
+  
+  .w3-container[ style="max-height: 90vh;"]
+    h3.font-bold Post Content
+    .grid.md:grid-cols-2.gap-2
+      div.marked-buttons
+        = select_tag('headers',options_for_select(%w{h1 h2 h3 h4 h5 h6},nil),include_blank:'Headers', data:{action:"change->marked#header"}, class:' mr-1 bg-blue-800 font-bold text-white',style:'padding:2px;')
+        = tag.div('B', data:{action:"click->marked#bold"}, title:"Bold: Insert **** or surround selected text between **text**")
+        = tag.div('I', data:{action:"click->marked#italic"})
+        = tag.div('BI', data:{action:"click->marked#italicBold"})
+        / = tag.div('H1', data:{action:"click->marked#h1"})
+        / = tag.div('H2', data:{action:"click->marked#h2"})
+        / = tag.div('H3', data:{action:"click->marked#h3"})
+        / = tag.div('H4', data:{action:"click->marked#h4"})
+        / = tag.div('H5', data:{action:"click->marked#h5"})
+        / = tag.div('H6', data:{action:"click->marked#h6"})
+        = tag.div('BQ', data:{action:"click->marked#backQuote"})
+        = tag.div('BT', data:{action:"click->marked#backTick"})
+        = tag.div('EM', data:{action:"click->marked#em"})
+
+        = tag.div('UL', data:{action:"click->marked#ul"})
+        = tag.div('OL', data:{action:"click->marked#ol"})
+        = tag.div('FC', data:{action:"click->marked#fencedCode"})
+        = tag.div('LK', data:{action:"click->marked#anchor"})
+        = tag.div('IM', data:{action:"click->marked#image"})
+        = form.text_area(:content, data:{action:"input->marked#convertToMarkdown change->marked#convertToMarkdown",marked_target:"markup"},style:'width:100%;height:50vh;',class:'border border-zinc-500 mt-1')
+      div
+        strong.mb-1 Rendered Markdown
+        / trap new article, won't have content and slim undefined
+        - if @article.content && @article.content.include?('.slim')
+          - slim = markdown_text(@article.content)
+          = tag.div(slim,style:"padding:6px;border:solid black 1px;z-index:0;height:50vh;overflow:scroll;",class:'markdown-body marked bg-white')
+
+        - else
+          = tag.div('',data:{marked_target:'viewer'},style:"padding:6px;border:solid black 1px;z-index:0;height:50vh;overflow:scroll;",class:'markdown-body marked bg-white')

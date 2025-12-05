@@ -1,0 +1,43 @@
+@media print {
+  .page-break {
+     page-break-after: always !important;
+  }
+  .top, .header {
+    display: none;
+  }
+  fieldset {
+    border: none;
+  }
+  body {
+    font-size: 8pt !important;
+    background-color: #fff;
+  }
+  ul, li {
+    font-size: 8pt !important;
+  }
+
+  th{
+    -webkit-print-color-adjust:exact !important;
+    print-color-adjust:exact !important;
+    background-color: #ddd;
+  }
+  a[href]:after {
+    content: none !important;
+  }
+  .noprint, .no-print {
+    display: none !important;
+  }
+ 
+  p {
+    font-size: 9pt !important;
+    margin:0.2rem 0 !important;
+    line-height: 0.9rem !important;
+  }
+
+  dd {
+    margin:0.3rem 0 !important;
+    line-height: 0.8rem !important;
+  }
+
+}
+

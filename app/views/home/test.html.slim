@@ -1,0 +1,272 @@
+/ div.grid.grid-cols-1.md:grid-cols-2.gap-8
+/   div hi steve
+/ = turbo_frame_tag "home"
+div
+  div.m-1 
+    = linkBtn('Visit1','groups/1/visit',meth:'patch',klass:"btn-pt mr-1")
+    = linkBtn('Visit2','groups/2/visit',meth:'patch',klass:"btn-sm-blue mr-1")
+    = linkBtn('Visit5','groups/5/visit',meth:'patch',klass:"btn-sm-blue mr-1")
+
+    span = current_group
+    span[class="btn-warn"] Danger
+    span = inspect_session
+  div.flex.gap-2.bg-lime-light.-mx-2.p-1.border-2.border-lime-darker
+    div.flex-shrink.font-bold Scheduled Game
+    div.flex-grow.flex-wrap
+      div.btn-cancel cancel
+      div.btn-cancel cancel cancel
+      div.btn-cancel = icon('fas fa-eye',"eye")
+      div.btn-cancel cancel cancel cancel
+      div.btn-sm-blue blue
+      div.btn-sm-green green
+      div.btn-sm-warn warn
+      div[class="#{sidebar_menu} inline-block px-2"] sqr blue
+      div[class="btn-pt"] pt blue
+
+
+    div.flex-shrink.text-green-800.p-0.font-bold.mr-3.hover:text-2xl = icon('fas fa-arrow-left')
+
+
+
+  div.m-2
+    span.btn-submit submit
+    span.btn-primary primary
+    span.btn-cancel cancel
+    span.btn-sm sm{base}
+    span.btn-sm-green sm green
+    span.btn-sm-blue sm blue with long content
+    span.btn-warn warn
+    span.btn-sm.bg-amber-400.hover:bg-amber-500.border-2.border-amber-600.px-1.py-0.5 smy
+    span.btn-sm-blue.text-white.bg-blue-600 
+      | Toggle Pays 
+      = icon("fas fa-exchange-alt")
+
+    span.icon-show = icon('fas fa-eye')
+    span.icon-edit = icon('fas fa-edit')
+    span.icon-destroy = icon('fas fa-trash')
+    span.btn-schedule Joe Shamoe
+
+  div.flex.gap-2.bg-lime-light.-mx-2.p-1.border-2.border-lime-darker
+    div.flex-shrink
+      div.font-bold.text-lg Optional Title
+      / div.btn-submit submit
+
+    div.flex-grow.flex-wrap
+      = link_to( icon('fas fa-arrow-left', 'Cancel - List Games'),  nil, class: "btn-cancel py-0")
+      = link_to icon('fas fa-user-plus', 'Add Late Player'),  nil,
+           class: "btn-cancel py-0.5"
+      = link_to icon('fas fa-arrows-alt-h', 'Adjust Teams'), nil,class: "btn-cancel"
+      = link_to icon('fas fa-arrows-alt-h', 'Swap Teams'), nil,
+           class: "btn-cancel"  
+      = link_to icon('fas fa-users', 'Reform Teams'),nil ,class: "btn-warn"
+    div.flex-shrink.text-green-800.p-0.font-bold.mr-3.hover:text-2xl = link_to icon('fas fa-arrow-left'), 'javascript:history.back()'
+
+
+  .mx-1.overflow-x-auto
+    table.golfer.w-full
+      caption  == 'pagy_nav(@pagy)'
+
+      thead
+        tr.max-2xl:visible.max-sm:hidden
+          th.btnorange Date
+          th Status
+          th Pay
+          th Players
+          th Teams
+          th Formed
+          th Makeup
+          th.w-36 Actions
+
+        tr.sm:max-2xl:hidden.sm:visible
+          th Date
+          th Status
+          th Pay
+          th #P
+          th #T
+          th Form
+          th MU
+          th.w-36 Actions
+      tbody
+        tr
+          td 2023-10-17
+          td Pending
+          td Teams
+          td 14
+          td 3
+          td draw
+          td mix34
+          td
+            span.icon-show = icon('fas fa-eye')
+            span.icon-edit = icon('fas fa-edit')
+            span.icon-destroy = icon('fas fa-trash')
+
+        tr
+          td 2023-10-17
+          td Pending
+          td Teams
+          td 14
+          td 3
+          td draw
+          td mix34
+          td
+            span.icon-show = icon('fas fa-eye')
+            span.icon-edit = icon('fas fa-edit')
+            span.icon-destroy = icon('fas fa-trash')
+
+
+
+        tr
+          td 2023-10-17
+          td Pending
+          td Teams
+          td 14
+          td 3
+          td draw
+          td mix34
+          td 
+            span.icon-show = icon('fas fa-eye')
+            span.icon-edit = icon('fas fa-edit')
+            span.icon-destroy = icon('fas fa-trash')
+
+  / div.grid.grid-cols-3.gap-8.mt-2
+  /   - 3.times do
+  /     table.classic.w-full
+  /       thead
+  /         tr
+  /           th.w-1/3 one
+  /           th.w-1/3 two
+  /           th.w-1/3 three
+  /       tbody
+  /         tr
+  /           td 1
+  /           td 2
+  /           td 3 
+  /         tr
+  /           td 1
+  /           td 2
+  /           td 3
+
+  /         tr
+  /           td 1
+  /           td 2
+  /           td 3
+
+  /         tr
+  /           td 1
+  /           td 2
+  /           td 3
+  / div= session_inspect
+  / - if current_user
+  /   div= "super #{current_user.is_super?}"
+  /   div= "admin #{current_user.is_admin?}"
+  br
+  / span Row Boxes using table inline
+  / table
+  /   tbody.flex.flex-wrap.gap-2
+  /     tr
+  /       th.border.border-slate-500.text-center.px-1.w-16 Skins
+  /       th.w-8.h-7.border.border-slate-500.text-center.cut 1
+  /       th.w-8.h-7.border.border-slate-500.text-center 2
+  /       th.w-8.h-7.border.border-slate-500.text-center 3
+  /       th.w-8.h-7.border.border-slate-500.text-center 4
+  /       th.w-8.h-7.border.border-slate-500.text-center.birdie 5
+  /       th.w-8.h-7.border.border-slate-500.text-center 7
+  /       th.w-8.h-7.border.border-slate-500.text-center 7
+  /       th.w-8.h-7.border.border-slate-500.text-center.eagle 8
+  /       th.w-8.h-7.border.border-slate-500.text-center 9
+  /       th.w-8.h-7.border.border-slate-500.text-center 10
+  /       th.w-8.h-7.border.border-slate-500.text-center 11
+  /       th.w-8.h-7.border.border-slate-500.text-center 12
+  /       th.w-8.h-7.border.border-slate-500.text-center 13
+  /       th.w-8.h-7.border.border-slate-500.text-center 14
+  /       th.w-8.h-7.border.border-slate-500.text-center.albatros 15
+  /       th.w-8.h-7.border.border-slate-500.text-center 16
+  /       th.w-8.h-7.border.border-slate-500.text-center 17
+  /       th.w-8.h-7.border.border-slate-500.text-center 18
+
+  br
+div.grid.grid-cols-2
+  / div
+  /   div[class="max-w-xs mx auto bg-white z-20"]
+  /     div [data-controller="autocomplete" 
+  /       data-autocomplete-url-value="/players/player_search" data-autocomplete-min-length-value="2"]
+  /       input[type="text" class="w-full" data-autocomplete-target="input" placeholder="Type to search..."]
+  /       ul[data-autocomplete-target="results"]
+    p.z-0 now is the time for all good men
+  div
+    span Row Boxes using table split
+    table
+      tbody.flex.flex-wrap.gap-2
+        tr
+          th.border.border-slate-500.text-center.px-1.w-16 SkinsF
+          th.w-8.h-7.border.border-slate-500.text-center.cut 1
+          th.w-8.h-7.border.border-slate-500.text-center 2
+          th.w-8.h-7.border.border-slate-500.text-center 3
+          th.w-8.h-7.border.border-slate-500.text-center 4
+          th.w-8.h-7.border.border-slate-500.text-center.birdie 5
+          th.w-8.h-7.border.border-slate-500.text-center 7
+          th.w-8.h-7.border.border-slate-500.text-center 7
+          th.w-8.h-7.border.border-slate-500.text-center.eagle 8
+          th.w-8.h-7.border.border-slate-500.text-center 9
+        tr
+          th.border.border-slate-500.text-center.px-1.w-16 SkinsB
+          th.w-8.h-7.border.border-slate-500.text-center 10
+          th.w-8.h-7.border.border-slate-500.text-center 11
+          th.w-8.h-7.border.border-slate-500.text-center 12
+          th.w-8.h-7.border.border-slate-500.text-center 13
+          th.w-8.h-7.border.border-slate-500.text-center 14
+          th.w-8.h-7.border.border-slate-500.text-center.albatros 15
+          th.w-8.h-7.border.border-slate-500.text-center 16
+          th.w-8.h-7.border.border-slate-500.text-center 17
+          th.w-8.h-7.border.border-slate-500.text-center 18
+
+    br
+    span Row Boxes using table stacked
+    table
+      tbody
+        tr
+          th.border.border-slate-500.text-center.px-1.w-16 SkinsF
+          th.w-8.h-7.border.border-slate-500.text-center.cut 1
+          th.w-8.h-7.border.border-slate-500.text-center 2
+          th.w-8.h-7.border.border-slate-500.text-center 3
+          th.w-8.h-7.border.border-slate-500.text-center 4
+          th.w-8.h-7.border.border-slate-500.text-center.birdie 5
+          th.w-8.h-7.border.border-slate-500.text-center 7
+          th.w-8.h-7.border.border-slate-500.text-center 7
+          th.w-8.h-7.border.border-slate-500.text-center.eagle 8
+          th.w-8.h-7.border.border-slate-500.text-center 9
+        tr
+          th.border.border-slate-500.text-center.px-1.w-16 SkinsB
+          th.w-8.h-7.border.border-slate-500.text-center 10
+          th.w-8.h-7.border.border-slate-500.text-center 11
+          th.w-8.h-7.border.border-slate-500.text-center 12
+          th.w-8.h-7.border.border-slate-500.text-center 13
+          th.w-8.h-7.border.border-slate-500.text-center 14
+          th.w-8.h-7.border.border-slate-500.text-center.albatros 15
+          th.w-8.h-7.border.border-slate-500.text-center 16
+          th.w-8.h-7.border.border-slate-500.text-center 17
+          th.w-8.h-7.border.border-slate-500.text-center 18
+
+
+      / tr.w-80.mb-2.mr-2
+      /   td.w-40.p-2.border.border-slate-500 something
+      /   td.w-40.p-2.border.border-slate-500 else
+      / tr.w-80.mb-2.mr-2
+      /   td.w-40.p-2.border.border-slate-500 something
+      /   td.w-40.p-2.border.border-slate-500 else
+      / tr.w-80.mb-2.mr-2
+      /   td.w-40.p-2.border.border-slate-500 something
+      /   td.w-40.p-2.border.border-slate-500 else
+      / tr.w-80.mb-2.mr-2
+      /   td.w-40.p-2.border.border-slate-500 something
+      /   td.w-40.p-2.border.border-slate-500 else
+      / tr.w-80.mb-2.mr-2
+      /   td.w-40.p-2.border.border-slate-500 something
+      /   td.w-40.p-2.border.border-slate-500 else
+      / tr.w-80.mb-2.mr-2
+      /   td.w-40.p-2.border.border-slate-500 something
+      /   td.w-40.p-2.border.border-slate-500 else
+      / tr.w-80.mb-2.mr-2
+      /   td.w-40.p-2.border.border-slate-500 something
+      /   td.w-40.p-2.border.border-slate-500 else
+      / tr
