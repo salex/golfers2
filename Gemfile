@@ -74,4 +74,3 @@ gem "pagy", "~> 8.0" # omit patch digit
 # gem "prawn-table"
 gem "exonio"
 gem "redcarpet", "~> 3.5.1"
-

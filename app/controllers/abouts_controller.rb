@@ -25,115 +25,115 @@ class AboutsController < ApplicationController
 
   def origin
     render turbo_stream: turbo_stream.replace(
-      'content',
-      partial: 'origin')
+      "content",
+      partial: "origin")
   end
 
   def changes
     render turbo_stream: turbo_stream.replace(
-      'content',
-      partial: 'changes')
+      "content",
+      partial: "changes")
   end
 
 
   def structure
     render turbo_stream: turbo_stream.replace(
-      'content',
-      partial: 'structure')
+      "content",
+      partial: "structure")
   end
 
 
   def forming
     render turbo_stream: turbo_stream.replace(
-      'content',
-      partial: 'forming')
+      "content",
+      partial: "forming")
   end
 
   def terminology
     render turbo_stream: turbo_stream.replace(
-      'content',
-      partial: 'terminology')
+      "content",
+      partial: "terminology")
   end
 
   def scoring
     render turbo_stream: turbo_stream.replace(
-      'content',
-      partial: 'scoring')
+      "content",
+      partial: "scoring")
   end
 
   def teams
     render turbo_stream: turbo_stream.replace(
-      'content',
-      partial: 'teams')
+      "content",
+      partial: "teams")
   end
 
   def eprocess
     render turbo_stream: turbo_stream.replace(
-      'content',
-      partial: 'process')
+      "content",
+      partial: "process")
   end
 
   def preferences
     render turbo_stream: turbo_stream.replace(
-      'content',
-      partial: 'preferences')
+      "content",
+      partial: "preferences")
   end
 
   def user
     render turbo_stream: turbo_stream.replace(
-      'content',
-      partial: 'user')
+      "content",
+      partial: "user")
   end
   
   def game
     render turbo_stream: turbo_stream.replace(
-      'content',
-      partial: 'game')
+      "content",
+      partial: "game")
   end
 
   def round
     render turbo_stream: turbo_stream.replace(
-      'content',
-      partial: 'round')
+      "content",
+      partial: "round")
   end
 
   def player
     render turbo_stream: turbo_stream.replace(
-      'content',
-      partial: 'player')
+      "content",
+      partial: "player")
   end
 
   def group
     render turbo_stream: turbo_stream.replace(
-      'content',
-      partial: 'group')
+      "content",
+      partial: "group")
   end
 
   def club
     render turbo_stream: turbo_stream.replace(
-      'content',
-      partial: 'club')
+      "content",
+      partial: "club")
   end
 
   def limiting
     render turbo_stream: turbo_stream.replace(
-      'content',
-      partial: 'limiting')
+      "content",
+      partial: "limiting")
   end
 
   def features
     render turbo_stream: turbo_stream.replace(
-      'content',
-      partial: 'features')
+      "content",
+      partial: "features")
   end
   def gmanage
     render turbo_stream: turbo_stream.replace(
-      'content',
-      partial: 'gmanage')
+      "content",
+      partial: "gmanage")
   end
   def notices
     n = Notice.all.order(:date).reverse
-    html = '<div class="mb-2"><strong>Recent Notices</strong></div>'
+    html = "<div class=\"mb-2\"><strong>Recent Notices</strong></div>"
     n.each do |i|
       html << "<strong>#{i.date}</strong>"
       html << helpers.slim_text(i.slim)
