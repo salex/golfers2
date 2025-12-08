@@ -44,7 +44,7 @@ class HomeController < ApplicationController
       params[:format] = 'html'
       redirect_to root_path
     else
-      cant_do_that(" -> #{params[:path]}")
+      cant_do_that("Find -> #{params[:path]}")
     end
   end
 
@@ -52,6 +52,7 @@ class HomeController < ApplicationController
 
   def redirect_group(path)
     @group = Group.find_by(Group.arel_table[:name].matches("%#{path}"))
+    # puts "IN REDIRECT #{@group.present?}"
     # puts "inRedirect #{if @group.present? ? @group.name : "none"}"
     # return @group
   end
