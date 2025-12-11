@@ -21,9 +21,9 @@ div[class="  flex text-lg  bg-black font-bold text-white" data-controller="toggl
 
         .w3-dropdown-content.w3-card-4.w-48.border-t.border-white
           = link_to "Users", users_path, class:"block green-btn"
-          = link_to "Groups", groups_path, class:"block green-btn" if current_user.is_super?
-          = link_to "Notices", notices_path, class:"block green-btn" if current_user.is_super?
-          = link_to "Articles", articles_path, class:"block green-btn" if current_user.is_super?
+          = link_to "Groups", groups_path, class:"block green-btn" if current_user.is_trustee?
+          = link_to "Notices", notices_path, class:"block green-btn" if current_user.is_trustee?
+          = link_to "Articles", articles_path, class:"block green-btn" if current_user.is_trustee?
 
 
 

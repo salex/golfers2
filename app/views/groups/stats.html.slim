@@ -1,10 +1,11 @@
 div.md:grid.md:grid-cols-12.gap-4.m-1
-  div.md:col-span-5.noprint.border-r.bg-lime-lightest.p-2.leading-4
-    span.float-left.text-lg.font-bold A version of FedEx points based on winning!
-    span.float-right.noprint 
-      = link_to icon('fas fa-print',"Print"), '#', title: 'Print it', class: 'btn btn-icon btn-info', onclick: "window.print();"
+  div.md:col-span-5.noprint.green-light.p-3.leading-4
+    div.h-10.p-2.green-dark.border-1
+      div.float-left.text-lg.font-bold A version of FedEx points based on winning!
+      div.float-right 
+        = link_to icon('fas fa-print',"Print"), '#', title: 'Print it', class: 'btn btn-icon btn-info pgolfer', onclick: "window.print();"
 
-    p.clear-both.mb-4 This page will calculate standings of group players by points won (money).
+    p.mb-4 This page will calculate standings of group players by points won (money).
     - options = @groupStats.money_list_options
     - game = options[:game]
 
@@ -12,22 +13,25 @@ div.md:grid.md:grid-cols-12.gap-4.m-1
       .bg-green-500.text-white.px-1
         h6.strong Group Players Stats Options/Filter
       div.p-1  = form_with url: stats_refresh_group_path(@group), method: :patch
-        strong Game
-        div
+        .strong
+          strong Game
+
+        div.m-1
+
           = select_tag 'stats[game]', options_for_select([['Team Game','quality'],['Birdies/Skins','skins'],['Par3','par3'],['Best Sides','other']],params[:stats].present? ? params[:stats][:game] : 'quality'),class:"border border-green-500 select"
           / ,class:'w3-select'
         .strong 
           strong  Limit By:
         
         - by = options[:limit_by]
-        .grid.grid-cols-2.m-1.bg-green-200.p-2
+        .grid.grid-cols-2.m-1.green-dark.p-2.border-1
           div
             = radio_button_tag 'stats[limit_by]', 'rounds', by:'rounds'
 
             strong = " #Rounds - Enter Rounds"
           div
             = text_field_tag 'stats[limit]', options[:limit],class:'w-40 bg-white p-1'
-        .grid.grid-cols-2.m-1.m-1.bg-green-200.p-2
+        .grid.grid-cols-2.m-1.green-dark.p-2.border-1
           div
             = radio_button_tag 'stats[limit_by]', 'date', by:'date',class:'xx'
             strong=  " Date>= Enter Date"
@@ -35,7 +39,7 @@ div.md:grid.md:grid-cols-12.gap-4.m-1
             = text_field_tag 'stats[from]', options[:from], data:{controller:'flatpickr'},class:'w-40 bg-white p-1'
         - sel = options[:order]
         div.strong Sort Order
-        .grid.grid-cols-4.m-1.m-1.bg-green-200.p-2
+        .grid.grid-cols-4.m-1.green-dark.p-2.border-1
           div 
             = radio_button_tag 'stats[order]', 'perc', sel=='perc',class:'xx'
             strong  PTRank
@@ -53,7 +57,7 @@ div.md:grid.md:grid-cols-12.gap-4.m-1
           button.btn-sqr-blue.p-2.font-bold ReSelect
     div.leading-4.mt-2
       p.mb-4 Stats are available for the Team game (Sides or Places) and optional side games (Birdies/Skins, Par3's, and Individual Best Sides)
-      p.mb-4 Your can sort the list by four columns (Won is default) (you also sort by any column)
+      p.mb-4 Your can sort the list by Sort Order radio buttons (Won is default). You also sort by any column header.
       ul[class="list-disc list-inside mb-2"]
         li Won - Total points won
         li Bal - Total points won - dues (profit or loss)

@@ -1,6 +1,6 @@
 .flex.gap-4
   h6.strong.dark-lime.px-1 Expired Players
-  p.fs8 Ocassionaly you should trim expired players. Expired player have no rounds because they (moved, quit, died,etc) and old rounds had be trimmed. 
+  p.fs8 Occasionally you should trim expired players. Expired player have no rounds because they (moved, quit, died,etc) and old rounds had be trimmed. 
   p.fs8 Players are be moved to an Expired status if the Trim Games/Rounds method removes all players rounds before a set number of months. :trim_months is defined in your group preferences (default 18 months). 
   p.fs8 This page allows you delete players by checking the checkbox next to their name and then clicking on the submit button
 = form_with(url: trim_expired_group_path(@group), method: :patch) 

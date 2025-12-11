@@ -22,7 +22,7 @@
   /   div[class="#{sidebar_menu}"] = link_to "User Management", users_path
   /   hr.underline
 
-  - if is_super?
+  - if is_trustee?
     div[class="#{sidebar_menu}"] = link_to 'Notice', notices_path
   /   div[class="#{sidebar_menu}"] = link_to 'Clubs', clubs_path
   /   div[class="#{sidebar_menu}"] = link_to 'inquiries', inquiries_path, class: "link-btn "

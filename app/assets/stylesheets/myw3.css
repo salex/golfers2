@@ -46,6 +46,12 @@ table.golfer td, table.golfer th {
 table.golfer th {
   padding: 0.2rem;
 }
+.green-light {
+  background-color: #eeffee;
+}
+.green-dark {
+  background-color: #bbffbb;
+}
 
 .stripped tr:nth-child(even), .stripped {
    background-color: #e2ffe2;
@@ -186,7 +192,7 @@ table.golfer th {
 }
 .lime-btn:hover {
   background-color: #b8ffb8 !important;
-  color:#4CCF70;
+  color:#008000 !important;
 }
 
 /*.wc-5 {
