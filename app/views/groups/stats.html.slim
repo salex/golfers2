@@ -1,9 +1,8 @@
 div.md:grid.md:grid-cols-12.gap-4.m-1
   div.md:col-span-5.noprint.green-light.p-3.leading-4
-    div.h-10.p-2.green-dark.border-1
-      div.float-left.text-lg.font-bold A version of FedEx points based on winning!
-      div.float-right 
-        = link_to icon('fas fa-print',"Print"), '#', title: 'Print it', class: 'btn btn-icon btn-info pgolfer', onclick: "window.print();"
+    div.h-10.p-2.green-dark.border-1.float-container
+      div.text-lg.font-bold A version of FedEx points based on winning!
+      div = link_to icon('fas fa-print',"Print"), '#', title: 'Print it', class: 'btn btn-icon btn-info pgolfer', onclick: "window.print();"
 
     p.mb-4 This page will calculate standings of group players by points won (money).
     - options = @groupStats.money_list_options

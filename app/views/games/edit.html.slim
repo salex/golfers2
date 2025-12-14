@@ -5,6 +5,6 @@ div.w-full
     / div.flex.gap-8
     = link_to icon('fas fa-eye',"Show Game"), game_path(@game), class:"btn-sm bg-green-400"
     =< link_to icon('fas fa-list',"List Games"), games_path, class:"btn-sm bg-green-400"
-    = button_to icon('fas fa-trash',"Destroy Game"), @game, method: :delete, form:{data: { turbo_confirm: 'Are you sure?', turbo_method:'delete' }}, class:"btn-sm bg-red-700 text-white"
+    = button_to icon('fas fa-trash',"Destroy Game"), @game, method: :delete, form:{data: { turbo_confirm: 'Are you sure?', turbo_method:'delete' }}, class:"btn-warn"
   hr.border-1.border-blue-500.my-1
   == render "form", game: @game

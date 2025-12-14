@@ -4,7 +4,7 @@ div.w-full
     = link_to icon('fas fa-eye',"Show User"), user_path(@user), class:"btn-sm-green"
     = link_to icon('fas fa-list',"List Users"), 
       users_path, class:"btn-sm-green"
-    = button_to icon('fas fa-trash',"Destroy User"), @user, method: :delete, form:{data: { turbo_confirm: 'Are you sure?', turbo_method:'delete' }}, class:"btn-sm bg-red-700 text-white"
+    = button_to icon('fas fa-trash',"Destroy User"), @user, method: :delete, form:{data: { turbo_confirm: 'Are you sure?', turbo_method:'delete' }}, class:"btn-warn"
 
   hr.border-1.border-blue-500.my-1
   == render "form", user: @user

@@ -20,7 +20,7 @@ div.w-full
       
     - if is_super?
 
-      = button_to icon('fas fa-trash',"Destroy Group"), @group, method: :delete, form:{data: { turbo_confirm: 'Are you sure?', turbo_method:'delete' }}, class:"btn-sm bg-red-700 text-white hover:bg-red-500 mt-1"
+      = button_to icon('fas fa-trash',"Destroy Group"), @group, method: :delete, form:{data: { turbo_confirm: 'Are you sure?', turbo_method:'delete' }}, class:"btn-warn"
 
     div 
       .text-green-800.p-0.font-bold.mr-3.hover:text-2xl = link_to icon('fas fa-arrow-left'), 'javascript:history.back()'

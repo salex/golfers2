@@ -1,3 +1,7 @@
+.float-container {
+  display: flex;
+  justify-content: space-between;
+}
 
 .btn-sqr-blue{
   background-color: #273862;

@@ -8,6 +8,8 @@ div.w-full
     / if Current.user.is_manager? || Current.user.id == @user.id
 
     =< link_to icon('fas fa-list',"List Users"), users_path, class:"btn-sm-green" if Current.user.is_manager?
+    = button_to(icon("fas fa-trash","Destroy user"),@user,method: :delete,form: { data: { turbo_confirm: "Are You Sure?"}},class:"btn-warn inline-block mt-1 "  )
+
     = button_to icon('fas fa-trash',"Destroy User"), @user, method: :delete, form:{data: { turbo_confirm: 'Are you sure?', turbo_method:'delete' }}, 
       class:"btn-sm-red bg-red-700 text-white" if can?('delete',"user")
     div.child.text-green-800.p-0.font-bold.mr-3.hover:text-2xl = link_to icon('fas fa-arrow-left'), 'javascript:history.back()'

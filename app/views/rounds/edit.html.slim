@@ -4,7 +4,7 @@ div.w-full
     = link_to icon('fas fa-eye',"Show Round"), round_path(@round), class:"btn-sm-green"
     / = link_to icon('fas fa-list',"List Rounds"), 
     /   rounds_path, class:"btn-sm-green"
-    = button_to icon('fas fa-trash',"Destroy Round"), @round, method: :delete, form:{data: { turbo_confirm: 'Are you sure?', turbo_method:'delete' }}, class:"btn-sm bg-red-700 text-white"
-
+    = button_to icon('fas fa-trash',"Destroy Round"), @round, method: :delete, form:{data: { turbo_confirm: 'Are you sure?', turbo_method:'delete' }}, class:"btn-warn"
+    
   hr.border-1.border-blue-500.my-1
   == render "form", round: @round
