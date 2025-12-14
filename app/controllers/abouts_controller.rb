@@ -19,7 +19,7 @@ class AboutsController < ApplicationController
   def show
     respond_to do |format|
       format.html { render "abouts/show" }
-      format.json { render :show}
+      format.json { render :show }
     end
   end
 
@@ -84,7 +84,7 @@ class AboutsController < ApplicationController
       "content",
       partial: "user")
   end
-  
+
   def game
     render turbo_stream: turbo_stream.replace(
       "content",
@@ -140,7 +140,7 @@ class AboutsController < ApplicationController
       html << "<br/><br/>"
     end
     render turbo_stream: turbo_stream.replace(
-      'content',partial: 'slim', locals:{html:html})
+      "content",partial: "slim", locals:{html:html} )
   end
 
   def slim
@@ -152,7 +152,7 @@ class AboutsController < ApplicationController
       html << "<br/><br/>"
     end
     render turbo_stream: turbo_stream.replace(
-      'content',partial: 'slim', locals:{html:html})
+      "content",partial: "slim", locals:{html:html} )
 
   end
 

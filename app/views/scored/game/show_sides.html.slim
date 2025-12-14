@@ -75,13 +75,15 @@ hr.underline
 
     div.border-2.border-black.p-1
       span.font-bold = "Front Teams #{scoring.winners[:front].to_s}"
-      span = "&#177; #{game_scores[scoring.winners[:front].first][:front_pm]} Pot $#{scoring.game.state[:side]} Share $#{to_quarters(scoring.game.state[:side]/scoring.winners[:front_size])}".html_safe
+      span =  "&#177;".html_safe + " #{game_scores[scoring.winners[:front].first][:front_pm]} Pot $#{scoring.game.state[:side]} Share $#{to_quarters(scoring.game.state[:side]/scoring.winners[:front_size])}"
+
     div.border-2.border-black.p-1 
-      span.font-bold = "Back Teams #{scoring.winners[:back].to_s}"  
-      span = "&#177; #{game_scores[scoring.winners[:back].first][:back_pm]} Pot $#{scoring.game.state[:side]} Share $#{to_quarters(scoring.game.state[:side]/scoring.winners[:back_size])}".html_safe
+      span.font-bold = "Back Teams #{scoring.winners[:back].to_s}" 
+      span = "&#177;".html_safe + " #{game_scores[scoring.winners[:back].first][:back_pm]} Pot $#{scoring.game.state[:side]} Share $#{to_quarters(scoring.game.state[:side]/scoring.winners[:back_size])}"
+
     div.border-2.border-black.p-1
       span.font-bold = "Total Teams #{scoring.winners[:total].to_s}"
-      span = "&#177; #{game_scores[scoring.winners[:total].first][:total_pm]} Pot $#{scoring.game.state[:side]} Share $#{to_quarters(scoring.game.state[:side]/scoring.winners[:total_size])}".html_safe
+      span = "&#177;".html_safe + "#{game_scores[scoring.winners[:total].first][:total_pm]} Pot $#{scoring.game.state[:side]} Share $#{to_quarters(scoring.game.state[:side]/scoring.winners[:total_size])}"
 
 div.my-4
   = render partial:'scored/game/best_sides',locals:{scoring:scoring}
