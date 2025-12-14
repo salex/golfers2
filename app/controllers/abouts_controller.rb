@@ -126,11 +126,13 @@ class AboutsController < ApplicationController
       "content",
       partial: "features")
   end
+  
   def gmanage
     render turbo_stream: turbo_stream.replace(
       "content",
       partial: "gmanage")
   end
+
   def notices
     n = Notice.all.order(:date).reverse
     html = "<div class=\"mb-2\"><strong>Recent Notices</strong></div>"
@@ -140,7 +142,7 @@ class AboutsController < ApplicationController
       html << "<br/><br/>"
     end
     render turbo_stream: turbo_stream.replace(
-      "content",partial: "slim", locals: { html: html })
+      "content", partial: "slim", locals: { html: html })
   end
 
   def slim
@@ -152,8 +154,6 @@ class AboutsController < ApplicationController
       html << "<br/><br/>"
     end
     render turbo_stream: turbo_stream.replace(
-      "content",partial: "slim", locals: { html:html })
-
+      "content", partial: "slim", locals: { html:html })
   end
-
 end

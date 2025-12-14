@@ -69,7 +69,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def cant_do_that(msg=nil)
+  def cant_do_that(msg="")
     redirect_to root_url, alert: "Sorry! I or You can't do that. #{msg}"
   end
   helper_method :cant_do_that
