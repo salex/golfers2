@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
         session[:expires] = Time.now + 60.minutes
         # because I have code that checks Current.user/group and visit
         Current.user = current_user
-        Current.group = Group.find_by(id:session[:group_id])
+        Current.group = Group.find_by(id: session[:group_id])
       end
     elsif current_group.present? && session[:expires].present?
       expire_time = Time.parse(session[:expires]) || Time.now
@@ -26,8 +26,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def can?(crud,model)
-    current_user && current_user.can?(crud,model)
+  def can?(crud, model)
+    current_user && current_user.can?(crud, model)
   end
   helper_method :can?
 
@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
   private
 
   def require_login
-    if current_user.nil? 
+    if current_user.nil?
       redirect_to root_url, alert: "I'm sorry. I can't - or You can't do that."
     end
   end
@@ -73,13 +73,13 @@ class ApplicationController < ActionController::Base
   end
   helper_method :cant_do_that
 
-  def current_user 
+  def current_user
     Current.user ||= authenticate_user_from_session
   end
   helper_method :current_user
 
-  def current_group 
-    Current.group ||= Group.find_by(id:session[:group_id])
+  def current_group
+    Current.group ||= Group.find_by(id: session[:group_id])
   end
   helper_method :current_group
   
