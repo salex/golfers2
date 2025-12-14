@@ -10,7 +10,7 @@ div.md:grid.md:grid-cols-12.mx-1.p-1.gap-4
 
     - if Current.group.welcome.present?
       .strong.text-center.text-4xl.small-caps Welcome
-      p= Current.group.welcome.html_safe
+      p.text-center = "".html_safe +  Current.group.welcome
 
     = render partial:"home/home_events"
     - if @notice.present?
