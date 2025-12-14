@@ -46,7 +46,6 @@ class ApplicationController < ActionController::Base
   end
   helper_method :is_super?
 
-
   private
 
   def require_login
@@ -74,18 +73,15 @@ class ApplicationController < ActionController::Base
   end
   helper_method :cant_do_that
 
-  
   def current_user 
     Current.user ||= authenticate_user_from_session
   end
   helper_method :current_user
 
   def current_group 
-    # visit
     Current.group ||= Group.find_by(id:session[:group_id])
   end
   helper_method :current_group
-
   
   def authenticate_user_from_session
    u =  User.find_by(id: session[:user_id])
