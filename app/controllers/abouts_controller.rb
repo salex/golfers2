@@ -140,7 +140,7 @@ class AboutsController < ApplicationController
       html << "<br/><br/>"
     end
     render turbo_stream: turbo_stream.replace(
-      "content",partial: "slim", locals:{html:html} )
+      "content",partial: "slim", locals: { html: html })
   end
 
   def slim
@@ -152,7 +152,7 @@ class AboutsController < ApplicationController
       html << "<br/><br/>"
     end
     render turbo_stream: turbo_stream.replace(
-      "content",partial: "slim", locals:{html:html} )
+      "content",partial: "slim", locals: { html:html })
 
   end
 
