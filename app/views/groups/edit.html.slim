@@ -1,5 +1,5 @@
 div.w-full
-  div.flex.gap-8
+  div.flex.gap-8.bg-lime-lightest
     h1.font-bold.text-2xl Editing Group
     - if current_user && current_user.is_admin?
       = link_to icon('fas fa-eye',"Show Group"), group_path(@group), class:"btn-sm-green"

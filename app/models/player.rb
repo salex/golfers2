@@ -63,7 +63,7 @@ class Player < ApplicationRecord
     self.last_played = game_date.present? && game_date > self.last_played ? game_date : quotas.last_played
     self.rquota = quotas.rquota
     self.limited = quotas.limited
-    # will rollback if quota.nii?
+    # will rollback if quota.nil?
     self.save if self.changed?
     # end
   end

@@ -9,7 +9,7 @@ class PasswordsController < ApplicationController
   end
 
   def update
-    puts "PPPPP #{user_params}"
+    # puts "PPPPP #{user_params}"
     if current_user.update(user_params)
       redirect_to root_path, notice:"Your password has been updated successfully."
     else 
