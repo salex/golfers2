@@ -1,21 +1,4 @@
 class AboutsController < ApplicationController
-  # collection do
-  #   get :forming
-  #   get :scoring
-  #   get :teams
-  #   get :players
-  #   get :preferences
-  #   get :origin
-  #   get :structure
-  #   get :terminology
-  #   get :club
-  #   get :group
-  #   get :player
-  #   get :round
-  #   get :event
-  #   get :user
-  # end
-
   def show
     respond_to do |format|
       format.html { render "abouts/show" }
@@ -35,13 +18,11 @@ class AboutsController < ApplicationController
       partial: "changes")
   end
 
-
   def structure
     render turbo_stream: turbo_stream.replace(
       "content",
       partial: "structure")
   end
-
 
   def forming
     render turbo_stream: turbo_stream.replace(
@@ -126,7 +107,7 @@ class AboutsController < ApplicationController
       "content",
       partial: "features")
   end
-  
+
   def gmanage
     render turbo_stream: turbo_stream.replace(
       "content",
@@ -154,6 +135,6 @@ class AboutsController < ApplicationController
       html << "<br/><br/>"
     end
     render turbo_stream: turbo_stream.replace(
-      "content", partial: "slim", locals: { html:html })
+      "content", partial: "slim", locals: { html: html })
   end
 end
