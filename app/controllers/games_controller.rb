@@ -6,7 +6,7 @@ class GamesController < ApplicationController
   def index
     # @games = current_group.games.order(:date).limit(20).reverse_order
     # @pagy, @records = pagy(Product.some_scope, items: 30)
-    @pagy, @games = pagy(current_group.games.order(:date).reverse_order, items: 12)
+    @pagy, @games = pagy(current_group.games.order(:date).reverse_order, items: 15)
 
 
   end
@@ -75,7 +75,6 @@ class GamesController < ApplicationController
       end
     end
   end
-
 
   private
      def require_group
