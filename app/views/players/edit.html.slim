@@ -3,9 +3,9 @@ div.bg-lime-lighter.p-1.-mx-2
 
     h1.font-bold.text-2xl Editing Player
 
-    = link_to icon('fas fa-eye',"Show Player"), player_path(@player), class:"btn-sm-green"
+    = link_to icon('fas fa-eye',"Show Player"), player_path(@player), class:"btn-link"
     = link_to icon('fas fa-list',"List Players"), 
-      players_path, class:"btn-sm-green"
+      players_path, class:"btn-link"
     = button_to icon('fas fa-trash',"Destroy Player"), @player, method: :delete, form:{data: { turbo_confirm: 'Are you sure?', turbo_method:'delete' }},class:"btn-warn mt-1 text-white inline-block" 
 
 hr.border-1.border-blue-500.my-1
