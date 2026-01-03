@@ -74,3 +74,4 @@ gem "prawn"
 gem "prawn-table"
 gem "exonio"
 gem "redcarpet", "~> 3.5.1"
+gem 'dotenv-rails', groups: [:development, :test]
