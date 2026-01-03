@@ -10,7 +10,7 @@ image: golfers2
 # Deploy to these servers.
 servers:
   web:
-    - 192.168.0.1
+    - 165.245.134.38
   # job:
   #   hosts:
   #     - 192.168.0.1
