@@ -1,3 +1,6 @@
+# Load .env
+<% require "dotenv"; Dotenv.load(".env") %>
+
 # Name of your application. Used to uniquely configure containers.
 service: golfers2
 
@@ -7,7 +10,7 @@ image: golfers2
 # Deploy to these servers.
 servers:
   web:
-    - 134.199.193.61
+    - 192.168.0.1
   # job:
   #   hosts:
   #     - 192.168.0.1

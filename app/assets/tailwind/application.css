@@ -24,10 +24,6 @@
   --color-green-darker: #22a022;
   --color-green-darkest: #228822;
 
-
-
-
-
 }
 
 
@@ -44,15 +40,6 @@
   .btn-lg {
     @apply border-zinc-300 py-1.5 px-2.5 inline-block rounded hover:opacity-70 font-bold border-2;
   }
-  .btn-primary{
-    @apply py-1 rounded font-bold m-1 px-4 bg-blue-300 hover:opacity-70 inline-block;
-  }
-  .btn-cancel{
-    @apply py-1 rounded font-bold m-1 px-4 bg-amber-400 hover:opacity-70 inline-block;
-  }
-  .btn-link{
-    @apply py-1 rounded font-bold m-1 px-4 bg-green-400 hover:opacity-70 inline-block;
-  }
   .btn-sm-green{
     @apply py-1 rounded font-bold m-1 px-4 bg-green-400 hover:opacity-70 inline-block;
   }
@@ -62,8 +49,16 @@
   .btn-sm-orange{
     @apply py-1 rounded font-bold m-1 px-4 bg-orange-400 hover:opacity-70 inline-block;
   }
-
-
+  /* main navigation buttons */
+  .btn-primary{
+    @apply py-1 rounded font-bold m-1 px-4 bg-blue-300 hover:opacity-70 inline-block;
+  }
+  .btn-cancel{
+    @apply py-1 rounded font-bold m-1 px-4 bg-amber-400 hover:opacity-70 inline-block;
+  }
+  .btn-link{
+    @apply py-1 rounded font-bold m-1 px-4 bg-green-400 hover:opacity-70 inline-block;
+  }
   .btn-submit {
     @apply rounded-lg font-bold py-2 px-5 bg-blue-600 hover:opacity-70 text-white inline-block cursor-pointer;
   }
