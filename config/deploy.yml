@@ -5,12 +5,12 @@
 service: golfers2
 
 # Name of the container image (use your-user/app-name on external registries).
-image: golfers2
+image: salex1710/golfers2
 
 # Deploy to these servers.
 servers:
   web:
-    - 165.245.134.38
+    - golfers2.stevealex.us
   # job:
   #   hosts:
   #     - 192.168.0.1
@@ -24,8 +24,8 @@ servers:
 # Don't use this when deploying to multiple web servers (then you have to terminate SSL at your load balancer).
 #
 proxy:
-  ssl: false
-  host: 165.245.134.38
+  ssl: true
+  host: golfers2.stevealex.us
 
 # Where you keep your container images.
 registry:
