@@ -146,6 +146,8 @@ Rails.application.routes.draw do
   get 'visit', to: 'home#groups'
   get 'test', to: 'home#test'
   get 'golfer', to: 'golfer#index'
+  get 'console', to: 'golfer#console'
+
   get 'score_sheet', to: 'home#score_sheet'
   get 'new_score_sheet', to: 'home#places_sheet'
   get 'payouts', to: 'apps#payouts'
