@@ -8,7 +8,7 @@ Bundler.require(*Rails.groups)
 
 # Load .env file in development and test environments
 if Rails.env.development? || Rails.env.test?
-  Dotenv::Railtie.load
+  Dotenv::Rails.load
 end
 
 module Mygolf
