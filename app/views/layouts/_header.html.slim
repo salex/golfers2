@@ -27,9 +27,9 @@ div[class="flex px-3 py-1  bg-green-600 font-bold "]
               = link_to "Edit User Profile",edit_profile_path , class:"block green-btn"
               = link_to "Change Password", edit_password_path , class:"block green-btn"
 
-        = button_to("Logout",session_path,method: :delete,class:"hover:bg-green-200 text-lg inline-block px-3 mx-3 text-green-200 hover:text-black")
+        = button_to(icon('fa fa-sign-out',"SignOut"),session_path,method: :delete,class:"hover:bg-green-200 text-lg inline-block px-3 mx-3 text-green-200 hover:text-black")
     - else
-      span.float-right = link_to "Sign In", new_session_path,
+      span.float-right = link_to icon('fa fa-sign-in',"SignIn"), new_session_path,
         class:"hover:bg-green-200 text-lg inline-block px-3 mx-3 text-green-200 hover:text-black"
       - if session[:fullname] == 'Visitor'
         span.float-right.font-bold.text-white.text-lg

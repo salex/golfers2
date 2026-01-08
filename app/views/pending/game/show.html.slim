@@ -32,7 +32,7 @@ div.flex.gap-2.bg-lime-lightest.-mx-2.p-1.border-2.border-green-400
           i.fa.fa-caret-down
 
         .w3-dropdown-content.w3-card-4.w-56
-          - if @game.method == 'places'
+          - if @game.method == 'places' || @game.formed['makeup'] == 'individuals'
             = link_to "Print Scorecard Portrait", @game.pending_url('print_places_scard'), class:"block btn-sqr-blue mb-1 p-1 " 
             = link_to "Print Scorecard Landscape", @game.pending_url('print_places_scardh'), class:"block btn-sqr-blue mb-1 p-1 "
           - else
