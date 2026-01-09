@@ -26,7 +26,7 @@ servers:
 proxy:
   ssl: true
   host: golfers.stevealex.us
-  app_port: 3001
+
 # Where you keep your container images.
 registry:
   # Alternatives: hub.docker.com / registry.digitalocean.com / ghcr.io / ...
