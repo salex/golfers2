@@ -40,8 +40,8 @@ div.w-full
 
             td = game.date
             td = game.method
-            td = game.formed["players"] if game.formed.present?
-            td = game.formed["teams"] if game.formed.present?
+            td = game.formed["round"]["players"] if game.formed.present?
+            td = game.formed["round"]["teams"] if game.formed.present?
             td = game.formed['makeup'] if game.formed.present?
             td = game.formed["seed_method"] if game.formed.present?
             td = game.course if game.formed.present?

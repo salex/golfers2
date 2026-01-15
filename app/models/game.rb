@@ -14,10 +14,6 @@ class Game < ApplicationRecord
 
   attribute :state 
 
-  # def stats
-  #   self.formed
-  # end
-
   def game_group
     Current.group || group
   end
