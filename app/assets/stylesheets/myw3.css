@@ -246,9 +246,14 @@ select:disabled {
   opacity: 0.5;
 }
 */
-p {
+/*p {
   margin:0.4rem 0;
-  line-height: 1.0rem;
+  line-heigßht: 1.0rem;
+}
+*/
+p.noindent{
+ margin-bottom: 0.8rem;
+ line-height: 1.2rem;
 }
 
 dd{
@@ -283,7 +288,7 @@ ul, ul.slim, ul.classic {
    padding-left: 1rem;
    margin-left:  1rem;
 }
-p.slim {
+p.slim{
  text-indent:1rem;
  margin-bottom: 0.8rem;
  line-height: 1.2rem;

@@ -73,7 +73,7 @@ class ArticlesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def require_super
-      cant_do_that(' - Not Authorized') unless is_super?
+      cant_do_that(' - Not Authorized') unless is_trustee?
     end
 
     def set_article

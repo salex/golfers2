@@ -7,7 +7,7 @@ div.w-full
 
   div.flex.gap-8
     - if current_user.present?
-      - if current_user.is_super?
+      - if current_user.is_trustee?
         = link_to icon('fas fa-edit',"Edit Notice"), edit_notice_path(@notice), class:"btn-sm-green"
         = link_to icon('fas fa-list',"List Notices"), notices_path, class:"btn-sm-green"
         = button_to icon('fas fa-trash',"Destroy Notice"), @notice, method: :delete, form:{data: { turbo_confirm: 'Are you sure?', turbo_method:'delete' }}, class:"btn-warn"
@@ -28,4 +28,4 @@ div.mx-2
     strong.w-20.inline-block.text-right.mr-2 Expires
     = @notice.due_date
   strong Slim
-  div.w-1/2 = markdown_text(@notice.slim)
+  div.w-1/2 = slim_text(@notice.slim)
