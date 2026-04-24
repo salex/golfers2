@@ -26,7 +26,7 @@ class PlayersController < ApplicationController
         @players = current_group.players.order(:name)
       end
     else
-      @active = current_group.active_players.to_a
+      @active = Current.group.active_players.to_a
       @inactive =  current_group.inactive_players.to_a
       @expired = current_group.expired_players.to_a
     end

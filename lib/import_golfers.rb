@@ -45,6 +45,9 @@ class ImportGolfers
     records = JSON.parse(json)
     records.each{|i|
       Game.create(i)
+      # i.formed = i.formed['round']
+      # i.save
+
     }
     puts "Games Size #{records.size} "
   end
