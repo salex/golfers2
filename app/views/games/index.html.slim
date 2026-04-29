@@ -40,12 +40,11 @@ div.w-full
 
             td = game.date
             td = game.method
-            td = game.formed["round"]["players"] if game.formed.present?
-            td = game.formed["round"]["teams"] if game.formed.present?
-            td = game.formed['makeup'] if game.formed.present?
-            td = game.formed["seed_method"] if game.formed.present?
-            td = game.course 
-            /if game.formed.present?
+            td = game.formed["round"]["players"] if game.formed["round"].present?
+            td = game.formed["round"]["teams"] if game.formed["round"].present?
+            td = game.formed["round"]['makeup'] if game.formed["round"].present?
+            td = game.formed["seed_method"] if game.formed["round"].present?
+            td 
             td 
 
               = link_to icon('fas fa-eye'), game,class:"icon bg-blue-600"

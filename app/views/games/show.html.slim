@@ -11,5 +11,6 @@ div.w-full
     = button_to icon('fas fa-trash',"Destroy Game"), @game, method: :delete,
       form:{data: { turbo_confirm: 'Are you sure?', turbo_method:'delete' }}, 
       class:"btn-warn p-1 text-white" if can?(:destroy,:game)
+  = render partial: '/shared/gheader' if @game.players.present?
 
   == render @game

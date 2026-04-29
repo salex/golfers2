@@ -29,7 +29,7 @@
   div.flex
     .font-bold Limits/Scoring Settings/Options
   .form-fields.half.flex.flex-wrap.gap-8
-    table.golfer
+    table.golfer.w-4/13
       thead
         tr
           th Setting
@@ -50,46 +50,46 @@
             td = form.text_field keys[i],class:"w-54 border"
 
 
-    table.golfer
-      thead
-        tr
-          th Setting
-          th Type
-          th Value
-      - (third + 1).upto(third * 2) do |i|
-        tr
-          th
-            = keys[i]
-          td 
-            = Group.attribute_types[keys[i]].type
-          
-          - if [TrueClass,FalseClass].include?(settings[keys[i]].class)
-            td = form.check_box( keys[i])
-          - elsif Group.attribute_types[keys[i]].type == :text
-            td = form.text_area keys[i],class:"w-54 border"
-          - else
-            td = form.text_field keys[i],class:"w-54 border"
+      table.golfer
+        thead
+          tr
+            th Setting
+            th Type
+            th Value
+        - (third + 1).upto(third * 2) do |i|
+          tr
+            th
+              = keys[i]
+            td 
+              = Group.attribute_types[keys[i]].type
+            
+            - if [TrueClass,FalseClass].include?(settings[keys[i]].class)
+              td = form.check_box( keys[i])
+            - elsif Group.attribute_types[keys[i]].type == :text
+              td = form.text_area keys[i],class:"w-54 border"
+            - else
+              td = form.text_field keys[i],class:"w-54 border"
 
-    table.golfer
-      thead
-        tr
-          th Setting
-          th  Type
-          th Value
+        table.golfer
+          thead
+            tr
+              th Setting
+              th  Type
+              th Value
 
-      - (third * 2 + 1).upto(len - 1) do |i|
-       tr
-         th
-           = keys[i]
-         td 
-           = Group.attribute_types[keys[i]].type
-         
-         - if [TrueClass,FalseClass].include?(settings[keys[i]].class)
-           td = form.check_box( keys[i])
-         - elsif Group.attribute_types[keys[i]].type == :text
-           td = form.text_area keys[i],class:"w-54 border"
-         - else
-           td = form.text_field keys[i],class:"w-54 border"
+          - (third * 2 + 1).upto(len - 1) do |i|
+           tr
+             th
+               = keys[i]
+             td 
+               = Group.attribute_types[keys[i]].type
+             
+             - if [TrueClass,FalseClass].include?(settings[keys[i]].class)
+               td = form.check_box( keys[i])
+             - elsif Group.attribute_types[keys[i]].type == :text
+               td = form.text_area keys[i],class:"w-54 border"
+             - else
+               td = form.text_field keys[i],class:"w-54 border"
 
 
 / - settings =  @group.settings

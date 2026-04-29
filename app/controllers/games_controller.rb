@@ -4,11 +4,7 @@ class GamesController < ApplicationController
 
   # GET /games or /games.json
   def index
-    # @games = current_group.games.order(:date).limit(20).reverse_order
-    # @pagy, @records = pagy(Product.some_scope, items: 30)
     @pagy, @games = pagy(current_group.games.order(:date).reverse_order, items: 15)
-
-
   end
 
   # GET /games/1 or /games/1.json
@@ -18,7 +14,7 @@ class GamesController < ApplicationController
 
   # GET /games/new
   def new
-    @game = current_group.games.build(status:'scheduled',date:Date.today)
+    @game = current_group.games.build(status:'scheduled',date:Date.today,stats:{'round':{}})
   end
 
   # GET /games/1/edit
@@ -65,7 +61,7 @@ class GamesController < ApplicationController
 
   def new_today
     @game = current_group.games.build(date:Date.today,method:current_group.pay,
-      status:'Scheduled',course:current_group.default_course)
+      status:'Scheduled',course:current_group.default_course,stats:{'round':{}})
     respond_to do |format|
       if @game.save
         format.html { redirect_to @game.namespace_url, notice: 'Game for today was successfully created' }

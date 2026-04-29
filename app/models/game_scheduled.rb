@@ -20,9 +20,18 @@ class GameScheduled < Game
           scheduled_rounds[m-1].save
         end
       end
-      self.formed = {} #if self.formed.nil?
+      # had a lot of problems for formed versions
+      #   some places I used formed['key']
+      #   other places I used formed['round']['key']
+      # I just included both!
+      # I think this is only place where set
+      self.formed = {'round':{}} if self.formed.nil?
       self.formed['makeup'] = makeup
+      self.formed['round']['makeup'] = makeup
       self.formed['seed_method'] = form_method
+      self.formed['round']['seed_method'] = form_method
+      self.formed['round']['players'] = self.rounds.size
+      self.formed['round']['teams'] = teams.size
       self.status = 'Pending'
       self.save
     else

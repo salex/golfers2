@@ -43,6 +43,7 @@ Rails.application.routes.draw do
           get :print_places_scard
           get :print_places_scardh
           # get :print_sc_p
+          get :indv_score_card
           get :score_cardp
           get :score_card
         end

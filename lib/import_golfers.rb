@@ -1,11 +1,18 @@
 =begin 
   lost track on what this does
-  golfers,stashes, groups and users are on imported once
-  the remain unchanged execpt for changes made after the initial 
-  commit
+  This is a new version that imports all Games, Players and
+    Rounds from ptgolf7
+  ptgolf7 will be update latest dump of ptgolf7 database
+  and use it's Convert module to create json files
+  The only thing used in the Convert module is:
+    new_conversion.rb
+  which creates json file in 
+    app/objects/convert/json/new
+  Those file are then copied to the lib directory in golfers2 and imported 
+  to replace players, games and rounds
 
-  Players, games and rounds are deleted and replaced
-
+  players, games and rounds will be deleted first
+  then new version will be imported
 =end
 
 class ImportGolfers
@@ -15,7 +22,6 @@ class ImportGolfers
     import_players
     import_games
     import_rounds
-    # fix_game_stats
   end
 
   def delete_models

@@ -22,43 +22,43 @@ div.m-1.flex.gap-8
       span.font-bold Select Course 
       - course = current_group.default_course
 
-      = select_tag 'stats[course]', options_for_select(current_group.group_courses.keys,@game.course || "Home"),class: "m-2 rounded-md bg-amber-400  text-black font-bold ",data: { action: "change->selecter#getValue",selecter_target:'tag'}
+      = select_tag 'stats[course]', options_for_select(current_group.group_courses.keys,@game.course || "Home"),class: "m-2 rounded-md bg-green-400  text-black font-bold ",data: { action: "change->selecter#getValue",selecter_target:'tag'}
 
     span.px-2.border-green-400.border[data-controller="selecter"]
       span[data-selecter-target='gameid' class="hidden"] = @game.id
       span.font-bold Select Pay Method 
       - pay = current_group.pay
 
-      = select_tag 'stats[pay]', options_for_select([["Sides","sides"],["Places","places"]],@game.method || "Home"),class: "m-2 rounded-md bg-amber-400  text-black font-bold ",data: { action: "change->selecter#getPay",selecter_target:'tag'}
+      = select_tag 'stats[pay]', options_for_select([["Sides","sides"],["Places","places"]],@game.method || "Home"),class: "m-2 rounded-md bg-green-400  text-black font-bold ",data: { action: "change->selecter#getPay",selecter_target:'tag'}
 
 
 
 
 = render partial:"/shared/theader"  
-
-table.golfer
-  thead
-    tr
-      th Id
-      th Player
-      th Team
-      th Tee
-      th Quota
-      th Front
-      th Back
-      th Total
-      th Quality
-      th Limited
-  tbody
-    - @game.current_players_name.each do |round|
+- if @game.participants.present?
+  table.golfer
+    thead
       tr
-        td =< round.id
-        td =< round.name
-        td =< round.team
-        td =< round.tee
-        td =< round.quota
-        td =< round.front
-        td =< round.back
-        td =< round.total
-        td =< round.quality
-        td =< round.limited
+        th Id
+        th Player
+        th Team
+        th Tee
+        th Quota
+        th Front
+        th Back
+        th Total
+        th Quality
+        th Limited
+    tbody
+      - @game.current_players_name.each do |round|
+        tr
+          td =< round.id
+          td =< round.name
+          td =< round.team
+          td =< round.tee
+          td =< round.quota
+          td =< round.front
+          td =< round.back
+          td =< round.total
+          td =< round.quality
+          td =< round.limited
