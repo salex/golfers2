@@ -13,6 +13,9 @@
       div
         = form.label :"group_id:", class:"w-40 font-bold text-right m-2 inline-block"
         = form.text_field :group_id, class:"border border-zinc-300"
+      div
+        = form.label :"name:",class:"w-40 font-bold text-right m-2 inline-block"
+        = form.text_field :name, class:"border border-zinc-300"
 
       div
         = form.label :"first_name:", class:"w-40 font-bold text-right m-2 inline-block"
@@ -29,10 +32,6 @@
       div
         = form.label :"use_nickname:",class:"w-40 font-bold text-right m-2 inline-block"
         = form.check_box :use_nickname, class:""
-
-      div
-        = form.label :"name:",class:"w-40 font-bold text-right m-2 inline-block"
-        = form.text_field :name, class:"border border-zinc-300"
 
       div
         = form.label :"tee:",class:"w-40 font-bold text-right m-2 inline-block"

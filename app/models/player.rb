@@ -6,6 +6,8 @@ class Player < ApplicationRecord
   has_many :rounds, dependent: :destroy
   has_many :games, through: :rounds
 
+  before_save :set_name
+
   def self.pairing_search(params,numb=30)
     subject = Player.find_by(id:params[:subject])
     return false if subject.blank?
@@ -24,6 +26,16 @@ class Player < ApplicationRecord
     return results
   end
 
+  def set_name
+    if self.use_nickname && self.nickname.present?
+      nname = nickname.titlecase
+      if !self.name[0..5].include?(nname[0..5])
+        self.name = "#{nname} - #{self.name.titlecase}"
+      end
+    else
+      self.name = self.name.titlecase
+    end
+  end
 
   def quota_limited
     if limited?
