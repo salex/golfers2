@@ -20,4 +20,10 @@ div.no-print
 .mx-auto.w-full.z-0
   h3.text-xl.font-bold = @article.title
   i = @article.created_at.to_fs(:long)
-  div.marked = markdown_text(@article.content)
+  div.border.p-2[data-controller="displayMarked"]
+    div.hidden = text_area_tag('x',@article.content, data:{displayMarked_target:"markup"})
+    h3.text-xl.font-bold = @article.title
+    i = @article.date.to_fs(:long)
+    div.marked[data-displayMarked-target='viewer']
+
+  

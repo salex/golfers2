@@ -83,3 +83,33 @@ can write premission problem with the above
 674  echo $CONTAINER_ID
 675  docker cp  /root/imports/production-2026-04-24.sqlite3 $CONTAINER_ID:/rails/storage/production.sqlite3
 676  ls
+
+Lets try mybooks replace db
+
+rsync the local file to the imports directory
+copy  develement to production
+
+cd to storge cd storage
+  cp development.sqlite3 production.sqlite3
+
+rsync db to kamal server
+  rsync -av production.sqlite3 root@165.245.134.38:/root/imports/mybooks-2026-05-10.sqlite3
+
+  chown 1000:1000 mybooks-2026-05-10.sqlite3
+
+get the container id
+
+kamal app stop
+
+CONTAINER_ID=$(docker ps --filter name=mybooks --format '{{.ID}}')
+
+echo $CONTAINER_ID
+
+replace db
+
+docker cp  /root/imports/mybooks-2026-05-10.sqlite3 $CONTAINER_ID:/rails/storage/production.sqlite3
+
+kamal app start
+
+nope! WRONG WORKED
+
