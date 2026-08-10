@@ -11,8 +11,21 @@ div[class="font-bold text-lg p-1 pl-4 -mx-2 bg-lime text-2xl flex"]
 div.grid.grid-cols-1.md:grid-cols-2.gap-8.p-4
 
   .card-4.bg-lime-lightest
-    span.float-right = link_to "Login", new_session_path,
-      class:"bg-green-200 hover:bg-green-400 font-bold text-lg inline-block px-3 mx-3 "
+    = link_to "Login", new_session_path,
+      class:"float-right bg-green-200 hover:bg-green-400 font-bold text-lg px-3 mx-3 "
+
+    br 
+    div = formatLine(:abc,'now is the time')
+    div = formatLine(:options,'there must be some!')
+
+    / div
+    /   = formatLabel(:xxxx)
+    /   = formatField('now is xxxx')
+
+
+    / div = formatField(:magbe,'crap')
+    / div = formatField(:mystuff,'crap')
+
 
     table.golfer.w-11/12.m-6.bg-white
       caption.font-lg.font-bold Current Groups

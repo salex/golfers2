@@ -5,67 +5,58 @@
       ul
         - @round.errors.each do |error|
           li = error.full_message
+
   .grid.grid-cols-3
     div
-      div
-        = form.label :game_id, style: "display: block"
-        = form.text_field :game_id
-
-      div
-        = form.label :player_id, style: "display: block"
-        = form.text_field :player_id
-
-      div
-        = form.label :type, style: "display: block"
-        = form.text_field :type
-
-      div
-        = form.label :date, style: "display: block"
-        = form.date_field :date
-
-      div
-        = form.label :team, style: "display: block"
-        = form.number_field :team
-    div
-      div
-        = form.label :tee, style: "display: block"
-        = form.text_field :tee
-
-      div
-        = form.label :quota, style: "display: block"
-        = form.number_field :quota
-
-      div
-        = form.label :front, style: "display: block"
-        = form.number_field :front
-
-      div
-        = form.label :back, style: "display: block"
-        = form.number_field :back
-
-      div
-        = form.label :total, style: "display: block"
-        = form.number_field :total
-    div
-      div
-        = form.label :quality, style: "display: block"
-        = form.text_field :quality
-
-      div
-        = form.label :skins, style: "display: block"
-        = form.text_field :skins
-
-      div
-        = form.label :par3, style: "display: block"
-        = form.text_field :par3
-
-      div
-        = form.label :other, style: "display: block"
-        = form.text_field :other
-
-      div
-        = form.label :limited, style: "display: block"
+      div.flex.gap-4
+        div.w-18.text-right.pl-1 = form.label :game_id,class:"font-bold"
+        div = form.text_field :game_id, class:"border border-gray-400 p-0.5"
+      div.flex.gap-4.m-1
+        div.w-18.text-right.pl-1 = form.label :player_id,class:"font-bold"
+        div = form.text_field :player_id, class:"border border-gray-400 p-0.5"
+      div.flex.gap-4.m-1
+        div.w-18.text-right.pl-1 = form.label :type,class:"font-bold"
+        div = form.text_field :type, class:"border border-gray-400 p-0.5"
+      div.flex.gap-4.m-1
+        div.w-18.text-right.pl-1 = form.label :date,class:"font-bold"
+        div = form.date_field :date, class:"border border-gray-400 p-0.5"
+      div.flex.gap-4.m-1
+        div.w-18.text-right.pl-1 = form.label :team,class:"font-bold"
+        div = form.number_field :team, class:"border border-gray-400 p-0.5"
+      div.flex.gap-4.m-1
+        div.w-18.text-right.pl-1 = form.label :tee,class:"font-bold"
+        div = select_tag :tee,options_for_select(['gold', 'Blue', 'White', 'Gray', 'Red'],selected:@round.tee)
+      div.flex.gap-4.m-1
+        div.w-18.text-right.pl-1 = form.label :quota,class:"font-bold"
+        div = form.number_field :quota, class:"border border-gray-400 p-0.5"
+      div.flex.gap-4.m-1
+        div.w-18.text-right.pl-1 = form.label :front,class:"font-bold"
+        div = form.number_field :front, class:"border border-gray-400 p-0.5"
+      div.flex.gap-4.m-1
+        div.w-18.text-right.pl-1 = form.label :back,class:"font-bold"
+        div = form.number_field :back, class:"border border-gray-400 p-0.5"
+      div.flex.gap-4.m-1
+        div.w-18.text-right.pl-1 = form.label :total,class:"font-bold"
+        div = form.number_field :total, class:"border border-gray-400 p-0.5"
+      div.flex.gap-4.m-1
+        div.w-18.text-right.pl-1 = form.label :quality, class:"font-bold"
+        = form.number_field :quality,step:0.01, class:"border border-gray-400 p-0.5"
+      div.flex.gap-4.m-1
+        div.w-18.text-right.pl-1 = form.label :skins, class:"font-bold"
+        = form.number_field :skins,step:0.01, class:"border border-gray-400 p-0.5"
+      div.flex.gap-4.m-1
+        div.w-18.text-right.pl-1 = form.label :par3, class:"font-bold"
+        = form.number_field :par3,step:0.01, class:"border border-gray-400 p-0.5"
+      div.flex.gap-4.m-1
+        div.w-18.text-right.pl-1 = form.label :other, class:"font-bold"
+        = form.number_field :other,step:0.01,  class:"border border-gray-400 p-0.5"
+      div.flex.gap-4.m-1
+        div.w-18.text-right.pl-1 = form.label :limited, class:"font-bold"
         = form.text_field :limited
+      div.flex.gap-4.m-1
+        div why
+        / = formatField :team,form.date_field(:date)
+
 
   div[class="btn-submit m-3"]
     = form.submit

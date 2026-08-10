@@ -1,10 +1,14 @@
 div.w-full
   h1.font-bold.text-2xl Editing Round
-  div.flex.gap-8
+  div.flex.gap-8.flex-wrap
     = link_to icon('fas fa-eye',"Show Round"), round_path(@round), class:"btn-sm-green"
     / = link_to icon('fas fa-list',"List Rounds"), 
     /   rounds_path, class:"btn-sm-green"
     = button_to icon('fas fa-trash',"Destroy Round"), @round, method: :delete, form:{data: { turbo_confirm: 'Are you sure?', turbo_method:'delete' }}, class:"btn-warn"
+    .md:w-2/3 
+      .annotate This area is restricted to Coordinators. It can be used to change mistakes made in forming teams. Mistakes include, using the wrong Tee, Quota. Use Rescore_Teams if error was in scoring. You can also Delete/Destroy the players round if they dropped out, but you can also remove them by Adjusting Teams and removing them there.
+
     
   hr.border-1.border-blue-500.my-1
+
   == render "form", round: @round

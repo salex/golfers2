@@ -92,7 +92,7 @@ div.my-2
 
     thead
       tr
-        th Date
+        th.w-fit Date
         th Team
         th Tee
         th Quota
@@ -110,8 +110,11 @@ div.my-2
           td
             = r.game_id.present? ? link_to( r.date, scored_game_path(r.game_id),class:'text-blue-700 hover:text-green-500') : r.date
             |&nbsp;
-            - if @current_user.present? && @current_user.is_manager?
-              = link_to "Show", round_path(r),class:'blue-link'
+
+            - if current_user.present? && current_user.is_trustee?
+              / = link_to "Show/Edit", round_path(r),class:'font-bold text-green-500'
+              = link_to icon('fas fa-eye'), round_path(r),class:" text-green-500 pl-2 hover:text-blue-600"
+
           td= r.team
           td= r.tee[0..0]
           td= "#{r.quota} #{r.limited} "

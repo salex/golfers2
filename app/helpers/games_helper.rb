@@ -1,4 +1,24 @@
 module GamesHelper
+  def in_nickels(num,str=false)
+    result =(num * 20).round / 20.0
+    str ? format("%.2f", result) : result
+  end
+
+  def in_dimes(num,str=false)
+    result =(num * 10).round / 10.0
+    str ? format("%.2f", result) : result
+  end
+
+  def in_quarters(num,str=false)
+    result =(num * 4).round / 4.0
+    str ? format("%.2f", result) : result
+  end
+
+  def in_halfs(num,str=false)
+    result =(num * 2).round / 2.0
+    str ? format("%.2f", result) : result
+  end
+
   def to_nickels(num,str=false)
     dollars = num.to_i
     cents = (num - dollars + 0.001).round(2) # can have float inaccracy
@@ -10,15 +30,11 @@ module GamesHelper
     end
   end
 
-  def to_dimes(num,str=false)
+  def to_dimes(num)
     dollars = num.to_i
     cents = (num - dollars + 0.001).round(2) # can have float inaccracy
     dimes  = dollars + (cents * 10).floor * 0.1
-    if str
-      return format("%.2f", dimes)
-    else
-      return dimes
-    end
+    return format("%.2f", dimes)
   end
 
   def to_qtr(num)

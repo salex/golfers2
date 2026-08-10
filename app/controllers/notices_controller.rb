@@ -7,7 +7,7 @@ class NoticesController < ApplicationController
   # GET /inquiries.json
 
   def index
-    @notices = Notice.all.order(:date)
+    @notices = Notice.all.order(:date).reverse
   end
 
   # GET /inquiries/1

@@ -12,6 +12,9 @@
     to replace players, games and rounds
   Players, Games and Rounds will be deleted first
     then new version will be imported/created
+  TO DO
+    Since this is a once in a while thing
+    delete the json files after import
 =end
 
 class ImportGolfers

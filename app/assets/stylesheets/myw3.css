@@ -12,6 +12,13 @@
     background-color: #4766b2;
 }
 
+.rowfield {
+   margin: 2px 0 3px 0;
+   padding:2px;
+   border: solid 1px #aaa;
+
+}
+
 table.classic {
   border-collapse: collapse;
 }
