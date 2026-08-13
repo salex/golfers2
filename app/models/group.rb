@@ -168,12 +168,12 @@ class Group < ApplicationRecord
     self.players.where_assoc_not_exists(:rounds).order(:name)
   end
 
-  def active_players(ago=120)
+  def active_players(ago=self.limit_inactive_days)
     active_date = Date.today - ago.days
     active = self.players.where_assoc_exists(:rounds).where(Player.arel_table[:last_played].gteq(active_date)).or(new_players).order(:name)
   end
 
-  def inactive_players(ago=120)
+  def inactive_players(ago=self.limit_inactive_days)
     active_date = Date.today - ago.days
     inactive = self.players.where_assoc_exists(:rounds).where(Player.arel_table[:last_played].lt(active_date)).order(:name)
   end

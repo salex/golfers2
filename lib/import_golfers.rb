@@ -39,6 +39,8 @@ class ImportGolfers
   #     g.save
   #   }
   # end
+  #     json = File.read(Rails.root.join('lib','golfers','test.json'))
+
 
   def import_players
     json = File.read(Rails.root.join('lib','golfers','set_players.json'))
