@@ -12,13 +12,12 @@
     background-color: #4766b2;
 }
 
-.rowfield {
+/*.rowfield {
    margin: 2px 0 3px 0;
    padding:2px;
    border: solid 1px #aaa;
-
 }
-
+*/
 table.classic {
   border-collapse: collapse;
 }
@@ -57,9 +56,11 @@ table.golfer td, table.golfer th {
 table.golfer th {
   padding: 0.2rem;
 }
+
 .green-light {
   background-color: #e8ffe8;
 }
+
 .green-dark {
   background-color: #bbffbb;
 }
@@ -183,12 +184,6 @@ table.golfer th {
 
 .bg-warn{ background-color:#ffa500}
 .bg-malt{ background-color:#991A1E}
-.bg-gold{ background-color:#A79055}
-.bg-dark-blue{ background-color:#0F3E61}
-.bg-pt-blue-d{ background-color:#273862}
-.bg-pt-blue-l{ background-color:#4766b2}
-
-
 
 /* used in about pages */
 .lime-btn {
@@ -206,32 +201,15 @@ table.golfer th {
   color:#008000 !important;
 }
 
-/*.wc-5 {
-  width:12.2rem;
-}
-.wc-4 {
-  width:11.1rem; 
-}
-.wc-3 {
-  width:9.3rem; 
-}
-.wc-2 {
-  width:9.5rem; 
-}
-*/
-
-
 .w08p {
    width: 10%;
 }
 .w04p {
    width: 3.4%;
 }
-
 .w10p{
    width: 15.0%;
 }
-
 .w-265p {
   width: 2.66%
 }
@@ -244,20 +222,7 @@ table.golfer th {
 .w-375p {
   width: 3.75%;
 }
-.
 
-/*input:disabled,
-textarea:disabled,
-select:disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-*/
-/*p {
-  margin:0.4rem 0;
-  line-heigßht: 1.0rem;
-}
-*/
 p.noindent{
  margin-bottom: 0.8rem;
  line-height: 1.2rem;
@@ -267,9 +232,6 @@ dd{
   margin:0.3rem 0;
   line-height: 1.0rem;
 }
-
-
-
 .strong{
   font-weight: bold;
 }
