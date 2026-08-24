@@ -32,18 +32,8 @@ class ImportGolfers
     Player.delete_all
   end
 
-  # this no longer needed, fixed in golfers2, uses ptgolf7 stats/formed
-  # def fix_game_stats
-  #   Game.all.each{|g|
-  #     g.formed = g.formed['round']
-  #     g.save
-  #   }
-  # end
-  #     json = File.read(Rails.root.join('lib','golfers','test.json'))
-
-
   def import_players
-    json = File.read(Rails.root.join('lib','golfers','set_players.json'))
+    json = File.read(Rails.root.join('lib','json_golfers','set_players.json'))
     records = JSON.parse(json)
     records.each{|i|
       Player.create(i)
@@ -52,7 +42,7 @@ class ImportGolfers
   end
   
   def import_games
-    json = File.read(Rails.root.join('lib','golfers','set_games.json'))
+    json = File.read(Rails.root.join('lib','json_golfers','set_games.json'))
     records = JSON.parse(json)
     records.each{|i|
       Game.create(i)
@@ -61,7 +51,7 @@ class ImportGolfers
   end
 
   def import_rounds
-    json = File.read(Rails.root.join('lib','golfers','set_rounds.json'))
+    json = File.read(Rails.root.join('lib','json_golfers','set_rounds.json'))
     records = JSON.parse(json)
     cnt = 0
     records.each_with_index{|r,i|
