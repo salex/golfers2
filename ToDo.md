@@ -113,3 +113,28 @@ kamal app start
 
 nope! WRONG WORKED
 
+ALL ABOVE DIDN'T WORK BECAUSE OF LACK OF KNOWLEDGE ON DOCKER@@
+BELOW IS NEW APPROACH 
+
+Will use the rails app golfers2
+  cd ~/work/rails8/golfers2
+
+Test in working directory
+  pwd
+
+get the docker container id
+  CONTAINER_ID=$(docker ps -q --filter name=^golfers2)
+
+test you have the container id
+  echo $CONTAINER_ID
+
+
+  scp ~/work/rails8/golfers2/storage/development.sqlite3 root@165.245.134.38:/root/imports/golfers/production.sqlite3
+
+  ssh root@165.245.134.38
+
+  cd /root/imports/golfers/
+
+  chown 1000 /root/imports/golfers/production.sqlite3
+
+  
