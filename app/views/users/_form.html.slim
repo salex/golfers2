@@ -45,7 +45,15 @@
       - roles = {} # define roles
       - User::Roles.each_with_index{|r,i| roles[i] = r} # set roles
       - @user.role = User::Roles.last if @user.new_record?
-      - if Current.user.is_trustee?
+
+      - if Current.user.is_super?
+        div
+          label.font-bold Role
+          - (0..(roles.keys.last)).each do |i|
+            div
+              = form.radio_button(:role, roles[i], selected: @user.role == i)
+              span.ml-2.font-bold= roles[i].humanize
+      - elsif Current.user.is_trustee?
         div
           label.font-bold Role
           - (1..(roles.keys.last)).each do |i|
