@@ -41,6 +41,8 @@ so look like to cp localhost file in imports dir to container
 
   kamal app start (and hope you didn't screw up!)
 
+for golfere2 try
+  docker cp production.sqlite3 $CONTAINER_ID:/rails/storage/production.sqlite3
 
 Here we go
   use 2 terminal windows - one to the vfs, one to the app directory
