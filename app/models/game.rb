@@ -4,7 +4,7 @@ class Game < ApplicationRecord
   has_many :scored_rounds
   has_many :rounds, dependent: :destroy
   has_many :players, through: :rounds
-  alias_attribute :stats, :formed
+  # alias_attribute :stats, :formed
 
   serialize :formed, coder: JSON
   serialize :par3, coder: JSON
@@ -80,6 +80,25 @@ class Game < ApplicationRecord
 
   def current_players_name
     participants.order('players.name')
+  end
+
+  def fix_formed
+    set_state
+    keys = formed.keys
+    unless keys.include?('round')
+      formed['round'] = {}
+      if self.state[:players].present?
+        formed['round']['players'] = self.state[:players]
+      else
+        formed['round']['players'] = 0
+      end
+      if self.state[:teams].present?
+        formed['round']['teams'] = self.state[:teams]
+      else
+        formed['round']['teams'] = 0
+      end
+    end
+    return formed
   end
 
   def set_state

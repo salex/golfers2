@@ -14,7 +14,7 @@ class GamesController < ApplicationController
 
   # GET /games/new
   def new
-    @game = current_group.games.build(status:'scheduled',date:Date.today,stats:{'round':{}})
+    @game = current_group.games.build(status:'scheduled',date:Date.today,formed:{'round':{}})
   end
 
   # GET /games/1/edit
@@ -61,7 +61,7 @@ class GamesController < ApplicationController
 
   def new_today
     @game = current_group.games.build(date:Date.today,method:current_group.pay,
-      status:'Scheduled',course:current_group.default_course,stats:{'round':{}})
+      status:'Scheduled',course:current_group.default_course,formed:{'round':{}})
     respond_to do |format|
       if @game.save
         format.html { redirect_to @game.namespace_url, notice: 'Game for today was successfully created' }

@@ -39,18 +39,16 @@ div.flex.gap-2.bg-lime-lightest.-mx-2.p-1.border-2.border-green-400
             = link_to "Print Scorecard Portrait", @game.pending_url('print_score_cardp')+"?rows=3", class:"block btn-sqr-blue mb-1 p-1 " 
 
   div.flex-shrink.text-green-800.p-0.font-bold.mr-3.hover:text-2xl = link_to icon('fas fa-arrow-left'), 'javascript:history.back()'
-div.flex
+= render partial:"shared/gheader"
+div
   - if current_user  && can?(:update,:game) # current_user.is_trustee?
     - unless zero_team
-      div.w-44 = link_to icon('fas fa-pencil-alt', 'Score Teams'),
+      div.flex.items-center.justify-center = link_to icon('fas fa-pencil-alt', 'Score Teams'),
         score_teams_pending_game_path(@game),
-        class:"btn btn-submit py-2"
+        class:"btn btn-submit py-2 w-1/3 text-center"
 
   - if can?(:destroy,:game) && @game.state[:can_delete.to_s]  
     = button_to(icon("fas fa-trash","Destroy Incomplete Game"),game_path(@game),method: :delete,form: { data: { turbo_confirm: "Are You Sure?"}},class:"btn-warn display:fl p-1.5 m-1 rounded "  )
-
-
-= render partial:"shared/gheader"
 
 .flex.flex-wrap
   - team_keys  = teams.keys.sort
