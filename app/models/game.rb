@@ -4,7 +4,10 @@ class Game < ApplicationRecord
   has_many :scored_rounds
   has_many :rounds, dependent: :destroy
   has_many :players, through: :rounds
-  # alias_attribute :stats, :formed
+  # ptgolf7 use stats for game hash
+  # golfer2 uses formed for game hash
+  # only used in ImportGolfers
+  alias_attribute :stats, :formed
 
   serialize :formed, coder: JSON
   serialize :par3, coder: JSON
