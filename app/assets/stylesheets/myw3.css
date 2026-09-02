@@ -240,12 +240,13 @@ dl.indent-dd dd {
    margin-left: 2rem;
    line-height: 1.2rem;
    margin-bottom: 0.3rem;
+   margin-top: 0.3rem;
 }
 dl.indent-dd dt {
    margin-left: 1rem;
    font-weight: bold;
    line-height: 1.2rem;
-   margin-bottom: 0.3rem;
+   margin-bottom: 1rem;
 }
 
 dl.indent-dd.strong-dt dt {

@@ -1,0 +1,54 @@
+
+.w3-row-padding.flex.gap-4
+  .w-3/4
+    h5.strong What's changed?
+
+    dl.indent-dd
+      dt.strong Rails upgrade from rails 7 to rails 8
+      dd I've been writing Rails applications for over 20 years. Each version change requires some work. When I lost my ability to deploy new version to ptgolf.us, I decided to upgrade to Rails 8 and started to work on the new version. That was almost 2 years ago! I worked on it occasionally. It's now time to move to the new version.
+
+      dd I created a new Rail 8 application. I then created new models(Groups, Players, Games etc.) and imported data to them. I also imported most of the views. I also left off a bunch of junk that was never used.
+
+      dd I tried to get the groups to take a look at the new version I deployed to a staging server, but never got any feedback. The ptgolf.us server costs me $25 a month to keep up. It also housed a couple of VFW Post 8600 sites that are no longer used. My new plan was to move it to a smaller server.
+
+
+    dl.indent-dd
+      dt.strong Look and Feel
+      dd It looks a little different! There was way too much green. I changed the tables to use alternate green/white rows.
+      
+      dd The new version is much more responsive in that more views work on a phone.
+
+      dd The 3 column Create New Game has moved to 2 columns that wrap on a phone.
+      dt.strong Authorization 
+      dd Authorization controls who can do what. You have to be logged in to make any changes. Some people have more privileges than others, based on a Roles. I'm using a new version of that I've streamlined that a little. There are five roles. [super trustee manager admin  member]
+      dd A super user (me) can do anything. It create new Groups, login to different groups if needed to fixed something.
+      dd A trustee can do everything a super user can do except changing any super users settings.
+      dd A manager(Sheriff!) can do anything to any models owned by the group.
+      dd Admin - can do everything a manager can do except changing managers and up settings. 
+      dd A member can look!
+
+  .w-1/4
+    h5.strong What hasn't changed?
+    dl.indent-dd
+      dt.strong The process
+      dd 
+        |You still
+        ul
+          li Schedule a Game for today
+          li Add Players to the Game
+          li Form teams, maybe print scorecards
+          li Play
+          li Score the Game/Teams
+      dd While the Process hasn't changed, some of the guts have.
+
+    dl.indent-dd
+      dt.strong Getting any feedback!
+
+      dd Email: salex@mac.com
+      dd Plone/txt: 334.294.6026
+    
+ 
+p.strong 
+  |I'm sure there more subtle changes that I have not addressed, but I'm tired of writing, so go look for yourself. Might also want to look at 
+  button.w3-green.px-1 = link_to "About/Features",about_path
+  |  for some new or little know features.

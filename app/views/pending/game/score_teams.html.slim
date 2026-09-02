@@ -27,14 +27,16 @@ div.flex.gap-8
 
   div
     .sticky.top-12
-      div.flex.items-center.justify-center.my-2 
+      div.flex.items-center.my-2.gap-8
         = f.submit("Update Scores",autocomplete: :off,disabled: :disabled,
-        id:'submit_form',class:"btn-submit w-1/3 text-center")
+        id:'submit_form',class:"btn-submit w-80 text-center")
+        div#status_box.text-center.border-2.font-bold.text-xl.bg-blue-100.text-blue-700.w-full 
+
 
   
     - select_points = !useKeys
     div
-      div#status_box.text-center.border-2.font-bold.text-xl.bg-blue-100.text-blue-700 
+      / div#status_box.text-center.border-2.font-bold.text-xl.bg-blue-100.text-blue-700 
 
       div[class="#{current_group.use_autoscroll ? "overflow-auto vh-75" : ""}"]
         / [style="height:75vh;"]

@@ -163,6 +163,8 @@ Rails.application.routes.draw do
 
 
   root "home#index"
+  get 'changes', to: 'home#changes'
+
   get '*path', to: 'home#redirect'
 
 end
