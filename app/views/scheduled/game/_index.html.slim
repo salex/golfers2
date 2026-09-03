@@ -1,5 +1,7 @@
 div[class="-mx-2"]
-  div.flex.gap-2.bg-lime-lighter.p-1
+  / div.flex.gap-2.bg-lime-lighter.p-1
+  div.flex.gap-2.bg-lime-lighter.-mx-2.p-1.border-b-2.border-green-400
+
     div.ml-2.flex-shrink
       .text-lg.font-bold = "Scheduled Game"
     div.flex-grow.flex.flex-wrap
@@ -8,6 +10,7 @@ div[class="-mx-2"]
         = button_to(icon("fas fa-trash","Destroy Incomplete Game"),game_path(@game),method: :delete,form: { data: { turbo_confirm: "Are You Sure?"}},class:"btn-warn inline-block mt-1 "  )
 
     div.flex-shrink.text-green-800.p-0.font-bold.mr-3.hover:text-2xl = link_to icon('fas fa-arrow-left'), 'javascript:history.back()'
+    
 div.m-1.flex.gap-8
   - if can?(:update,:game)
     - if @game.state[:can_form] || @game.state[:can_reform]

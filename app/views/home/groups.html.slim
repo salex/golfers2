@@ -1,3 +1,5 @@
+div.hidden.bg-blue-500.bg-red-500.bg-orange-500.bg-purple-500.bg-green-500.bg-green-600.bg-green-700.text-green-600.text-green-200
+
 div[class="font-bold text-lg p-1 pl-4 -mx-2 bg-lime text-2xl flex"] 
   div.flex-shrink
     span.font-bold.flex-shrink[style="text-transform:none;" ]PtGolf
@@ -14,10 +16,10 @@ div.grid.grid-cols-1.md:grid-cols-2.gap-8.p-4
     = link_to "Login", new_session_path,
       class:"float-right bg-green-200 hover:bg-green-400 font-bold text-lg px-3 mx-3 "
 
-    br 
-    div = formatLine(:abc,'now is the time')
-    div = formatLine(:options,'there must be some!')
-    div = formatLine(:why,'did it not deploy!')
+    / br 
+    / div = formatLine(:abc,'now is the time')
+    / div = formatLine(:options,'there must be some!')
+    / div = formatLine(:why,'did it not deploy!')
 
 
     / div
