@@ -47,7 +47,7 @@ class User < ApplicationRecord
   end
 
   # Role checkers, from low of member to high of super
-  def level?
+  def level? # NOT USED
     Can.level(self.role)
   end
 
@@ -73,12 +73,10 @@ class User < ApplicationRecord
 
   def has_role?(role_arr)
     # new simplified role based access. role_arr is always an array
-    # self.role should be a string with one word but will take more
-    # will work with underutilized haml or json left in roles
+    # self.role should be a string with one word 
     return false if self.role.blank?
     return false if role_arr.class != Array
     return role_arr.include?(self.role)
   end
-  # # scp -r /Users/salex/work/rails/users rails@167.71.240.205:/home/rails/apps/myusers
 
 end
