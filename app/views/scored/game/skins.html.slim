@@ -5,15 +5,21 @@
 
 
 div.m-2.p-2.w-3/4
-  = link_to icon('fas fa-arrows-alt-h', 'Return to Game'), @game.namespace_url, class: 'btn-cancel font-bold'
 
   #players= form_with(url:@game.namespace_url('update_skins'), method: :patch) do |f|
-    div[data-controller="sideSkins" data-sideSkins-defaultin-value="#{skins.default_in}"]
+    div[data-controller="sideSkins"data-sideSkins-defaultin-value="#{skins.default_in}"]
+      div.bg-lime-lightest.-mx-2.p-1.border-b-2.border-green-400.flex.gap-8
+        div.text-lg.font-black Score Skin's/Birdie's
+        button.btn-submit= f.submit("Update Skins/Birdies Game", class:'')
+
+        = link_to icon('fas fa-arrows-alt-h', 'Cancel - Return to Game'), @game.namespace_url, class: 'btn-cancel font-bold'
+
+
       .annotate 
-        |Instructions: Click on any of the Side Games "In" header to toggle(add/remove) all Players. Click on Checkbox in "In" column to toggle individual player. Click on Hole# to set score for that hole. Each click will cycle form '.' to B to E to A and then back to '.'  Click "Update Skins Game" button to save.
+        |Instructions: Click on any of the Side Games "In" header to toggle(add/remove) all Players. Click on Checkbox in "In" column to toggle individual player. Click on Hole# to set score for that hole. Each click will cycle form '.' to B(irdey) to E(agle) to A(lbatros) and then back to '.'  Click "Update Skins Game" button to save.
     
-      div
-        button.submit= f.submit("Update Skins Game", class:'btn-submit m-2')
+      / div
+      /   button.submit= f.submit("Update Skins Game", class:'btn-submit m-2')
  
       div.flex.gap-2.p-1
         div.font-bold Skins Hole Colors

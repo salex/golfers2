@@ -6,7 +6,7 @@
   -if zero_team
     / h4 = callout_alert("A Participant was either added or deleted after the teams were formed. You must either ReForm Teams or Adjust Teams before scoring.")
     - controller.redirect_to adjust_teams_pending_game_path(@game), notice: "Your here for one of the below reasons."
-div.flex.gap-2.bg-lime-lighter.-mx-2.p-1.border-b-2.border-green-400
+div.flex.gap-2.bg-lime-lightest.-mx-2.p-1.border-b-2.border-green-400
   div.ml-2.flex-shrink.text-lg.font-bold = "Pending Game"
 
   div.flex-grow.flex-wrap
@@ -40,15 +40,16 @@ div.flex.gap-2.bg-lime-lighter.-mx-2.p-1.border-b-2.border-green-400
 
   div.flex-shrink.text-green-800.p-0.font-bold.mr-3.hover:text-2xl = link_to icon('fas fa-arrow-left'), 'javascript:history.back()'
 div.flex.gap-8
-  - if current_user  && can?(:update,:game) # current_user.is_trustee?
-    - unless zero_team
-      div.flex.items-center.justify-center.m-2 = link_to icon('fas fa-pencil-alt', 'Score Teams'),
-        score_teams_pending_game_path(@game),
-        class:"btn btn-submit w-64 py-2 text-center"
+  div.flex-shrink.bg-lime-lightest.-ml-2.mb-1.border-r-2.border-b-2.border-green-400
+    - if current_user  && can?(:update,:game) # current_user.is_trustee?
+      - unless zero_team
+        div.flex.items-center.justify-center.m-2 = link_to icon('fas fa-pencil-alt', 'Score Teams'),
+          score_teams_pending_game_path(@game),
+          class:"btn btn-submit w-64 py-2 text-center"
 
-  - if can?(:destroy,:game) && @game.state[:can_delete.to_s]  
-    = button_to(icon("fas fa-trash","Destroy Incomplete Game"),game_path(@game),method: :delete,form: { data: { turbo_confirm: "Are You Sure?"}},class:"btn-warn display:fl p-1.5 m-1 rounded "  )
-  = render partial:"shared/gheader"
+    - if can?(:destroy,:game) && @game.state[:can_delete.to_s]  
+      = button_to(icon("fas fa-trash","Destroy Incomplete Game"),game_path(@game),method: :delete,form: { data: { turbo_confirm: "Are You Sure?"}},class:"btn-warn display:fl w-64 p-1.5 m-1 ml-2 rounded "  )
+  div.flex-grow.flex-wrap = render partial:"shared/gheader"
 
 
 .flex.flex-wrap

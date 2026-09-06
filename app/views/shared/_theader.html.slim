@@ -18,7 +18,8 @@
       =< @game.method
     div
       strong.ml-3 Players:
-      - rounds = @game.rounds.size
+      /- rounds = @game.rounds.size
+      - rounds = @game.formed['players']
       =< rounds
     div
       strong.ml-3 Dues:

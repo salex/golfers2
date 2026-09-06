@@ -116,7 +116,7 @@ class Game < ApplicationRecord
       state[:has_scored_round] = rnds.where(type: 'ScoredRound').size.positive?
       state[:can_form] = (state[:teams] == [0]) || status == 'Scheduled'
       state[:can_reform] = !state[:can_form] && state[:has_zero_team]
-      state[:can_delete] = (status != 'Scored') && ((Date.today - date) > 2)
+      state[:can_delete] = (status != 'Scored') && ((Date.today - date) >= 2)
       state[:dues] = game_group.dues
       state[:pot] = game_group.dues * state[:players]
       state[:side] = (state[:pot] / 3).round(2)

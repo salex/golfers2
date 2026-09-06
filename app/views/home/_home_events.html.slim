@@ -6,7 +6,7 @@
     div.annotate 
       div Scheduled games may have players but no teams. 
       div Pending games have teams/players, but has not been scored. 
-      dib Old games that were entered in error or incomplete should be deleted/destroyed!
+      div Old games that were entered in error or incomplete should be deleted/destroyed!
     .flex.flex-wrap.justify-center
       - current_group.home_events.each do |e|
         = link_to "#{e.status} #{e.date} Players: #{e.formed['round']['players']} Teams: #{e.formed['round']['teams']}", e.namespace_url, class:"btn-sqr-blue p-1 border-zinc-100 border-2 rounded"
