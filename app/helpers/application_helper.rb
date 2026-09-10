@@ -15,19 +15,20 @@ module ApplicationHelper
   end
 
   def markdown_text(text)
-    # if text.include?(".slimtext")
-    #   slim_text(text)
-    #   # render inline:text, type: :slim
-    #   # puts " I GOT SLIME TEXT AND REDEERE IT"
-    # else
-    options = {
-      :autolink => true,
-      :space_after_headers => true,
-      :fenced_code_blocks => true,
-      :no_intra_emphasis => true
-    }
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, options)
-    markdown.render(text).html_safe
+    if text.include?(".slimtext")
+      slim_text(text)
+      render inline:text, type: :slim
+      # puts " I GOT SLIME TEXT AND REDEERE IT"
+    else
+      options = {
+        :autolink => true,
+        :space_after_headers => true,
+        :fenced_code_blocks => true,
+        :no_intra_emphasis => true
+      }
+      markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, options)
+      markdown.render(text).html_safe
+    end
   end
 
   def destroyTag(model_path,meth:"",confirm_msg:"",klass:"",prompt:"")

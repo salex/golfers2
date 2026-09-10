@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :require_super, only: [:create, :edit, :update, :destroy]
-  before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :set_article, only: [:show, :view, :edit, :update, :destroy]
 
 
   # GET /inquiries
@@ -13,6 +13,12 @@ class ArticlesController < ApplicationController
   # GET /inquiries/1
   # GET /inquiries/1.json
   def show
+    unless Current.user 
+      render :view
+    end
+  end
+
+  def view
   end
 
   # GET /inquiries/new

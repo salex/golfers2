@@ -6,7 +6,8 @@ div[class="  flex text-lg  bg-black font-bold text-white" data-controller="toggl
   div.p-1.px-3.hover:bg-green-600.border-r.border-white = link_to("Home",root_path)
   
   - unless Current.group
-    div.p-1.px-3.hover:bg-green-600.border-r.border-white = link_to "About", '/about' 
+    div.p-1.px-3.hover:bg-green-600.border-r.border-white = link_to "About", '/about'
+    div.p-1.px-3.hover:bg-green-600.border-r.border-white = link_to "Articles",'/articles' 
 
   - if Current.group
     div.p-1.px-3.hover:bg-green-600.border-r.border-white = link_to "Group", current_group, class:"" 

@@ -6,7 +6,12 @@ Rails.application.routes.draw do
       get :display
     end
   end
-  resources :articles 
+
+  resources :articles do
+    member do
+      get :view
+    end
+  end
 
   namespace :apps do 
     get :score_sheet
