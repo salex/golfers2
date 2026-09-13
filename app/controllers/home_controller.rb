@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index
     if current_group.present?
-      @notice = Notice.where(Notice.arel_table[:due_date].gt(Date.today))
+      @notice = Notice.where(Notice.arel_table[:due_date].gteq(Date.today))
       render template: 'home/group'
     else
       render template: 'home/groups'

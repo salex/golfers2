@@ -7,8 +7,11 @@ div.flex.flex-wrap.border.border-slate-400.p-1.my-1
     strong.ml-3 Status:
     =< @game.status
   div
-    strong.ml-3 Pay Method:
+    strong.ml-3 Pay:
     =< @game.method
+  div
+    strong.ml-3 Seed:
+    =< @game.formed['round']['seed_method']
   div
     strong.ml-3 Players:
     - rounds = @game.state[:players]

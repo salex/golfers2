@@ -38,7 +38,11 @@
       - 0.upto(third) do |i|
         tr
           th
-            = keys[i]
+            / = keys[i]
+            - if keys[i] == 'pay'
+              = keys[i] + "{sides/places}"
+            - else
+              = keys[i]
           td 
             = Group.attribute_types[keys[i]].type
           

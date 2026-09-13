@@ -1,7 +1,6 @@
 / set 5 base group colors
 div.hidden.bg-blue-500.bg-red-500.bg-orange-500.bg-purple-500.bg-green-500.bg-green-600.bg-green-700.text-green-600
 - bg = current_group.group_color
-/ - bg = "bg-orange-500"
 div[class="font-bold text-lg text-white p-1 pl-4 -mx-2 #{bg}"] 
   span = "#{current_group.name} Home Page"
   span.float-right.text-green-800.p-0.font-bold.mr-3.hover:text-2xl = link_to icon('fas fa-arrow-left'), 'javascript:history.back()'
@@ -11,22 +10,19 @@ div.md:grid.md:grid-cols-12.mx-1.p-1.gap-4
     - if Current.group.welcome.present?
       .strong.text-center.text-4xl.small-caps Welcome
       p.text-center = "".html_safe +  Current.group.welcome
-
+      
     = render partial:"home/home_events"
+    / div inspect
+    / div = session[:expires]
+    / div = Current.user
+    / div = Current.group
+    <!-- && Current.session.keys -->
     - if @notice.present?
       - @notice.each do |n|
         p.mb-3 = callout_success(markdown_text(n.slim),n.due_date) if n.status == 'success'
         p.mb-3 = callout_alert(markdown_text(n.slim),n.due_date) if n.status == 'alert'
         p.mb-3 = callout_info(markdown_text(n.slim),n.due_date) if n.status == 'info'
         p.mb-3 = callout_warning(markdown_text(n.slim),n.due_date) if n.status == 'warning'
-    / - if Current.user
-        / div = Current.user.attributes
-        / div = Current.user.permit
-        / div = Current.user.role_rank
-    - if Current.group.alert.present?
-      p.mb-3 = callout_alert Current.group.alert.html_safe
-    - if Current.group.notice.present?
-      p.mb-3 = callout_info Current.group.notice.html_safe
 
   div.md:col-span-3
     = render "home/sidebar"

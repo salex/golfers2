@@ -42,7 +42,7 @@
       div
         strong.mb-1 Rendered Markdown
         / trap new article, won't have content and slim undefined
-        - if @article.content && @article.content.include?('.slim')
+        - if @article.content && @article.content.include?('.slimtext')
           - slim = markdown_text(@article.content)
           = tag.div(slim,style:"padding:6px;border:solid black 1px;z-index:0;height:50vh;overflow:scroll;",class:'markdown-body marked bg-white')
 
