@@ -2,12 +2,12 @@
 - par3 = Par3.new(@game)
 - players = par3.rounds.pluck(:id,:player_name)
 
-div.m-1.p-1.w-1/2
+div.m-1.p-1
 
   #players= form_with(url:update_par3s_scored_game_path(@game), method: :patch) do |f|
  
     div[data-controller="sidePar3" data-sidePar3-defaultin-value="#{par3.default_in}"]
-      div.bg-lime-lightest.-mx-2.p-1.border-b-2.border-green-400.flex.gap-8
+      div.bg-lime-lightest.-mx-2.p-1.border-b-2.border-green-400.flex.flex-wrap.gap-8
         div.text-lg.font-black Score Par 3's
         button.btn-submit= f.submit("Update Par3", class:'')
         = hidden_field_tag 'side_game','par3o'

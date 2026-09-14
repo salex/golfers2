@@ -36,17 +36,17 @@ div.flex.gap-2.bg-lime-lightest.-mx-2.p-1.border-b-2.border-green-400
             = link_to "Print Scorecard Portrait", @game.pending_url('print_score_cardp')+"?rows=3", class:"block btn-sqr-blue mb-1 p-1 " 
 
   div.flex-shrink.text-green-800.p-0.font-bold.mr-3.hover:text-2xl = link_to icon('fas fa-arrow-left'), 'javascript:history.back()'
-div.flex.gap-8
-  div.flex-shrink.bg-lime-lightest.-ml-2.mb-1.border-r-2.border-b-2.border-green-400
-    - if current_user  && can?(:update,:game) # current_user.is_trustee?
-      - unless zero_team
-        div.flex.items-center.justify-center.m-2 = link_to icon('fas fa-pencil-alt', 'Score Teams'),
-          score_teams_pending_game_path(@game),
-          class:"btn btn-submit w-64 py-2 text-center"
+div.flex-grow.flex-wrap = render partial:"shared/gheader"
 
-    - if can?(:destroy,:game) && @game.state[:can_delete.to_s]  
-      = button_to(icon("fas fa-trash","Destroy Incomplete Game"),game_path(@game),method: :delete,form: { data: { turbo_confirm: "Are You Sure?"}},class:"btn-warn display:fl w-64 p-1.5 m-1 ml-2 rounded "  )
-  div.flex-grow.flex-wrap = render partial:"shared/gheader"
+div.flex.flex-wrap.gap-8.-ml-2.mb-1
+  - if current_user  && can?(:update,:game) # current_user.is_trustee?
+    - unless zero_team
+      div.flex.items-center.justify-center = link_to icon('fas fa-pencil-alt', 'Score Teams'),
+        score_teams_pending_game_path(@game),
+        class:"btn btn-submit mx-2 py-2 text-center"
+
+  - if can?(:destroy,:game) && @game.state[:can_delete.to_s]  
+    = button_to(icon("fas fa-trash","Destroy Incomplete Game"),game_path(@game),method: :delete,form: { data: { turbo_confirm: "Are You Sure?"}},class:"btn-warn display:fl p-2 m-1 ml-2 rounded "  )
 
 
 .flex.flex-wrap
