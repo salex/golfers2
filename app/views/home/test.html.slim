@@ -9,7 +9,19 @@ div
 
     span = current_group
     span[class="btn-warn"] Danger
-    span = inspect_session
+    / span = inspect_session
+    div.flex.gap-4.bg-lime-lightest.-mx-3.p-2.border-b-2.border-lime-darker
+      div.flex-shrink.font-black Scheduled Game
+      div.flex-grow.flex-wrap
+        div.btn-cancel task1
+        div.btn-cancel task2
+        div.btn-cancel task3
+        div.btn-cancel task1
+        div.btn-cancel task2
+        div.btn-cancel task3
+
+      div.flex-shrink.text-green-800.p-0.font-bold.mr-3.hover:text-2xl = icon('fas fa-arrow-left')
+  div x
   div.flex.gap-2.bg-lime-light.-mx-2.p-1.border-2.border-lime-darker
     div.flex-shrink.font-bold Scheduled Game
     div.flex-grow.flex-wrap

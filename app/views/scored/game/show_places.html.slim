@@ -5,16 +5,23 @@
 - win = scoring.winners
 
 
-.bg-lime-lighter.border-bottom.bg-lime.p-1.-mx-2.mb-1
-  = links = link_to( icon('fas fa-arrow-left', 'Cancel - List Games'),  games_path, class: "btn-cancel")
+div.flex.gap-2.bg-lime-lightest.-mx-2.p-1.border-b-2.border-green-400
+  div.ml-2.flex-shrink
+    .text-lg.font-black = "Scored Places Game"
 
-  - if can?(:update,:game)
-    = link_to icon('fas fa-pencil-alt', 'ReScore Teams'), @game.pending_url('score_teams'),
-      class: "btn-warn"
-    = link_to icon('fas fa-pencil-alt', 'Score Skins/Birdies'), @game.scored_url('skins'),
-      class: "btn-cancel"
-    = link_to icon('fas fa-pencil-alt', 'Score Par3s'), @game.scored_url('par3s'),
-      class: "btn-cancel"
+  div.flex-grow.flex-wrap
+    = links = link_to( icon('fas fa-arrow-left', 'Cancel - List Games'),  games_path, class: "btn-cancel")
+
+    - if can?(:update,:game)
+      = link_to icon('fas fa-pencil-alt', 'ReScore Teams'), @game.pending_url('score_teams'),
+        class: "btn-warn"
+      = link_to icon('fas fa-pencil-alt', 'Score Skins/Birdies'), @game.scored_url('skins'),
+        class: "btn-cancel"
+      = link_to icon('fas fa-pencil-alt', 'Score Par3s'), @game.scored_url('par3s'),
+        class: "btn-cancel"
+ 
+    div.flex-shrink.text-green-800.p-0.font-bold.mr-3.hover:text-2xl.float-right = link_to icon('fas fa-arrow-left'), 'javascript:history.back()'
+
 
 = render partial:"shared/gheader"
 

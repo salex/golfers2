@@ -1,11 +1,11 @@
 section.dashboard
-  div.md:flex.bg-lime-lightest.p-1.-mx-2.mb-1
+  div.md:flex.gap-4.bg-lime-lightest.p-1.-mx-2.mb-1
     div.ml-2.text-xl.strong 
       - if params[:filter].blank?
-        span.font-bold.text-lg Players(all)
+        div.font-black.text-lg Players(all)
       - else
-        span = "Players(#{ params[:filter]})"
-    div.flex-grow.text-center
+        div = "Players(#{ params[:filter]})"
+    div.flex-grow
       = link_to icon('fas fa-user-plus', 'Add New Player'),  new_player_path, class: "btn-cancel mr-2" if is_manager?
       = link_to icon('fas fa-list', 'Status View'),  players_path, class: "btn-cancel" if @players.present?
       = link_to icon('fas fa-list', 'Table View'),  players_path(table:1), class: "btn-cancel" if @players.blank?

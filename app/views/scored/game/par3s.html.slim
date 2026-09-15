@@ -7,12 +7,15 @@ div.m-1.p-1
   #players= form_with(url:update_par3s_scored_game_path(@game), method: :patch) do |f|
  
     div[data-controller="sidePar3" data-sidePar3-defaultin-value="#{par3.default_in}"]
-      div.bg-lime-lightest.-mx-2.p-1.border-b-2.border-green-400.flex.flex-wrap.gap-8
-        div.text-lg.font-black Score Par 3's
+      div.bg-lime-lightest.-mx-2.p-1.border-b-2.border-green-400.flex-grow.gap-8
+        span.text-lg.mr-4.font-black Score Par 3's
         button.btn-submit= f.submit("Update Par3", class:'')
         = hidden_field_tag 'side_game','par3o'
 
         = link_to icon('fas fa-arrows-alt-h', 'Cancel - Return to Game'), @game.namespace_url, class: 'btn-cancel font-bold'
+
+        div.flex-shrink.text-green-800.p-0.font-bold.mr-3.hover:text-2xl.float-right = link_to icon('fas fa-arrow-left'), 'javascript:history.back()'
+
 
       .annotate 
         |Instructions: Click on any of the Side Games "In" header to toggle(add/remove) all Players. Click on Checkbox in "In" column to toggle individual player. more....

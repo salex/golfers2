@@ -9,31 +9,39 @@ div.flex.gap-2.bg-lime-lightest.-mx-2.p-1.border-b-2.border-green-400
   div.flex-grow.flex-wrap
     = link_to( icon('fas fa-arrow-left', 'List Games'),  games_path, class: "btn-link")
     - if can?(:update,:game)
-      = link_to icon('fas fa-user-plus', 'Add Player'),  @game.scheduled_url(:set),
-        class: "btn-cancel",
-        title: "Pete showed up late at the tee box, there was a threesome teeing off. Put Pete in the threesome and when you get in use this button to add Pete. Then adjust teams to change the threesome to a foursome"
-      = link_to icon('fas fa-arrows-alt-h', 'Adjust Teams'), @game.namespace_url('adjust_teams'),
-        class: "btn-cancel",
-        title: "Joe would like to play with Pete! You can move Joe to another team and move another player from Pete's to Joe's team. Pick player in same point range if using seeded teams."
-      = link_to icon('fas fa-arrows-alt-h', 'Swap Teams'), @game.namespace_url('swap_teams'),
-        class: "btn-cancel",
-        title: "Joe needs to go off early, swap his team to first."
-      
-      = link_to icon('fas fa-users', 'Reform Teams'), @game.scheduled_url('form_teams'),class: "btn-warn",title: "Joe is bitching about the teams, maybe just reform."
- 
+      div.w3-dropdown-hover.mr-2.w-fit
+
+        div[class="btn-cancel p-1"] 
+          = icon('fas fa-print'," Game Change Options ")
+          i.fa.fa-caret-down
+
+        .w3-dropdown-content.w3-card-4
+
+          = link_to icon('fas fa-user-plus', 'Add Player'),  @game.scheduled_url(:set),
+            class: "btn-cancel w-full",
+            title: "Pete showed up late at the tee box, there was a threesome teeing off. Put Pete in the threesome and when you get in use this button to add Pete. Then adjust teams to change the threesome to a foursome"
+          = link_to icon('fas fa-arrows-alt-h', 'Adjust Teams'), @game.namespace_url('adjust_teams'),
+            class: "btn-cancel w-full",
+            title: "Joe would like to play with Pete! You can move Joe to another team and move another player from Pete's to Joe's team. Pick player in same point range if using seeded teams."
+          = link_to icon('fas fa-arrows-alt-h', 'Swap Teams'), @game.namespace_url('swap_teams'),
+            class: "btn-cancel w-full",
+            title: "Joe needs to go off early, swap his team to first."
+          
+          = link_to icon('fas fa-users', 'Reform Teams'), @game.scheduled_url('form_teams'),class: "btn-warn w-full",title: "Joe is bitching about the teams, maybe just reform."
+     
       div.w3-dropdown-hover.mr-2.w-48
 
         div[class="btn-gray p-1"] 
-          = icon('fas fa-print'," Print Options")
+          = icon('fas fa-print'," Print Scorecards ")
           i.fa.fa-caret-down
 
         .w3-dropdown-content.w3-card-4.w-56
           - if @game.method == 'places' || @game.formed['makeup'] == 'individuals'
-            = link_to "Print Scorecard Portrait", @game.pending_url('print_places_scard'), class:"block btn-sqr-blue mb-1 p-1 " 
-            = link_to "Print Scorecard Landscape", @game.pending_url('print_places_scardh'), class:"block btn-sqr-blue mb-1 p-1 "
+            = link_to "PScorecard Portrait", @game.pending_url('print_places_scard'), class:"block btn-sqr-blue mb-1 p-1 " 
+            = link_to "Scorecard Landscape", @game.pending_url('print_places_scardh'), class:"block btn-sqr-blue mb-1 p-1 "
           - else
-            = link_to "Print Scorecard Landscape", @game.pending_url('print_score_card'), class:"block btn-sqr-blue mb-1 p-1 " 
-            = link_to "Print Scorecard Portrait", @game.pending_url('print_score_cardp')+"?rows=3", class:"block btn-sqr-blue mb-1 p-1 " 
+            = link_to "Scorecard Landscape", @game.pending_url('print_score_card'), class:"block btn-sqr-blue mb-1 p-1 " 
+            = link_to "Scorecard Portrait", @game.pending_url('print_score_cardp')+"?rows=3", class:"block btn-sqr-blue mb-1 p-1 " 
 
   div.flex-shrink.text-green-800.p-0.font-bold.mr-3.hover:text-2xl = link_to icon('fas fa-arrow-left'), 'javascript:history.back()'
 div.flex-grow.flex-wrap = render partial:"shared/gheader"
