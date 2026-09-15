@@ -3,9 +3,9 @@
 - zero_team = @game.state[:has_zero_team]
 -if zero_team
   - controller.redirect_to adjust_teams_pending_game_path(@game), alert: "Your here for one of the below reasons. A Participant was added after the teams were formed. You must either ReForm Teams or Adjust Teams before scoring."
-div.flex.gap-2.bg-lime-lightest.-mx-2.p-1.border-b-2.border-green-400
-  div.ml-2.flex-shrink.text-lg.font-bold = "Pending Game"
-
+div.flex.gap-2.bg-lime-light.-mx-2.p-1.border-b-2.border-green-400
+  div.ml-2.flex-shrink.text-2xl.font-bold = "Pending Game"
+  / h1.font-bold.text-2xl.flex-shrink
   div.flex-grow.flex-wrap
     = link_to( icon('fas fa-arrow-left', 'List Games'),  games_path, class: "btn-link")
     - if can?(:update,:game)
@@ -37,7 +37,7 @@ div.flex.gap-2.bg-lime-lightest.-mx-2.p-1.border-b-2.border-green-400
 
         .w3-dropdown-content.w3-card-4.w-56
           - if @game.method == 'places' || @game.formed['makeup'] == 'individuals'
-            = link_to "PScorecard Portrait", @game.pending_url('print_places_scard'), class:"block btn-sqr-blue mb-1 p-1 " 
+            = link_to "Scorecard Portrait", @game.pending_url('print_places_scard'), class:"block btn-sqr-blue mb-1 p-1 " 
             = link_to "Scorecard Landscape", @game.pending_url('print_places_scardh'), class:"block btn-sqr-blue mb-1 p-1 "
           - else
             = link_to "Scorecard Landscape", @game.pending_url('print_score_card'), class:"block btn-sqr-blue mb-1 p-1 " 

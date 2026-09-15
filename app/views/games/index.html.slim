@@ -21,7 +21,7 @@ div.w-full
           th Teams
           th Makeup
           th Seed
-          th Course
+          / th Course NOT NEEDED - WAS JUST A BRAIN FART
 
           th Actions
       tbody
@@ -44,7 +44,7 @@ div.w-full
             td = game.formed["round"]["teams"] if game.formed["round"].present?
             td = game.formed["round"]['makeup'] if game.formed["round"].present?
             td = game.formed["seed_method"] if game.formed["round"].present?
-            td 
+            / td x
             td 
 
               = link_to icon('fas fa-eye'), game,class:"icon bg-blue-600"

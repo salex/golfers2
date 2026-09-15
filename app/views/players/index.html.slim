@@ -1,8 +1,9 @@
 section.dashboard
-  div.md:flex.gap-4.bg-lime-lightest.p-1.-mx-2.mb-1
-    div.ml-2.text-xl.strong 
+  div.md:flex.gap-4.bg-lime-light.p-1.-mx-2.mb-1.border-b-2.border-green-400
+    / div.ml-2.text-xl.strong 
+    h1.font-black.text-2xl.flex-shrink
       - if params[:filter].blank?
-        div.font-black.text-lg Players(all)
+        div Players(all)
       - else
         div = "Players(#{ params[:filter]})"
     div.flex-grow

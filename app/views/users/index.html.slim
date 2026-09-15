@@ -1,8 +1,7 @@
 p style="color: green" = notice
-div.flex.gap-2.bg-lime-lighter.-m-1.p-1.-mx-2
-  div.flex-shrink
-    div.font-bold.text-xl.mx-2 Users
 
+div.flex.bg-lime-light.gap-4.-mx-2.mb-1.p-1.border-b-2.border-green-400
+  h1.font-black.text-2xl.flex-shrink Users
   div.flex-grow.flex-wrap.gap-4
     = link_to link_to icon('fas fa-plus-square', "New User"), new_user_path,class:"btn-sm-blue"
   div.flex-shrink.text-green-800.p-0.font-bold.mr-3.hover:text-2xl = link_to icon('fas fa-arrow-left'), 'javascript:history.back()'
