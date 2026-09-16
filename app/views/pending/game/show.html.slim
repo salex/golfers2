@@ -28,6 +28,8 @@ div.flex.gap-2.bg-lime-light.-mx-2.p-1.border-b-2.border-green-400
             title: "Joe needs to go off early, swap his team to first."
           
           = link_to icon('fas fa-users', 'Reform Teams'), @game.scheduled_url('form_teams'),class: "btn-warn w-full",title: "Joe is bitching about the teams, maybe just reform."
+          = button_to(icon("fas fa-trash","Destroy Game"),game_path(@game),method: :delete,form: { data: { turbo_confirm: "Are You Sure?"}},class:"btn-warn w-full text-left "  )
+
      
       div.w3-dropdown-hover.mr-2.w-48
 

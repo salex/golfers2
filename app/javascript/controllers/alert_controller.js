@@ -7,18 +7,15 @@ export default class extends Controller {
   static targets = [ "options" , "submit"]
 
   connect() {
-    console.log("connected alert")
-    // console.log(this.submitTarget)
+    console.log("Validate Formed")
   }
 
-  // blind() {
-  //   // console.log("clicked blind, set individual, only choice")
-  //   this.optionsTargets[0].checked = true
-  // }
+  blind() {
+    // console.log("clicked blind, set individual, only choice")
+    this.optionsTargets[0].checked = true
+  }
 
   checkOptions(){
-    console.log("clicked")
-
     const all = this.optionsTargets
     var btn = event.target
     var ckd = false
@@ -30,9 +27,7 @@ export default class extends Controller {
     }
     if (!ckd) {
       event.preventDefault()
-      // window.alert("Your have not seleted a Team Makeup Option")
-      // console.log("Your have not seleted a Team Makeup Option")
-
+      alert("Your have not seleted a Team Makeup Option")
     }else{
       // btn.style.display = 'none'
       this.submitTarget.disabled = false

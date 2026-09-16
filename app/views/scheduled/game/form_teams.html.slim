@@ -13,7 +13,7 @@ div[class="-mx-2"]
 = render partial:"shared/gheader"
 
 - participants = @game.current_players
-div.flex.flex-wrap.gap-8.mx-2
+div.flex.flex-wrap.gap-8.mx-2[data-controller='alert']
   div= form_with(url:update_teams_scheduled_game_path(@game), method: :patch)do |f|
       div 
         span.strong Team Options 
