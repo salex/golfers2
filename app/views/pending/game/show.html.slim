@@ -7,7 +7,7 @@ div.flex.gap-2.bg-lime-light.-mx-2.p-1.border-b-2.border-green-400
   div.ml-2.flex-shrink.text-2xl.font-bold = "Pending Game"
   / h1.font-bold.text-2xl.flex-shrink
   div.flex-grow.flex-wrap
-    = link_to( icon('fas fa-arrow-left', 'List Games'),  games_path, class: "btn-link")
+    = link_to( icon('fas fa-arrow-left', 'List Games'),  games_path, class: "btn-cancel")
     - if can?(:update,:game)
       div.w3-dropdown-hover.mr-2.w-fit
 
