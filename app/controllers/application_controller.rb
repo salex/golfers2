@@ -88,6 +88,7 @@ class ApplicationController < ActionController::Base
   end
 
   def user_signed_in?
+    # NOT USED
     current_user.present?
   end
   helper_method :user_signed_in?

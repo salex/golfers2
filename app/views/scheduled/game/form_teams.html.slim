@@ -56,10 +56,10 @@ div.flex.flex-wrap.gap-8.mx-2[data-controller='alert']
          
       div
         = f.submit("Form Teams", class:' btn btn-submit w-full',data:{alert_target:'submit', action: 'click->alert#checkOptions'},id:'submit_form',disabled:true)
-        h3.strong.w3-center - Or Just pick your own teams! -
+        / h3.strong.w3-center - Or Just pick your own teams! -
         / / = button_to  'Assign Teams',  action:'assign_teams', class: 'btn btn-icon btn-info dblock mr-2 w100 w3-center'
 
-        div.btn-link= link_to "Pick your own teams",@game.namespace_url('adjust_teams'),class:'strong fs125 dblock'
+        / div.btn-link= link_to "Pick your own teams",@game.namespace_url('adjust_teams'),class:'strong fs125 dblock'
 
   div
     h5.italic

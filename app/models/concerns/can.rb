@@ -24,7 +24,7 @@ class Can
       player: "1111",
       game: "1111",
       round: "1111",
-      article: "1111"
+      article: "0100"
     },
     admin: {
       group: "0100",
@@ -32,7 +32,7 @@ class Can
       player: "1111",
       game: "1111",
       round: "1111",
-      article: "1111"
+      article: "0100"
     },
     member: {
       group: "0100",
@@ -40,7 +40,7 @@ class Can
       player: "0100",
       game: "0100",
       round: "0100",
-      article: "1111"
+      article: "0100"
     }
   }
 
