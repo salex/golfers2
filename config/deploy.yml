@@ -25,7 +25,7 @@ servers:
 #
 proxy:
   ssl: true
-  host: golfers.stevealex.us
+  host: ptgolf.us
 
 # Where you keep your container images.
 registry:
