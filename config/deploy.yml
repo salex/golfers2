@@ -10,7 +10,7 @@ image: salex1710/ptgolf8
 # Deploy to these servers.
 servers:
   web:
-    - 129.212.181.183
+    - 134.122.119.31
   # job:
   #   hosts:
   #     - 192.168.0.1
