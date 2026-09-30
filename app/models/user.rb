@@ -47,9 +47,6 @@ class User < ApplicationRecord
   end
 
   # Role checkers, from low of member to high of super
-  def level? # NOT USED
-    Can.level(self.role)
-  end
 
   def is_super?
     return has_role?(['super']) || self.username == 'salex'

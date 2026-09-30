@@ -18,10 +18,7 @@ div.w-full
         
         = link_to( icon('fas fa-list', 'List/Edit Groups'),  groups_path, class: "btn-cancel") if is_trustee? 
 
-      
-        / - if current_user && current_user.is_super?
-
-        = button_to icon('fas fa-trash',"Destroy Group"), @group, method: :delete, form:{data: { turbo_confirm: 'Are you sure?', turbo_method:'delete' },class:"inline-block"}, class:"btn-warn " if is_super?
+        = button_to(icon('fas fa-trash',"Destroy Group"), @group, method: :delete, form:{data: { turbo_confirm: 'Are you sure?', turbo_method:'delete' },class:"inline-block"}, class:"btn-warn ") if is_super?
 
     div 
       .text-green-800.p-0.font-bold.mr-3.hover:text-2xl = link_to icon('fas fa-arrow-left'), 'javascript:history.back()'

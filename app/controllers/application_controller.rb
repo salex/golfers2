@@ -31,6 +31,12 @@ class ApplicationController < ActionController::Base
   end
   helper_method :can?
 
+  # shortcut role checker helpers
+  def is_admin?
+    current_user && current_user.is_admin? # && current_user.group_id == current_group.id
+  end
+  helper_method :is_admin?
+
   def is_manager?
     current_user && current_user.is_manager? # && current_user.group_id == current_group.id
   end
@@ -86,12 +92,6 @@ class ApplicationController < ActionController::Base
   def authenticate_user_from_session
    u =  User.find_by(id: session[:user_id])
   end
-
-  def user_signed_in?
-    # NOT USED
-    current_user.present?
-  end
-  helper_method :user_signed_in?
 
   def login(user)
     Current.user = user
