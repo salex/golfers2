@@ -11,7 +11,7 @@ div.flex.flex-wrap.border.border-slate-400.p-1.my-1
     =< @game.method
   div
     strong.ml-3 Seed:
-    =< @game.formed['round']['seed_method']
+    =< @game.formed['seed_method']
   div
     strong.ml-3 Players:
     - rounds = @game.state[:players]

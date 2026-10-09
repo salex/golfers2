@@ -15,7 +15,7 @@ div.md:grid.md:grid-cols-12.mx-1.p-1.gap-4
     / div inspect
     / div = session[:expires]
     / div = Current.user
-    / div = Current.group
+    / div.strong.text-center = "Session expires: #{session[:expires]}"
     <!-- && Current.session.keys -->
     - if @notice.present?
       - @notice.each do |n|

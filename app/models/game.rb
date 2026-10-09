@@ -120,6 +120,8 @@ class Game < ApplicationRecord
       state[:dues] = game_group.dues
       state[:pot] = game_group.dues * state[:players]
       state[:side] = (state[:pot] / 3).round(2)
+      state[:seed_method] = self.formed['seed_method']
+      state[:makeup] = self.formed['makeup'] 
     else
       state[:can_delete] = true  # created in error
     end

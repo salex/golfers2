@@ -5,7 +5,7 @@ class Scored::GameController < ApplicationController
 
   def show
 
-    @game.method = current_group.pays if @game.method.blank?
+    @game.method = current_group.pay if @game.method.blank?
     # vaild was to catch a game with deleted player NUsed
     valid = @game.rounds.length == @game.formed['round']['players']
     case @game.method
@@ -15,14 +15,14 @@ class Scored::GameController < ApplicationController
         render template:'scored/game/show_sides'
 
       else
-        render template:'scored/game/invalid'
+        redirect_to root_path, alert:'scored/game/invalid'
       end
     when 'places'
       if valid
         @scoring = PgaScorePlaces.new(@game)
         render template:'scored/game/show_places'
       else
-        render template:'scored/game/invalid'
+        redirect_to root_path, alert:'scored/game/invalid '
       end
     end
   end

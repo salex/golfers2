@@ -12,4 +12,5 @@
         = link_to "#{e.status} #{e.date} Players: #{e.formed['round']['players']} Teams: #{e.formed['round']['teams']}", e.namespace_url, class:"btn-sqr-blue p-1 border-zinc-100 border-2 rounded"
     - if current_user && current_user.is_admin? && !current_group.games.find_by(date:Date.today).present?
       hr.underline
-      div.flex-none= button_to("Create New Game for Today", new_today_games_path, method:'post', class:"btn-sm-green w-full text-white bg-green-600")
+      div.flex-none= button_to("Create New Game for Today", new_today_games_path, method:'post', class:"btn-sm-green w-full text-white bg-green-600") 
+    div.strong.text-center = "Session Expires: #{session[:expires]}"
