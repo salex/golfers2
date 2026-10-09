@@ -39,8 +39,8 @@ class HomeController < ApplicationController
       Current.group = @group
       session[:group_id] = @group.id
       session[:fullname] = "Visitor"
-      session[:expires] = Time.now + 15.minutes
-      cookies[:group_id] = {value: @group.id, expires: Time.now + 15.minutes}
+      session[:expires] = Time.zone.now + 15.minutes
+      cookies[:group_id] = {value: @group.id, expires: Time.zone.now + 15.minutes}
       params[:format] = 'html'
       redirect_to root_path
     else

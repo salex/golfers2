@@ -5,35 +5,35 @@ class ApplicationController < ActionController::Base
 
   def session_expiry
     if current_user.present?
-      if session[:expires] < Time.now
+      if session[:expires] < Time.zone.now
         # terminate_session
         reset_session
         redirect_to root_path, flash: { alert: "Your session has expired!" }
       else
-        session[:expires] = Time.now + 45.minutes
+        session[:expires] = Time.zone.now + 45.minutes
       end
     end
   end
 
   # def session_expired
   #   if current_user.present? && session[:expires].present?
-  #     expire_time = Time.parse(session[:expires]) || Time.now
-  #     session_time_left = (expire_time - Time.now).to_i
+  #     expire_time = Time.parse(session[:expires]) || Time.zone.now
+  #     session_time_left = (expire_time - Time.zone.now).to_i
   #     unless session_time_left > 0
   #       logout(current_user)
   #     else
-  #       session[:expires] = Time.now + 1.minutes
+  #       session[:expires] = Time.zone.now + 1.minutes
   #       # because I have code that checks Current.user/group and visit
   #       Current.user = current_user
   #       Current.group = Group.find_by(id: session[:group_id])
   #     end
   #   elsif current_group.present? && session[:expires].present?
-  #     expire_time = Time.parse(session[:expires]) || Time.now
-  #     session_time_left = (expire_time - Time.now).to_i
+  #     expire_time = Time.parse(session[:expires]) || Time.zone.now
+  #     session_time_left = (expire_time - Time.zone.now).to_i
   #     unless session_time_left > 0
   #       logout(nil)
   #     else
-  #       session[:expires] = Time.now + 1.minutes
+  #       session[:expires] = Time.zone.now + 1.minutes
   #     end
   #   end
   # end
@@ -111,7 +111,7 @@ class ApplicationController < ActionController::Base
     session[:group_id] = user.group_id
     session[:user_id] = user.id
     session[:fullname] = user.fullname == "Unknown" ? user.username : user.fullname
-    session[:expires] = Time.now + 60.minutes
+    session[:expires] = Time.zone.now + 60.minutes
     Current.group = Current.user.group
   end
 

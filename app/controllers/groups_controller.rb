@@ -72,7 +72,7 @@ class GroupsController < ApplicationController
     session[:group_id] = user.group_id
     session[:user_id] = user.id
     session[:fullname] = user.fullname
-    session[:expires] = Time.now + 60.minutes
+    session[:expires] = Time.zone.now + 60.minutes
     Current.group = Current.user.group
   end
 
@@ -94,7 +94,7 @@ class GroupsController < ApplicationController
       reset_session
       session[:group_id] = @group.id
       session[:fullname] = @who
-      session[:expires] = Time.now + 15.minutes
+      session[:expires] = Time.zone.now + 15.minutes
       redirect_to root_path, notice:"Welcome to group #{@group.name}"
     end
   end
