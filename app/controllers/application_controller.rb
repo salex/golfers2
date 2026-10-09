@@ -10,33 +10,10 @@ class ApplicationController < ActionController::Base
         reset_session
         redirect_to root_path, flash: { alert: "Your session has expired!" }
       else
-        session[:expires] = Time.zone.now + 45.minutes
+        session[:expires] = Time.zone.now + 30.minutes
       end
     end
   end
-
-  # def session_expired
-  #   if current_user.present? && session[:expires].present?
-  #     expire_time = Time.parse(session[:expires]) || Time.zone.now
-  #     session_time_left = (expire_time - Time.zone.now).to_i
-  #     unless session_time_left > 0
-  #       logout(current_user)
-  #     else
-  #       session[:expires] = Time.zone.now + 1.minutes
-  #       # because I have code that checks Current.user/group and visit
-  #       Current.user = current_user
-  #       Current.group = Group.find_by(id: session[:group_id])
-  #     end
-  #   elsif current_group.present? && session[:expires].present?
-  #     expire_time = Time.parse(session[:expires]) || Time.zone.now
-  #     session_time_left = (expire_time - Time.zone.now).to_i
-  #     unless session_time_left > 0
-  #       logout(nil)
-  #     else
-  #       session[:expires] = Time.zone.now + 1.minutes
-  #     end
-  #   end
-  # end
 
   def can?(crud, model)
     current_user && current_user.can?(crud, model)

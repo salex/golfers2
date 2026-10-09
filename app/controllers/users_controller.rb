@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     elsif is_trustee?
       @users = User.all.includes(:group).where.not(role:'super').order(:fullname)
     elsif is_manager?
-      @users = Current.group.users.where.not(role:'super').where.not(role:'trustee').order(:fullname)
+      @users = current_group.users.where.not(role:'super').where.not(role:'trustee').order(:fullname)
     else
       cant_do_that
     end

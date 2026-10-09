@@ -12,7 +12,8 @@ div.md:grid.md:grid-cols-12.mx-1.p-1.gap-4
       p.text-center = "".html_safe +  Current.group.welcome
       
     = render partial:"home/home_events"
-    / div inspect
+    / div = session.keys
+    / div = Current.group.name
     / div = session[:expires]
     / div = Current.user
     / div.strong.text-center = "Session expires: #{session[:expires]}"

@@ -62,7 +62,7 @@ class RoundsController < ApplicationController
     def set_round
       @round = Round.find(params[:id])
       group = @round.game.group
-      cant_do_that(' - Round not a Group Game round') unless Current.group == group
+      cant_do_that(' - Round not a Group Game round') unless current_group == group
 
       # puts "GROUP #{Current.group == group}"
 
