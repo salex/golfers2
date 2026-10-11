@@ -35,7 +35,7 @@ div.flex.flex-wrap.border.border-slate-400.p-1.my-1
   - if @game.method == "sides"
     div
       strong.ml-3 Pot Sides:
-      =< pot / 3.0
+      =< to_quarters(pot / 3.0)
   - else
     div
       strong.ml-3 Pot Places:

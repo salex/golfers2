@@ -13,6 +13,7 @@
   --color-lime-darker:  #00dd00;
   --color-lime-dark:  #00ee00;
   --color-lime:  #00ff00;
+  --color-lime-lighten: #55ff55;
   --color-lime-light:  #90ff90;
   --color-lime-lighter:  #aaffaa;
   --color-lime-lightest:  #ccffcc;
@@ -23,6 +24,10 @@
   --color-green-dark: #22bb22;
   --color-green-darker: #22a022;
   --color-green-darkest: #228822;
+  --color-avocado-500: oklch(0.84 0.18 117.33);
+  --color-avocado-200: oklch(0.98 0.04 113.22);
+
+
 
 }
 

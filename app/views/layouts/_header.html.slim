@@ -33,6 +33,6 @@ div[class="flex px-3 py-1  bg-green-600 font-bold "]
         class:"hover:bg-green-200 text-lg inline-block px-3 mx-3 text-green-200 hover:text-black"
       - if session[:fullname] == 'Visitor'
         span.float-right.font-bold.text-white.text-lg
-          = linkBtn('Exit Visit',leave_group_path(current_group),meth:'patch',klass:" py-0")
+          = linkBtn('Exit Visit',leave_group_path(current_group),meth:'patch',klass:" hover:bg-green-200 hover:text-black px-3 py-0")
 
 

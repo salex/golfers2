@@ -7,9 +7,27 @@ div
     = linkBtn('Visit2','groups/2/visit',meth:'patch',klass:"btn-sm-blue mr-1")
     = linkBtn('Visit5','groups/5/visit',meth:'patch',klass:"btn-sm-blue mr-1")
 
-    span = current_group
     span[class="btn-warn"] Danger
     / span = inspect_session
+    div.flex.gap-1
+      div.bg-lime-darkest  #00cc00;
+      div.bg-lime-darker  #00dd00;
+      div.bg-lime-dark  #00ee00;
+      div.bg-lime  #00ff00;
+      div.bg-lime-light  #90ff90;
+      div.bg-lime-lighter  #aaffaa;
+      div.bg-lime-lightest  #ccffcc;
+      div.bg-green-lightest #55ff55;
+      div.bg-green-lighter #22ee22;
+      div.bg-green-light #22dd22;
+      div.bg-green #22cc22;
+      div.bg-green-dark #22bb22;
+      div.bg-green-darker #22a022;
+      div.bg-green-darkest #228822;
+      div.bg-avocado-500 #ava500
+      div.bg-avocado-200 #ava200
+
+
     div.flex.gap-4.bg-lime-lightest.-mx-3.p-2.border-b-2.border-lime-darker
       div.flex-shrink.font-black Scheduled Game
       div.flex-grow.flex-wrap
@@ -53,9 +71,9 @@ div
       | Toggle Pays 
       = icon("fas fa-exchange-alt")
 
-    span.icon-show = icon('fas fa-eye')
-    span.icon-edit = icon('fas fa-edit')
-    span.icon-destroy = icon('fas fa-trash')
+    span.icon-show.text-green-600 = icon('fas fa-eye')
+    span.icon-edit.text-amber-600 = icon('fas fa-edit')
+    span.icon-destroy.text-red-600 = icon('fas fa-trash')
     span.btn-schedule Joe Shamoe
 
   div.flex.gap-2.bg-lime-light.-mx-2.p-1.border-2.border-lime-darker

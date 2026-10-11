@@ -32,7 +32,7 @@
     - if @game.method == "sides"
       div
         strong.ml-3 Pot Sides:
-        =< pot / 3.0
+        =< to_quarters(pot / 3.0)
     - else
       div
         strong.ml-3 Pot Places:
