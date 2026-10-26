@@ -17,7 +17,7 @@ class PlayerObjects::Quota < ApplicationService
 
   def initialize(player)
     @player = player
-    @group = Current.group || player.group
+    @group = Current.group || @player.group
     @scored_rounds = @player.scored_rounds
   end
 

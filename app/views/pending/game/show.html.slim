@@ -85,7 +85,9 @@ div.flex.flex-wrap.gap-8.-ml-2.mb-1
                 tr
                   td= mate.player_name
                   td= mate.tee
-                  td= mate.quota_limited 
+                  / td= mate.quota_limited 
+                  td= mate.player.quota_limited 
+
                   td= mate.quota / 2.0
                   td
                     = check_box_tag( '',nil, (!mate.total.nil?))  

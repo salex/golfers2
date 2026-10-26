@@ -5,8 +5,25 @@ class Player < ApplicationRecord
   has_many :scored_rounds
   has_many :rounds, dependent: :destroy
   has_many :games, through: :rounds
+  validates_presence_of :quota
+  validates_presence_of :tee
+  validates_presence_of :name
+
+  # attribute :limit_status
+  after_initialize :set_limited
 
   before_save :set_name
+
+  def set_limited
+    get_limit_status = PlayerObjects::LimitStatus.new(self).get
+    if get_limit_status != self.limited
+      puts "Status Changed: current #{self.name} #{self.limited} changed #{get_limit_status}"
+      self.limited = get_limit_status
+      self.save
+    else
+      puts "OK #{self.name}"
+    end
+  end
 
   def self.pairing_search(params,numb=30)
     subject = Player.find_by(id:params[:subject])
@@ -53,7 +70,7 @@ class Player < ApplicationRecord
   end
 
   def limited?(tee=nil)
-    tee.blank? ? self.limited.present? : PlayerObjects::LimitStatus.get(self,tee)
+    PlayerObjects::LimitStatus.get(self,tee)
   end
 
   def recompute_quota(game_date = nil)
@@ -68,9 +85,6 @@ class Player < ApplicationRecord
       quotas = PlayerObjects::Quota.new(self).tee_quota('Base').to_struct 
     end
     # remembers there is no tee set, uses primary tee
-    #TODO is there any reason for this if statement? If nothing changed should not do anything
-    # if quotas.totals.present? || game_date.present? || quotas.tee == "Base"
-      # update last_played if game_date && played from different tee
     self.quota = quotas.quota
     self.last_played = game_date.present? && game_date > self.last_played ? game_date : quotas.last_played
     self.rquota = quotas.rquota
@@ -129,10 +143,5 @@ class Player < ApplicationRecord
     avg =  number_rounds > 0 ? (won / number_rounds).round(2) : 0.0
     [self.name,number_rounds,won,dues,balance,perc,avg]
   end
-
-
-
-
-  
 
 end

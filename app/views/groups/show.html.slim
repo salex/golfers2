@@ -6,7 +6,7 @@ div.w-full
       / div.btn-submit submit
 
     div.flex-grow.flex-wrap.gap-4
-      - if current_user && current_user.is_admin?
+      - if Current.user && Current.user.is_manager?
 
         = link_to icon('fas fa-edit', 'Edit Group'),edit_group_path(@group),
              class: "btn-cancel"

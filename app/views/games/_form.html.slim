@@ -29,6 +29,13 @@
     = form.label "Method:", class: "strong w-30 mr-4 inline-block text-right"
     = form.select(:method, [["Sides","sides"],["Places","places"]])
 
+  / div.m-1
+  /   = form.label "Formed:", class: "strong w-30 mr-4 inline-block text-right"
+  /   = form.text_area :formed, class: "border p-0.5"
+
+
+
+
   div.m-1
     = form.label "Course:", class: "strong w-30 mr-4 inline-block text-right"
     = form.select(:course,Current.group.group_courses.keys)

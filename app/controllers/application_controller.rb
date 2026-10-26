@@ -68,6 +68,7 @@ class ApplicationController < ActionController::Base
   end
   helper_method :cant_do_that
 
+  #NEED TO FIX THIS 
   def current_user
     Current.user ||= authenticate_user_from_session
   end

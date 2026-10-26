@@ -7,7 +7,7 @@ class Scored::GameController < ApplicationController
 
     @game.method = current_group.pay if @game.method.blank?
     # vaild was to catch a game with deleted player NUsed
-    valid = @game.rounds.length == @game.formed['round']['players']
+    valid = @game.rounds.length == @game.formed['players']
     case @game.method
     when 'sides'
       if valid

@@ -3,17 +3,18 @@ class Game < ApplicationRecord
   has_many :scored_rounds
   has_many :rounds, dependent: :destroy
   has_many :players, through: :rounds
-  # ptgolf7 use stats for game hash
-  # golfer2 uses formed for game hash
-  # only used in ImportGolfers
+  # ptgolf7 used stats for game hash
+  # ptgolf8 uses formed for game hash
   alias_attribute :stats, :formed
 
   serialize :formed, coder: JSON
   serialize :par3, coder: JSON
   serialize :skins, coder: JSON
 
-  before_save :set_player_teams
-
+  before_save :set_formed
+    # will set the formed hash to current value
+    # even if was not change - but something did
+    # if the called .save
   attribute :state 
 
   def game_group
@@ -39,21 +40,6 @@ class Game < ApplicationRecord
   def scored_url(action = nil)
     "/scored/game/#{self.id}/#{action if action.present?}"
   end
-
-  def set_player_teams
-    self.formed = {} if self.formed.blank?
-    rnds = self.rounds
-    if rnds.size.positive?
-      arr = rnds.pluck(:id, :team)
-      teams = arr.pluck(1).sort.uniq
-      formed['players'] = arr.size
-      formed['teams'] = teams.size
-    else
-      formed['players'] = 0
-      formed['teams'] = 0
-    end
-  end
-
 
   def active_players
     group.active_players.where.not(id: players.pluck(:id))
@@ -84,27 +70,33 @@ class Game < ApplicationRecord
     participants.order('players.name')
   end
 
-  def fix_formed
-    set_state
-    keys = formed.keys
-    unless keys.include?('round')
-      formed['round'] = {}
-      if self.state[:players].present?
-        formed['round']['players'] = self.state[:players]
-      else
-        formed['round']['players'] = 0
-      end
-      if self.state[:teams].present?
-        formed['round']['teams'] = self.state[:teams]
-      else
-        formed['round']['teams'] = 0
-      end
+  def set_formed
+    # it took me 3+ hours to get this to work. 
+    # its still a semi kludge but oh well
+ 
+    if self.formed['players'] == 0
+      self.formed
+    else
+      set_state
+      # assume makeup and seed_method are in formed
+      # GOAL IS TO GET RID ON THE FORMED['ROUND'] VERSION
+      # all formed[round] calls have been removed
+      self.formed['players'] = self.state[:players]
+      self.formed['teams'] = self.state[:teams].size
+      self.formed['makeup'] = self.state[:makeup]
+      self.formed['seed_method'] = self.state[:seed_method]
+
+      # What will be removed
+      # self.formed['round']['players'] = self.formed['players'] 
+      # self.formed['round']['teams'] = self.formed['teams']
+      # self.formed['round']['makeup'] = self.formed['makeup']
+      # self.formed['round']['seed_method'] = self.formed['seed_method']
     end
-    return formed
   end
 
   def set_state
     # called from scheduled or pending to help manage actions
+    # also used to updates formed hash
     rnds = participants
     self.state = {
       players: rnds.size
@@ -127,6 +119,21 @@ class Game < ApplicationRecord
     end
     state
   end
+
+  # just history that was replaced
+  # def set_player_teams
+  #   self.formed = {} if self.formed.blank?
+  #   rnds = self.rounds
+  #   if rnds.size.positive?
+  #     arr = rnds.pluck(:id, :team)
+  #     teams = arr.pluck(1).sort.uniq
+  #     formed['players'] = arr.size
+  #     formed['teams'] = teams.size
+  #   else
+  #     formed['players'] = 0
+  #     formed['teams'] = 0
+  #   end
+  # end
 
   def update_participants(params)
     add_players(params[:add_players]) if params[:add_players].present?
@@ -175,7 +182,7 @@ class Game < ApplicationRecord
     teams = rounds.pluck(:team).uniq.sort
     results = {}
     if team.present? # just players for single team
-      results[team.to_i] = current_players.where(team: team)
+      results[team.to_i] = current_players.where(team: team).includes(:game)
     else
       teams.each do |t|
         results[t] = current_players.where(team: t)
@@ -190,11 +197,12 @@ class Game < ApplicationRecord
       teams[team] = {players:[],header:""}.with_indifferent_access
       tquota = 0
       gplayers.each do |gp|
+        limit_status = gp.player.limited
         tquota += gp.quota
         fl = gp.full_name.split
         initial = fl.size > 1 ? fl[0][0..0] + fl[1][0..0] : fl[0][0..1]
         quota = "#{gp.tee[0..0]}#{gp.limited.present? ? (gp.quota.to_s+'*') : gp.quota}"
-        teams[team][:players] << {name: gp.name,quota:quota,initial:initial }
+        teams[team][:players] << {name: gp.name,quota:quota,initial:initial,limit_status:limit_status }
       end
       teams[team][:header] = "Team #{team} - Quota #{tquota} Side #{tquota/2.0} Hole #{(tquota / 18.0).round(1)}"
     end

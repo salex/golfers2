@@ -1,7 +1,8 @@
 class GameScheduled < Game
 
   def form_teams(makeup,form_method)
-    teams = ScheduledGame::FormTeams.new(self.rounds.size,makeup,form_method).teams
+    players = self.rounds.size
+    teams = ScheduledGame::FormTeams.new(players,makeup,form_method).teams
     # puts "WHAT TEAMS #{teams}"
     return false if teams.blank?  
     if makeup == 'individuals' || makeup == 'assigned'
@@ -27,10 +28,13 @@ class GameScheduled < Game
       # I think this is only place where set
       self.formed = {'round':{}} if self.formed.nil?
       self.formed['makeup'] = makeup
-      self.formed['round']['makeup'] = makeup
       self.formed['seed_method'] = form_method
+      self.formed['players'] = players
+      self.formed['teams'] = teams.size
+      # I should delete the double entry
+      self.formed['round']['makeup'] = makeup
       self.formed['round']['seed_method'] = form_method
-      self.formed['round']['players'] = self.rounds.size
+      self.formed['round']['players'] = players 
       self.formed['round']['teams'] = teams.size
       self.status = 'Pending'
       self.save

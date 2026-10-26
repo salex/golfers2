@@ -31,7 +31,6 @@ class UsersController < ApplicationController
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
-    # @user.permits = DefaultPermits::CRUD[@user.role.to_sym]
     respond_to do |format|
       if @user.save
         format.html { redirect_to user_url(@user), notice: "User was successfully created." }
@@ -46,14 +45,8 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1 or /users/1.json
   def update
     curr_role = @user.role
-    # puts "CURR ROLE #{curr_role}"
     respond_to do |format|
       if @user.update(user_params)
-        # puts "CURR ROLE #{curr_role} NEW ROLE #{@user.role} #{@user.role != curr_role}"
-        # if @user.role.nil? || (@user.role != curr_role) # role changed - may be a better way
-        #   @user.permits = DefaultPermits::CRUD[@user.role.to_sym]
-        #   @user.save
-        # end
         format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
         format.json { render :show, status: :ok, location: @user }
       else

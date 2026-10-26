@@ -36,10 +36,13 @@ div.mt-1.flex.flex-wrap.bg-green-0
         td = @player.rquota
       tr
         th Limited
-        td = @player.limited
+        td = @player.limited?
       tr
         th LPlayed
-        td = time_ago_in_words(@player.last_played)
+        - if @player.last_played.nil?
+          td Error
+        - else
+          td = time_ago_in_words(@player.last_played.to_time)
 
   .px-1.w-full.lg:w-7/12
 

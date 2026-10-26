@@ -68,9 +68,17 @@
           - n = q =  w = "." # need something other than space
           - if players[i].present?
             
+            / - n = players[i][:name]
+            / - q = players[i][:quota]
+            / - w = players[i][:initial]
+          - if players[i].present?
             - n = players[i][:name]
-            - q = players[i][:quota]
+            - if players[i][:limit_status].blank?
+              - q = players[i][:quota]
+            - else 
+              - q = players[i][:quota]+"*"
             - w = players[i][:initial]
+
 
           tr
             - if rows == 2
