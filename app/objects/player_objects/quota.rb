@@ -44,7 +44,8 @@ class PlayerObjects::Quota < ApplicationService
     else
       { tee: tee,
         quota: player.quota,
-        limited: PlayerObjects::LimitStatus.get(player, tee),
+        # limited: PlayerObjects::LimitStatus.get(player, tee),
+        limited: player.limited,
         last_played: player.last_played,
         totals: [],
         dropped: nil,

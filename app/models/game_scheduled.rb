@@ -24,18 +24,13 @@ class GameScheduled < Game
       # had a lot of problems for formed versions
       #   some places I used formed['key']
       #   other places I used formed['round']['key']
-      # I just included both!
+      # I just deleted all references to formed['round']
       # I think this is only place where set
-      self.formed = {'round':{}} if self.formed.nil?
+      self.formed = {} if self.formed.nil?
       self.formed['makeup'] = makeup
       self.formed['seed_method'] = form_method
       self.formed['players'] = players
       self.formed['teams'] = teams.size
-      # I should delete the double entry
-      self.formed['round']['makeup'] = makeup
-      self.formed['round']['seed_method'] = form_method
-      self.formed['round']['players'] = players 
-      self.formed['round']['teams'] = teams.size
       self.status = 'Pending'
       self.save
     else

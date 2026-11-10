@@ -1,0 +1,49 @@
+how_to_fix.txt
+Nov 2026 fixing
+I'm feed up with trying fix stuff by piece mill. What were trying to do is replace bad code with good code. The code is more or less trying to do stuff that was still needed, with convoluted code.
+
+Most is a result is fixing the game formed hash.
+
+{"round"=>{"players"=>12, "teams"=>3, "makeup"=>"mixed34", "seed_method"=>"draw"}, "makeup"=>"mixed34", "seed_method"=>"draw", "players"=>0, "teams"=>0}
+
+The :round key goes way back. The keys are there twice, once in the :round hash then the just in formed, I tried to merge them but failed.  I got rid of calls to :round in all code, but have to fix the values for the other key.
+
+Lets get rid of :round and fix the other key. the Fix::FixFormed object does that.
+
+Will do that once but then we have to update it any time a Game is changed 
+
+The game.set_state gives you all that is needed to keep those four attributes up to date in the games formed hash. Just have to figure out how to trigger any changes.
+
+Player limiting has been another patching fiasco.  Needs to be in one place. Need to be in a SolidQueue task, but haven't figured how how to do that
+
+Fix::UpdatePlayerLimited does that.
+Gotta stop doing it in different places.
+
+
+
+First months deployments created some errors
+
+1 
+  Games formed continues to be a major problem. my fixes didn't work. creating new games continues to create the game.formed['round'] key. That's been fixed with some change. Can probable just let it alone for the 12 or so rounds that have been created since oct 26 deploy.
+  or
+  g = Game.where("formed LIKE ?", "%round%")
+    then delete the 'round' key.
+2
+  Game formed['players']  and ['teams'] are set to 0 since it is only set on creating a new game. It is set with the new games but the older games needs to be fixed. 
+
+  Can.t find code but probably simplest is to use game.set_stats to set those keys
+    Games.all
+
+  Found it in things. also takes care of deleting the ['round'] key in formed
+
+  module Things
+    class FixFormed
+
+3 
+  Limit Status
+
+  I have a object that does it
+
+    class UpdatePlayerLimited
+
+  until I figure out how to get a SolidQueu task to run it daily, thinking about putting it in Game.new_for_today. it would run about 9 times a week

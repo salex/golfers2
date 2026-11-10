@@ -32,11 +32,14 @@ class PlayerObjects::LimitStatus < ApplicationService
   
   def initialize(player,tee = nil)
     @player = player
+    # puts "INIT '#{@player.limited}'"
     @tee = tee || player.tee
     @group = Current.group || player.group
+    @rounds = @player.scored_rounds
   end
 
   def get
+    # puts "GET #{@player.name}' CUR #{@player.limited}'"
     get_limit_status
   end
 
@@ -49,13 +52,13 @@ class PlayerObjects::LimitStatus < ApplicationService
     end
     
     if group.limit_new_player
-      unless scored_rounds_count >= group.limit_rounds
+      if scored_rounds_count < group.limit_rounds
         return "#{group.limit_points}:newPlayer"
       end
     end
 
     if group.limit_new_tee
-      unless scored_rounds_count(tee) >= group.limit_new_tee_rounds
+      if scored_rounds_count(tee) < group.limit_new_tee_rounds
         return "#{group.limit_new_tee_points}:newtee"
       end
     end
@@ -63,20 +66,22 @@ class PlayerObjects::LimitStatus < ApplicationService
     if group.limit_inactive_player
       limit_date = (Date.today - group.limit_inactive_days)
       rounds_count = player.scored_rounds.where("rounds.date > ?",limit_date).size
-      unless rounds_count >= group.limit_inactive_rounds
+      # puts "limit_date #{limit_date} rnds #{group.limit_inactive_rounds} cnt #{rounds_count}"
+      if rounds_count < group.limit_inactive_rounds
+        # puts "TEST inactive curr '#{player.limited}'"
         return "#{group.limit_inactive_points}:inactive"
       end
     end
-    
     return nil
   end
 
   def scored_rounds_count(atee = nil)
     if atee.present?
-      player.scored_rounds.where(tee:atee).size
+      @rounds.where(tee:atee).size
     else
-      player.scored_rounds.size
+      @rounds.size
     end
   end
 
 end
+

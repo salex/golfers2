@@ -36,7 +36,9 @@ div.mt-1.flex.flex-wrap.bg-green-0
         td = @player.rquota
       tr
         th Limited
+        / td = @player.limited?
         td = @player.limited?
+
       tr
         th LPlayed
         - if @player.last_played.nil?

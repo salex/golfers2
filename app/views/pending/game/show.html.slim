@@ -17,7 +17,7 @@ div.flex.gap-2.bg-lime-light.-mx-2.p-1.border-b-2.border-green-400
 
         .w3-dropdown-content.w3-card-4
 
-          = link_to icon('fas fa-user-plus', 'Add Player'),  @game.scheduled_url(:set),
+          = link_to icon('fas fa-user-plus', 'Add/Del Player'),  @game.scheduled_url(:set),
             class: "btn-cancel w-full",
             title: "Pete showed up late at the tee box, there was a threesome teeing off. Put Pete in the threesome and when you get in use this button to add Pete. Then adjust teams to change the threesome to a foursome"
           = link_to icon('fas fa-arrows-alt-h', 'Adjust Teams'), @game.namespace_url('adjust_teams'),
@@ -29,7 +29,6 @@ div.flex.gap-2.bg-lime-light.-mx-2.p-1.border-b-2.border-green-400
           
           = link_to icon('fas fa-users', 'Reform Teams'), @game.scheduled_url('form_teams'),class: "btn-warn w-full",title: "Joe is bitching about the teams, maybe just reform."
           = button_to(icon("fas fa-trash","Destroy Game"),game_path(@game),method: :delete,form: { data: { turbo_confirm: "Are You Sure?"}},class:"btn-warn w-full text-left "  )
-
      
       div.w3-dropdown-hover.mr-2.w-48
 

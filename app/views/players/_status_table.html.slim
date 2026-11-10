@@ -1,12 +1,9 @@
 h6.strong.text-lg.bg-green-lighter.m-1.px-1.font-bold Active Players
-div.grid.md:grid-cols-2.lg:grid-cols-3.gap-2.px-1.m-1
 
+div.grid.md:grid-cols-2.lg:grid-cols-3.gap-2.px-1.m-1
   - if @active.present?
     - map = array_to_cols(@active,3)
-
     - map.each do |col|
-      / - puts" MAP #{col}"
-
       div
         table.golfer.w-full
           thead

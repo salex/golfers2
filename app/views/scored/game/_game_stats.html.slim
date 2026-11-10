@@ -80,7 +80,11 @@ div.flex.flex-wrap.gap-8
             - par3.stats.each do |k,v|
               tr
                 td.font-bold.p-2 =  k
-                td.p-2 = v
+                -if v.class == Array
+                  td.p-2 = v.sort
+                - else
+                  td.p-2 = v
+
         div.w-full
           table.golfer.w-full
             caption.font-bold.text-lg Winners

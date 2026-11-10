@@ -2,6 +2,18 @@ class ApplicationController < ActionController::Base
   include Pagy::Backend
 
   before_action :session_expiry
+  #, :update_limited
+
+  # def update_limited
+  #   last = Player.order(:updated_at).last.updated_at
+  #   now = Time.now
+  #   puts "CHECK YYY #{today} -- LLL #{last }"
+  #   if last > today
+  #     puts " DDDDDDDDDDD  don't update #{last}"
+  #   else
+  #     puts " YYYYYYYYY update it #{last}" 
+  #   end
+  # end
 
   def session_expiry
     if current_user.present?
@@ -10,7 +22,7 @@ class ApplicationController < ActionController::Base
         reset_session
         redirect_to root_path, flash: { alert: "Your session has expired!" }
       else
-        session[:expires] = Time.zone.now + 30.minutes
+        session[:expires] = Time.zone.now + 45.minutes
       end
     end
   end

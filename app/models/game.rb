@@ -10,7 +10,6 @@ class Game < ApplicationRecord
   serialize :formed, coder: JSON
   serialize :par3, coder: JSON
   serialize :skins, coder: JSON
-
   before_save :set_formed
     # will set the formed hash to current value
     # even if was not change - but something did
@@ -63,35 +62,19 @@ class Game < ApplicationRecord
   end
 
   def current_team_players
+    # not used
     participants.order(:team, 'players.rquota DESC')
   end
 
   def current_players_name
+    # not used
     participants.order('players.name')
   end
+  # scp root@134.122.119.31:/root/imports/development.sqlite3 ~/work/backups/ptgolf8/development.sqlite3
 
   def set_formed
-    # it took me 3+ hours to get this to work. 
-    # its still a semi kludge but oh well
- 
-    if self.formed['players'] == 0
-      self.formed
-    else
-      set_state
-      # assume makeup and seed_method are in formed
-      # GOAL IS TO GET RID ON THE FORMED['ROUND'] VERSION
-      # all formed[round] calls have been removed
-      self.formed['players'] = self.state[:players]
-      self.formed['teams'] = self.state[:teams].size
-      self.formed['makeup'] = self.state[:makeup]
-      self.formed['seed_method'] = self.state[:seed_method]
 
-      # What will be removed
-      # self.formed['round']['players'] = self.formed['players'] 
-      # self.formed['round']['teams'] = self.formed['teams']
-      # self.formed['round']['makeup'] = self.formed['makeup']
-      # self.formed['round']['seed_method'] = self.formed['seed_method']
-    end
+    set_state
   end
 
   def set_state
@@ -117,6 +100,7 @@ class Game < ApplicationRecord
     else
       state[:can_delete] = true  # created in error
     end
+    # puts "i be here where are you"
     state
   end
 
@@ -129,7 +113,7 @@ class Game < ApplicationRecord
   #     teams = arr.pluck(1).sort.uniq
   #     formed['players'] = arr.size
   #     formed['teams'] = teams.size
-  #   else
+  #   elsef
   #     formed['players'] = 0
   #     formed['teams'] = 0
   #   end
@@ -139,8 +123,14 @@ class Game < ApplicationRecord
     add_players(params[:add_players]) if params[:add_players].present?
     delete_players(params[:deleted]) if params[:deleted].present?
     check_tee_change(params[:tee]) if params[:tee].present?
-    set_state 
+    set_state
+    update_formed
     save
+  end
+
+  def update_formed
+    self.formed['players'] = self.state[:players]
+    self.formed['team'] = self.state[:teams].size
   end
 
   def add_players(add_players)
@@ -152,6 +142,7 @@ class Game < ApplicationRecord
       grnd.tee = player.tee
       grnd.team = 0
       grnd.limited = player.limited  # there was a bug called limited? which return boolean
+      
       grnd.save
     end
   end

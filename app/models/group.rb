@@ -179,7 +179,7 @@ class Group < ApplicationRecord
   end
 
   def new_players
-    self.players.where(last_played:Date.today).where_assoc_not_exists(:rounds)
+    self.players.where_assoc_not_exists(:rounds)
   end
 
   def home_events

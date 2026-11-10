@@ -19,7 +19,7 @@ div.m-1
         th[data-action="click->sortTable#sortBy"] 
           i.fas.fa-sort.noprint.nopointer 
           | LPlayed
-        th frozen
+        th limited
         - if current_user && current_user.is_trustee?
           th Actions
 
@@ -34,7 +34,7 @@ div.m-1
           td = player.quota
           td = player.rquota
           td = player.last_played
-          td = player.is_frozen
+          td = player.limited
           td
             = link_to icon('fas fa-eye'), player,class:"icon bg-blue-600"
             - if can?(:update,:player)
