@@ -1,3 +1,6 @@
+- if @game.state[:has_zero_team]
+  div = link_to icon('fas fa-arrows-alt-h', 'Add new Player(s)'), @game.namespace_url, class: 'block btn-schedule text-center font-bold bg-orange-600', data:{turbo_frame: "_top"} 
+
 = form_with(url: update_players_scheduled_game_path(@game), 
   method: :patch, html:{id:"update_participants"},
   data:{scheduler_target:"form"},
