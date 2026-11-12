@@ -20,12 +20,12 @@ div
     
     p.text-lg.italic Or you can use this form to swap the team order between two teams and swap all the player on the team.
     = form_with(url:@game.namespace_url('update_teams'), method: :patch )do |f|
-      div.flex.gap-16
+      div.flex.flex-wrap.gap-16
         div
           button.btn.btn-submit.btn-green = f.submit("Swap Team Order", class:'button small w100 ',id:'submit_form')
         div
           .strong.text-center Swap Team Order
-          div.flex.gap-8
+          div.flex.flex-wrap.gap-8
             div
               div From
               = select_tag "swap_team_1", options_for_select((1..p_count).to_a, ""),include_blank:"Swap Team From",class:"border border-green-500 select"

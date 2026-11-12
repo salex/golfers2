@@ -10,8 +10,14 @@
     .flex.flex-wrap.justify-center
       - current_group.home_events.each do |e|
         = link_to "#{e.status} #{e.date} Players: #{e.formed['players']} Teams: #{e.formed['teams']}", e.namespace_url, class:"btn-sqr-blue p-1 border-zinc-100 border-2 rounded"
-    - if current_user && current_user.is_admin? && !current_group.games.find_by(date:Date.today).present?
-      hr.underline
-      div.flex-none= button_to("Create New Game for Today", new_today_games_path, method:'post', class:"btn-sm-green w-full text-white bg-green-600")
+    hr.underline
+    - if current_user && current_user.is_admin?
+      - if current_group.games.find_by(date:Date.today).present?
+        div.card-4.flex-none.m-1 = button_to("Create Another Game for Today", new_today_games_path, method:'post', class:"btn-sm-green w-full text-black bg-amber-400")
+        hr.underline
+      - else
+        div.card-4.flex-none.m-1 = button_to("Create New Game for Today", new_today_games_path, method:'post', class:"btn-sm-green w-full text-white bg-green-600")
+        hr.underline
+
     - unless session[:fullname] == 'Visitor' # a visitor
       div.strong.text-center = "Session Expires: #{session[:expires]}"
