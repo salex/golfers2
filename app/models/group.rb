@@ -10,6 +10,7 @@ class Group < ApplicationRecord
   serialize :settings, coder: JSON
 
   after_initialize :set_attributes
+  # after_find :set_limited_status
 
   attribute :group_courses
   # lets just set all attributes to settings values 
@@ -53,8 +54,6 @@ class Group < ApplicationRecord
   attribute :score_place_dist, :string
   attribute :score_place_perc, :integer
   attribute :default_course, :string
-
-
 
   def set_attributes
     if self.settings.blank?
@@ -144,6 +143,28 @@ class Group < ApplicationRecord
     self.save 
   end
 
+  def set_limited_status
+    # return if Current.user.nil?
+    last_update = self.updated_at.to_date
+    puts "HELLLLLLLLLOOOOOOO  #{self.name} #{last_update} #{Date.today}"
+
+    return unless last_update != Date.today
+    puts "gonna reset"
+    self.players.each do |player|
+      limit = PlayerObjects::LimitStatus.get(player)
+      if limit != player.limited
+        puts "Status Changed: current #{player.name} #{player.limited} changed #{limit}"
+        player.limited = limit
+        player.save
+      end
+    end
+    self.touch
+    puts "Saving #{self.changed?}"
+    self.save!
+  end
+
+
+
   def parse_courses
     if self.courses.blank?
       # set a parse_able string with key and values
@@ -170,16 +191,12 @@ class Group < ApplicationRecord
 
   def active_players(ago=self.limit_inactive_days)
     active_date = Date.today - ago.days
-    active = self.players.where_assoc_exists(:rounds).where(Player.arel_table[:last_played].gteq(active_date)).or(new_players).order(:name)
+    active = self.players.where_assoc_exists(:rounds).where(Player.arel_table[:last_played].gteq(active_date)).order(:name)
   end
 
   def inactive_players(ago=self.limit_inactive_days)
     active_date = Date.today - ago.days
     inactive = self.players.where_assoc_exists(:rounds).where(Player.arel_table[:last_played].lt(active_date)).order(:name)
-  end
-
-  def new_players
-    self.players.where_assoc_not_exists(:rounds)
   end
 
   def home_events
@@ -203,15 +220,17 @@ class Group < ApplicationRecord
     .or(self.players.where(t[:nickname].matches("%#{n}%"))).order(:name).pluck(:name,:id)
   end
 
-  def trim_rounds
-    # lets get rid of all rounds and events that are over options[:trim_months] months old
+  def trim_expired_games
+    # lets get rid of all games/rounds that are over options[:trim_months] months old
     exp_date = Date.today - self.trim_months.months
     games = self.games.where(Game.arel_table[:date].lt(exp_date)).includes(:rounds)
     if games.present?
       games.destroy_all
       recompute_group_quotas
+      # puts "WOULD DELETE #{games.size} games"
     end
   end
+
 
   def recompute_group_quotas
     self.players.each do |player|

@@ -9,7 +9,6 @@ class Player < ApplicationRecord
   validates_presence_of :tee
   validates_presence_of :name
 
-  # after_find :set_limited
   before_save :set_name
 
   def self.pairing_search(params,numb=30)
@@ -57,8 +56,11 @@ class Player < ApplicationRecord
   end
 
   def limited?(tee=nil)
-    # PlayerObjects::LimitStatus.get(self,tee)
-    self.limited
+    if self.limited.present?
+      self.limited 
+    else
+      nil 
+    end
   end
 
   def recompute_quota(game_date = nil)

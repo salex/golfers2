@@ -1,0 +1,23 @@
+.m-2.w3-row-padding.grid.grid-cols-3.gap-12
+  div
+    h5.strong = "What's changed #{@golfer.name}?  "
+    p.slim = "This is just a kludge to update all players in a group 'limited' field. I hope to get a task do run every day to do this. The table to the right will have a button to recompute limited status if it hasn't been updated in more than one day. It will just show 'Current' if it's Current."
+  
+  table.golfer.w-180.card-4
+    caption
+      h1.font-bold.text-center
+        = "Update Groups Players Limit Status"
+    tr
+      th Group Name
+      th Last Update
+      th ReBuild
+    - @groups.each do |group|
+      - last_update = group.updated_at
+      - diff  = Date.today  - last_update.to_date
+      tr
+        th = group.name
+        td = time_ago_in_words(group.updated_at)
+        - if diff >= 1
+          td = button_to "ReLimit",relimit_group_path(group), method:'patch',class:"lime-btn"
+        - else
+          td = 'Current'

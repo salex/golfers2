@@ -35,7 +35,7 @@ class PlayerObjects::LimitStatus < ApplicationService
     # puts "INIT '#{@player.limited}'"
     @tee = tee || player.tee
     @group = Current.group || player.group
-    @rounds = @player.scored_rounds
+    @rounds = @player.scored_rounds.limit(10)
   end
 
   def get
@@ -52,7 +52,7 @@ class PlayerObjects::LimitStatus < ApplicationService
     end
     
     if group.limit_new_player
-      if scored_rounds_count < group.limit_rounds
+      if scored_rounds_count.zero? || scored_rounds_count < group.limit_rounds
         return "#{group.limit_points}:newPlayer"
       end
     end

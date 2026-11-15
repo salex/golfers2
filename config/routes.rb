@@ -102,10 +102,10 @@ Rails.application.routes.draw do
       patch :leave
       get :stats
       patch :stats_refresh
-      patch :trim_rounds
       get :expired_players
-      patch :trim_expired
+      patch :trim_expired_games
       patch :recompute_quotas
+      patch :relimit
 
     end
   end
@@ -153,6 +153,8 @@ Rails.application.routes.draw do
   get 'test', to: 'home#test'
   get 'golfer', to: 'golfer#index'
   get 'console', to: 'golfer#console'
+  get 'relimit', to: 'golfer#relimit'
+
 
   get 'score_sheet', to: 'home#score_sheet'
   get 'new_score_sheet', to: 'home#places_sheet'
