@@ -146,20 +146,18 @@ class Group < ApplicationRecord
   def set_limited_status
     # return if Current.user.nil?
     last_update = self.updated_at.to_date
-    puts "HELLLLLLLLLOOOOOOO  #{self.name} #{last_update} #{Date.today}"
-
-    return unless last_update != Date.today
-    puts "gonna reset"
+    # puts "HELL)  #{self.name} #{last_update} #{Date.today}"
+    return unless last_update < Date.today
     self.players.each do |player|
       limit = PlayerObjects::LimitStatus.get(player)
       if limit != player.limited
-        puts "Status Changed: current #{player.name} #{player.limited} changed #{limit}"
+        # puts "Status Changed: current #{player.name} #{player.limited} changed #{limit}"
         player.limited = limit
         player.save
       end
     end
     self.touch
-    puts "Saving #{self.changed?}"
+    # puts "Saving #{self.changed?}"
     self.save!
   end
 
