@@ -11,9 +11,8 @@ class GolferController < ApplicationController
   end
 
   def relimit
-    puts "my name is #{self.class}"
+    cant_do_that unless is_manager?
     @groups = Group.all
     @golfer = Golfer.first
-    @golfer.reset_limited
   end
 end

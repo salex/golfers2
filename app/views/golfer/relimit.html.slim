@@ -17,7 +17,7 @@
       tr
         th = group.name
         td = time_ago_in_words(group.updated_at)
-        - if diff > 0
+        - if diff > 1
           td = button_to "ReLimit",relimit_group_path(group), method:'patch',class:"lime-btn"
         - else
-          td.bg-lime-lightest.text-green-600.font-bold = 'Current'
+          td.bg-lime-lightest.text-green-600.font-bold.text-center = 'Current'

@@ -52,24 +52,30 @@ class PlayerObjects::LimitStatus < ApplicationService
     end
     
     if group.limit_new_player
-      if scored_rounds_count.zero? || scored_rounds_count < group.limit_rounds
+      limit_date = (Date.today - 30.days)
+      # Can only be a new player if you played in last 30 days
+      if (scored_rounds_count < group.limit_rounds)  && (player.last_played > limit_date)
         return "#{group.limit_points}:newPlayer"
       end
     end
 
     if group.limit_new_tee
-      if scored_rounds_count(tee) < group.limit_new_tee_rounds
+      if (scored_rounds_count(tee) < group.limit_new_tee_rounds) 
         return "#{group.limit_new_tee_points}:newtee"
       end
     end
-
+    
     if group.limit_inactive_player
       limit_date = (Date.today - group.limit_inactive_days)
       rounds_count = player.scored_rounds.where("rounds.date > ?",limit_date).size
       # puts "limit_date #{limit_date} rnds #{group.limit_inactive_rounds} cnt #{rounds_count}"
       if rounds_count < group.limit_inactive_rounds
-        # puts "TEST inactive curr '#{player.limited}'"
         return "#{group.limit_inactive_points}:inactive"
+      # else
+      #   player.limited = nil
+      #   puts "eles limit_date #{limit_date} rnds #{group.limit_inactive_rounds} cnt #{rounds_count}"
+
+      #   player.save if player.changed?
       end
     end
     return nil

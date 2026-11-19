@@ -1,6 +1,7 @@
 div.mt-1.flex.flex-wrap.bg-green-0
   div.px-1.w-full.lg:w-5/12.flex.gap-2
-    
+    / gets limited but not saved. leave that up to relimit
+    - @player.limited  = PlayerObjects::LimitStatus.get(@player)
     table.golfer.w-1/2
       tr
         th Name
@@ -30,13 +31,12 @@ div.mt-1.flex.flex-wrap.bg-green-0
         td = @player.tee
       tr
         th Quota
-        td = @player.quota
+        td = @player.quota_limited
       tr
         th rQuota
         td = @player.rquota
       tr
         th Limited
-        / td = @player.limited?
         td = @player.limited?
 
       tr
