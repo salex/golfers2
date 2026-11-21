@@ -149,7 +149,7 @@ class Group < ApplicationRecord
     self.players.each do |player|
       limit = PlayerObjects::LimitStatus.get(player)
       if limit != player.limited
-        # puts "Status Changed: current #{player.name} #{player.limited} changed #{limit}"
+        puts "Status Changed: current #{player.name} #{player.limited} changed #{limit}"
         player.limited = limit
         player.save
       end

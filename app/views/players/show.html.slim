@@ -10,8 +10,8 @@ section.dashboard
       - if can?(:update,:player)
         => link_to icon('fas fa-edit',"Edit Player"), edit_player_path(@player), 
           class:"btn-cancel"
-        = button_to icon('fas fa-trash',"Destroy Player"), @player, method: :delete, form:{data: { turbo_confirm: 'Are you sure?', turbo_method:'delete' }},
-          class:"btn-warn mt-1 text-white inline-block"
+        - unless @player.rounds.present?
+          = button_to icon('fas fa-trash',"Destroy Player"), @player, method: :delete, form:{data: { turbo_confirm: 'Are you sure?', turbo_method:'delete' }},class:"btn-warn mt-1 text-white inline-block"
 
     div.flex-shrink.text-green-800.p-0.font-bold.mr-3.hover:text-2xl.float-right = link_to icon('fas fa-arrow-left'), 'javascript:history.back()'
 

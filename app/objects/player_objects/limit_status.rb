@@ -52,8 +52,8 @@ class PlayerObjects::LimitStatus < ApplicationService
     end
     
     if group.limit_new_player
-      limit_date = (Date.today - 30.days)
-      # Can only be a new player if you played in last 30 days
+      limit_date = (Date.today - 90.days)
+      # Can only be a new player if you played in last 90 days
       if (scored_rounds_count < group.limit_rounds)  && (player.last_played > limit_date)
         return "#{group.limit_points}:newPlayer"
       end
@@ -67,7 +67,7 @@ class PlayerObjects::LimitStatus < ApplicationService
     
     if group.limit_inactive_player
       limit_date = (Date.today - group.limit_inactive_days)
-      rounds_count = player.scored_rounds.where("rounds.date > ?",limit_date).size
+      rounds_count = player.scored_rounds.where("rounds.date >= ?",limit_date).size
       # puts "limit_date #{limit_date} rnds #{group.limit_inactive_rounds} cnt #{rounds_count}"
       if rounds_count < group.limit_inactive_rounds
         return "#{group.limit_inactive_points}:inactive"

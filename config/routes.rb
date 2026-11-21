@@ -103,6 +103,7 @@ Rails.application.routes.draw do
       get :stats
       patch :stats_refresh
       get :expired_players
+      patch :trim_expired
       patch :trim_expired_games
       patch :recompute_quotas
       patch :relimit

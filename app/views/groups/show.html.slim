@@ -11,6 +11,9 @@ div.w-full
         = link_to icon('fas fa-edit', 'Edit Group'),edit_group_path(@group),
              class: "btn-cancel"
 
+        = link_to icon('fas fa-cut', 'Trim Expired Players'),expired_players_group_path(@group),
+             class:"btn-warn p-1.5 rounded mr-2"
+
         = button_to icon('fas fa-cut','Trim Games/Rounds'), trim_expired_games_group_path(@group), method: :patch, form:{data: { turbo_confirm: "Are You Sure? Will delete all rounds over #{@group.trim_months} months old?", turbo_method:'delete' },class:"inline-block p-0 m-0"}, class:"btn-warn p-1.5 rounded mr-2"
 
         = button_to icon('fas fa-calculator', 'Recompute Quotas'), recompute_quotas_group_path(@group), method: :patch, form:{data: { turbo_confirm: "Are You Sure? Will recompute quotas for all group players? ", turbo_method:'patch' },class:"inline-block"}, class:"btn-warn p-1.5 rounded mr-2"

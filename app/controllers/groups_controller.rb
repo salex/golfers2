@@ -5,7 +5,7 @@ class GroupsController < ApplicationController
   before_action :require_admin, only: %i[edit update expired_players]
   before_action :require_member, except: %i[show visit leave stats stats_refresh]
 
-  before_action :set_group, only: %i[ show edit update destroy visit relimit expired_players]
+  before_action :set_group, only: %i[ show edit update destroy visit relimit expired_players trim_expired]
 
   # GET /groups or /groups.json
   def index
@@ -126,6 +126,14 @@ class GroupsController < ApplicationController
   def expired_players
     @expired = @group.expired_players
   end
+
+  def trim_expired
+    # set_group
+    players = @group.players.find(params[:deleted]).pluck(:name)
+    @group.players.find(params[:deleted]).each{|p| p.delete}
+    redirect_to expired_players_group_path(@group), notice: "Player(s) #{players} have been deleted!"
+  end
+
 
   def recompute_quotas
     set_group
